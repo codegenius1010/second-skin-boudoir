@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body { background: #111111; color: #F7F1EA; }
+::selection { background: #D8B98A; color: #111111; }
+
+.luxury-gradient { background: radial-gradient(circle at 20% 20%, rgba(216,185,138,.16), transparent 32%), linear-gradient(135deg, #111111 0%, #1B1816 50%, #3A2A24 100%); }
+.gold-line { background: linear-gradient(90deg, transparent, #D8B98A, transparent); height: 1px; }
+.prose-luxury p { margin-bottom: 1rem; color: rgba(247,241,234,.78); line-height: 1.8; }

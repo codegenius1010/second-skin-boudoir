@@ -1,0 +1,8 @@
+import type { Metadata } from 'next'
+import { Hero } from '@/components/Hero'
+import { Section, Eyebrow, Heading } from '@/components/Section'
+import { ContactForm } from '@/components/ContactForm'
+import { Button } from '@/components/Button'
+import { site } from '@/lib/site'
+export const metadata: Metadata = { title: 'Book a Boudoir Consultation', description: 'Start with a private boudoir consultation for Second Skin Boudoir in Destin, 30A, Santa Rosa Beach, and the Florida Gulf Coast.' }
+export default function Page(){return <main><Hero eyebrow="Contact" title="Start With a Private Consultation" subtitle="No pressure. No commitment. Just a private conversation about what you want, what you are nervous about, and how we can create something beautiful for you."/><Section><div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr]"><div><Eyebrow>Begin privately</Eyebrow><Heading>Tell us what you are dreaming about — and what you are nervous about.</Heading><p className="mt-5 text-ivory/68">Your inquiry is private. Your images are never shared without written permission. Products begin at $995 and session fees are separate.</p><div className="mt-8 rounded-[2rem] border border-ivory/10 bg-smoke p-6 text-ivory/70"><p className="text-champagne">Prefer to call or text?</p><p className="mt-2 text-2xl font-serif text-ivory">{site.phone}</p><p className="mt-1">{site.email}</p></div></div><ContactForm/></div></Section><Section><div className="max-w-2xl"><p className="text-ivory/70 text-base"><strong>Know someone who would love this experience?</strong> Share the love and both of you earn $250 in credits. <Button href="/refer-a-friend" className="mt-4 inline-block">Learn about our referral program</Button></p></div></Section></main>}
