@@ -35,7 +35,7 @@ export default function Page() {
             <div 
               className="calendly-inline-widget" 
               data-url="https://calendly.com/matthew-ssb/second-skin-boudoir?hide_gdpr_banner=1"
-              style={{ minWidth: '320px', height: '700px' }}
+              style={{ minWidth: '320px', maxWidth: '900px', width: '100%', height: '600px' }}
             />
           </div>
           <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
