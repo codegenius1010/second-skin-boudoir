@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-export function ContactForm() {
+export function ContactForm({ hidePricingCheckbox = false }) {
   const [loading, setLoading] = useState(false)
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -48,7 +48,7 @@ export function ContactForm() {
     <textarea name="nervousAbout" placeholder="What are you most nervous about?" rows={4} className={input}/>
     <select name="consultationPreference" className={input} defaultValue=""><option value="" disabled>How would you prefer to consult?</option><option>Phone call</option><option>Zoom video call (recommended)</option><option>Text first, then call</option></select>
     <input name="timeframe" placeholder="Desired timeframe" className={input}/>
-    <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> I understand products begin at $995 and session fees are separate.</label>
+    {!hidePricingCheckbox && <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> I understand products begin at $995 and session fees are separate.</label>}
     <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> I understand my inquiry is private and my images will never be shared without written permission.</label>
     <button disabled={loading} className="rounded-full bg-champagne px-6 py-4 font-semibold text-charcoal transition hover:bg-ivory disabled:opacity-60">{loading ? 'Sending...' : 'Request My Consultation'}</button>
   </form>
