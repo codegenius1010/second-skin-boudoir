@@ -4,14 +4,41 @@ import { useState } from 'react'
 export function ContactForm() {
   const [loading, setLoading] = useState(false)
   async function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); setLoading(true)
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT
+    e.preventDefault()
+    setLoading(true)
     const form = e.currentTarget
     const data = new FormData(form)
+    
+    // Convert FormData to JSON
+    const json = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      city: data.get('city'),
+      sessionType: data.get('sessionType'),
+      nervousAbout: data.get('nervousAbout'),
+      consultationPreference: data.get('consultationPreference'),
+      timeframe: data.get('timeframe'),
+    }
+    
     try {
-      if (endpoint) await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-      window.location.href = '/thank-you'
-    } catch { setLoading(false); alert('Something went wrong. Please call or text 850-608-0844.') }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(json),
+      })
+      
+      if (response.ok) {
+        window.location.href = '/thank-you'
+      } else {
+        setLoading(false)
+        alert('Something went wrong. Please call or text 850-608-0844.')
+      }
+    } catch (error) {
+      setLoading(false)
+      alert('Something went wrong. Please call or text 850-608-0844.')
+    }
   }
   const input = 'w-full rounded-2xl border border-ivory/10 bg-charcoal px-4 py-3 text-ivory placeholder:text-ivory/35 outline-none focus:border-champagne'
   return <form onSubmit={submit} className="grid gap-4 rounded-[2rem] border border-ivory/10 bg-smoke p-6 shadow-glow md:p-8">
@@ -24,6 +51,5 @@ export function ContactForm() {
     <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> I understand products begin at $995 and session fees are separate.</label>
     <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> I understand my inquiry is private and my images will never be shared without written permission.</label>
     <button disabled={loading} className="rounded-full bg-champagne px-6 py-4 font-semibold text-charcoal transition hover:bg-ivory disabled:opacity-60">{loading ? 'Sending...' : 'Request My Consultation'}</button>
-    {!process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT && <p className="text-xs text-ivory/45">Formspree is not configured yet. The form will still redirect to the thank-you page during testing.</p>}
   </form>
 }
