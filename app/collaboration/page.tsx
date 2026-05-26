@@ -4,121 +4,12 @@ import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
 import { FAQAccordion } from '@/components/FAQAccordion'
+import { ContactForm } from '@/components/ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Model Collaboration | Second Skin Boudoir',
-  description: 'Join us for a free boudoir session in exchange for portfolio photos. No experience needed. Complete creative control over how your photos are shared.'
+  title: 'Collaboration Sessions | Second Skin Boudoir',
+  description: 'Free boudoir session in exchange for beautiful portfolio photos. Models, entrepreneurs, or any woman wanting professional photos. Complete creative control. No experience needed.'
 }
 
-export default function Page() {
-  return (
-    <main>
-      <Hero
-        eyebrow="Collaboration"
-        title="Build with Us"
-        subtitle="Free boudoir session in exchange for portfolio photos. You control how we share your images."
-      />
-      
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <Eyebrow>What we're looking for</Eyebrow>
-            <Heading>Models ready to create something beautiful together.</Heading>
-          </div>
-          <div className="prose-luxury text-lg">
-            <p>I'm currently building my portfolio with carefully curated boudoir sessions, and I'm looking for models who are ready to explore their confidence on camera.</p>
-            <p>This is a collaboration. You'll receive a complete, private boudoir experience with professional styling and direction. In return, I'll use select photos for my portfolio, website, and Instagram (with full control over what gets shared).</p>
-            <p>You receive a complimentary session. No costs, no hidden fees, no pressure to buy prints or products.</p>
-          </div>
-        </div>
-      </Section>
+export default function Page(){return <main><Hero title="Collaborate with Second Skin Boudoir" subtitle="Free boudoir session in exchange for beautiful portfolio photos. You control how your images are shared—publicly, anonymously, or privately." eyebrow="Collaboration" cta="Book Your Free Consultation" href="/contact" image="/images/secondskinboudoir.jpg"/><Section><div className="grid md:grid-cols-3 gap-6"><Card title="✨ Full Experience">Professional styling guidance, fully guided posing, and a complete 1-hour session in a luxury setting. Completely private.</Card><Card title="📸 Your Photos">10-18 edited digital images from your session. You own them completely and decide what happens with them.</Card><Card title="🎯 Creative Control">Choose which images get shared publicly, anonymously, or kept completely private. 100% your choice, no pressure.</Card></div></Section><Section className="bg-smoke"><Eyebrow>Why Women Choose This Path</Eyebrow><Heading>What This Collaboration Means for You</Heading><div className="mt-12 grid md:grid-cols-2 gap-8"><div><h3 className="text-lg font-semibold text-ivory mb-3 flex items-center gap-3"><span className="text-2xl">📸</span> Professional Photos You Own</h3><p className="text-champagne">10-18 edited digital images completely yours. Use them for portfolios, agencies, social media, or keep them private. No restrictions. They're yours to do with as you wish.</p></div><div><h3 className="text-lg font-semibold text-ivory mb-3 flex items-center gap-3"><span className="text-2xl">💪</span> Feel Powerful</h3><p className="text-champagne">This isn't just about photos—it's about reconnecting with your confidence and seeing yourself the way I see you. Professional, empowered, and beautiful.</p></div><div><h3 className="text-lg font-semibold text-ivory mb-3 flex items-center gap-3"><span className="text-2xl">🤝</span> Your Voice Matters</h3><p className="text-champagne">This is partnership. Every decision—what to wear, what to shoot, how to pose, what to keep private—is yours. I guide the art; you guide the experience.</p></div><div><h3 className="text-lg font-semibold text-ivory mb-3 flex items-center gap-3"><span className="text-2xl">🎨</span> Choice Is Yours</h3><p className="text-champagne">Share publicly, stay anonymous, or keep them completely private. You decide which images go where. Zero pressure to share anything you're not comfortable with.</p></div></div></Section><Section className="bg-white"><Eyebrow>Safety & Comfort First</Eyebrow><Heading>Your Trust Matters to Us</Heading><div className="mt-12 max-w-3xl"><div className="bg-gradient-to-br from-rose-50 to-amber-50 border border-rose-200 rounded-3xl p-8 mb-8"><p className="text-charcoal text-lg leading-relaxed mb-6">I'm a male photographer specializing in creating safe, empowering experiences for every woman. Your comfort and safety are non-negotiable.</p><div className="space-y-4"><div className="flex gap-4"><span className="text-2xl">✓</span><div><h4 className="font-semibold text-charcoal mb-1">Private Consultation First</h4><p className="text-champagne">Before anything, we talk. Phone, Zoom, or text—your choice. You'll get to know me and ask any questions you have.</p></div></div><div className="flex gap-4"><span className="text-2xl">✓</span><div><h4 className="font-semibold text-charcoal mb-1">Bring a Trusted Friend</h4><p className="text-champagne">You're welcome to bring anyone you trust to your session. They can be in the room the entire time.</p></div></div><div className="flex gap-4"><span className="text-2xl">✓</span><div><h4 className="font-semibold text-charcoal mb-1">You Control Everything</h4><p className="text-champagne">Your outfit choices, what gets shot, what gets shown, how images are used—you have complete control. Pause anytime.</p></div></div><div className="flex gap-4"><span className="text-2xl">✓</span><div><h4 className="font-semibold text-charcoal mb-1">Proven Experience</h4><p className="text-champagne">I've worked with hundreds of women and know exactly how to make you feel safe, directed, and confident.</p></div></div></div></div></div></Section><Section className="bg-smoke"><Eyebrow>Your Collaboration</Eyebrow><Heading>How This Works</Heading><div className="mt-12 space-y-6 max-w-3xl"><div className="flex gap-6"><div className="flex-shrink-0"><div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-rose-400 to-amber-300 text-white font-bold">1</div></div><div><h3 className="text-lg font-semibold text-ivory mb-2">Consultation</h3><p className="text-champagne">We chat about your vision, what you want to explore, comfort level, style preferences, and how you'd like your photos shared. This is where you get to know me.</p></div></div><div className="flex gap-6"><div className="flex-shrink-0"><div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-rose-400 to-amber-300 text-white font-bold">2</div></div><div><h3 className="text-lg font-semibold text-ivory mb-2">What to Wear Guide</h3><p className="text-champagne">You'll receive styling inspiration, outfit suggestions, and examples to help you prepare. We'll create multiple looks during your session.</p></div></div><div className="flex gap-6"><div className="flex-shrink-0"><div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-rose-400 to-amber-300 text-white font-bold">3</div></div><div><h3 className="text-lg font-semibold text-ivory mb-2">The Session</h3><p className="text-champagne">1 hour of photography with professional direction every step. Every pose, expression, angle is guided. You'll feel confident and the images will show it.</p></div></div><div className="flex gap-6"><div className="flex-shrink-0"><div className="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-br from-rose-400 to-amber-300 text-white font-bold">4</div></div><div><h3 className="text-lg font-semibold text-ivory mb-2">Your Photos</h3><p className="text-champagne">10-18 edited professional images delivered to you. Together we decide which get shared on my social, website, portfolio—or kept completely private.</p></div></div></div></Section><Section className="bg-white"><Eyebrow>Questions?</Eyebrow><Heading>Everything About Collaboration</Heading><div className="mt-12"><FAQAccordion items={[['Is this really free?', 'Yes. Zero session fee, zero styling fee. You invest your time, we invest in creating beautiful images. You get professional photos you love and own completely. Win-win.'],['What can I do with the photos?', 'They\'re completely yours. Use them on social media, your website, professional profiles, or keep them totally private. We might ask to use a few for our website/portfolio, but you choose what gets shared and where.'],['Do I need to share my photos publicly?', 'Not at all. You control everything. Share publicly, stay anonymous, or keep them completely private. No pressure whatsoever. You decide.'],['What if I\'m nervous about posing?', 'Perfect—most people are at first. Every pose is guided step by step. I\'ll direct your posture, expression, angles—everything. By the end you\'ll feel confident and look amazing.'],['Can I stay completely private?', 'Absolutely. You can keep all your photos private, stay anonymous, or choose specific images to share. It\'s entirely your choice, and there\'s zero pressure.'],['When are sessions available?', 'I\'m booking a limited number of collaboration sessions through the end of the year. Each free session is a significant investment of time and artistry, and spots fill quickly. If this resonates with you, reach out soon to secure your date.'],['What should I wear?', 'Whatever makes you feel confident and like yourself. Lingerie, an oversized shirt, a favorite dress, jewelry, heels—we\'ll create multiple looks. Once you book, you\'ll get a detailed What to Wear guide with styling ideas and photos.'],['Do I need any experience?', 'Not at all. Whether this is your first time in front of a camera or you\'ve done it before, every pose is guided. You\'ll leave with gorgeous images and real confidence.'],['How do you keep me safe?', 'Private consultation first (so you know me), you can bring a trusted friend, you control everything—wardrobe, poses, what gets shot—and I have professional experience working with all kinds of women. Your comfort comes first.'],]}/></div></Section><Section className="bg-gradient-to-br from-rose-900/10 to-amber-900/10 border-2 border-rose-200"><div className="text-center mb-12"><Eyebrow>Ready?</Eyebrow><Heading>Let\'s Create Something Beautiful Together</Heading><p className="text-champagne text-lg mt-4 max-w-2xl mx-auto">Let\'s talk about your collaboration goals. No pressure, no commitment—just a conversation about how we can help each other grow.</p></div><ContactForm hidePricingCheckbox={true}/></Section></main>}
 
-      <Section className="bg-smoke">
-        <Eyebrow>What you get</Eyebrow>
-        <div className="grid gap-5 md:grid-cols-3">
-          <Card title="Full Experience">Wardrobe styling, professional posing guidance, and a guided 1-hour session in a luxury setting. Completely private.</Card>
-          <Card title="Your Photos">10-18 edited digital images from your session. You own them. You decide what happens with them.</Card>
-          <Card title="Creative Control">Choose which images can be shared publicly, kept anonymous, or kept completely private. 100% your choice.</Card>
-        </div>
-      </Section>
-
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <Eyebrow>How it works</Eyebrow>
-            <Heading>Simple, transparent, collaborative.</Heading>
-          </div>
-          <div className="prose-luxury text-lg">
-            <p><strong>Step 1:</strong> Reach out and tell me a bit about yourself. What are you looking to explore or celebrate?</p>
-            <p><strong>Step 2:</strong> We'll have a consultation call where we talk through everything. What to wear, what to expect, how you want your photos shared (or not shared).</p>
-            <p><strong>Step 3:</strong> Your session. We'll spend 1 hour creating beautiful, artistic images. You'll be guided through every pose and I'll direct everything for maximum flattery and comfort.</p>
-            <p><strong>Step 4:</strong> Your photos. You receive 10-18 edited digital images. Together we'll decide which images can be featured on my social media, website, and portfolio.</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="bg-gradient-to-br from-rose-50 to-amber-50 py-20">
-        <div className="max-w-2xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl lg:text-3xl font-serif text-rose-900 mb-6">Your Privacy Matters</h2>
-          <p className="text-lg text-gray-700 mb-4">
-            You have complete control over how your images are shared. Here are your options:
-          </p>
-          <ul className="space-y-3 text-base text-gray-600">
-            <li><strong>Public:</strong> Your name and full photos shared on social media and website</li>
-            <li><strong>Anonymous:</strong> Your photos shared publicly, but without identifying information</li>
-            <li><strong>Private:</strong> Your photos kept completely private, used only for my portfolio references</li>
-          </ul>
-          <p className="text-base text-gray-600 mt-6">
-            Nothing is ever shared without your explicit permission. You decide, session by session, which photos get shared and how.
-          </p>
-        </div>
-      </Section>
-
-      <Section>
-        <div className="max-w-2xl">
-          <Eyebrow>Who we're looking for</Eyebrow>
-          <Heading>Any woman ready to feel powerful.</Heading>
-          <div className="prose-luxury text-lg mt-6 space-y-4">
-            <p>There's no "type." Boudoir is for every body, every age, every confidence level.</p>
-            <p>You could be:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>A mom wanting to reclaim your confidence</li>
-              <li>Someone exploring a new version of yourself</li>
-              <li>A woman ready to see yourself the way others see you</li>
-              <li>Anyone curious about boudoir but nervous about trying it</li>
-              <li>Someone who wants beautiful art without the price tag</li>
-            </ul>
-            <p className="mt-4">If you're interested in a free, judgment-free boudoir experience and you're open to letting us create portfolio images together, let's talk.</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="bg-smoke">
-        <div className="max-w-3xl mx-auto text-center">
-          <Heading>Ready to create together?</Heading>
-          <p className="text-lg text-gray-700 mt-4 mb-8">
-            Send me a message on Instagram (@secondskinboudoir), or fill out the form below. Let's explore what's possible.
-          </p>
-          <Button href="/contact">Get in Touch</Button>
-        </div>
-      </Section>
-
-      <Section>
-        <div className="max-w-2xl">
-          <Eyebrow>Questions?</Eyebrow>
-          <Heading>Everything you need to know about collaboration.</Heading>
-          <div className="mt-8">
-            <FAQAccordion items={[
-              ['Is this really free?', 'Yes. You don\'t pay for the session or styling. The only thing we\'re asking for in return is permission to use select photos for portfolio, website, and social media purposes. You have full control over what gets shared.'],
-              ['What if I\'m nervous or inexperienced?', 'Perfect. That\'s exactly who this is for. Every pose is guided step by step. I\'ll direct everything from your posture to your expression. By the end of your session, you\'ll feel like a supermodel. The first five minutes might feel awkward, but then it becomes second nature.'],
-              ['Will you use all my photos?', 'You\'ll receive 10-18 edited digital images from your session, and together we\'ll decide which ones get featured on my social media, website, and portfolio. Every image you receive is a keeper.'],
-              ['Can I stay anonymous?', 'Absolutely. You can choose to have your photos shared anonymously or kept completely private. Many models love seeing themselves represented without being identified. It\'s entirely your choice.'],
-              ['When are sessions available?', 'I\'m scheduling portfolio collaboration sessions now through the end of the year. Once we connect, we\'ll find a time that works for both of us. Sessions are 1 hour of photography, plus additional time for styling and preparation.'],
-              ['What should I wear?', 'Whatever makes you feel confident. Lingerie, an oversized shirt, your favorite dress, jewelry, heels. We\'ll style you for different looks throughout the session. I\'ll guide you on what works best for each set. Once you book, you\'ll get a What to Wear guide with styling inspiration and photos to help you prepare.'],
-            ]}/>
-          </div>
-        </div>
-      </Section>
-    </main>
-  )
-}
