@@ -34,7 +34,7 @@ export default function Page() {
           <div className="mt-10 flex justify-center">
             <div 
               className="calendly-inline-widget" 
-              data-url="https://calendly.com/secondskinboudoir/consultation"
+              data-url="https://calendly.com/matthew-ssb/second-skin-boudoir?hide_gdpr_banner=1"
               style={{ minWidth: '320px', height: '700px' }}
             />
           </div>
