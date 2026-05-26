@@ -68,7 +68,7 @@ export default function PortfolioModels() {
 
       <Section className="bg-white">
         <Eyebrow>Safety First</Eyebrow>
-        <Heading>Your Comfort Matters Most</Heading>
+        <h2 className="text-4xl font-bold text-slate-700 mb-8">Your Comfort Matters Most</h2>
         <div className="mt-12 max-w-3xl">
           <div className="bg-gradient-to-br from-rose-50 to-amber-50 border border-rose-200 rounded-3xl p-8 mb-8">
             <p className="text-charcoal text-lg leading-relaxed mb-6">
