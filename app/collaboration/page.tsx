@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
+import { FAQAccordion } from '@/components/FAQAccordion'
 
 export const metadata: Metadata = {
   title: 'Model Collaboration | Second Skin Boudoir',
@@ -104,32 +105,17 @@ export default function Page() {
 
       <Section>
         <div className="max-w-2xl">
-          <Eyebrow>FAQs</Eyebrow>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Is this really free?</h3>
-              <p className="text-gray-700">Yes. You don't pay for the session or styling. The only thing we're asking for in return is permission to use select photos for portfolio, website, and social media purposes. You have full control over what gets shared.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">What if I'm nervous or inexperienced?</h3>
-              <p className="text-gray-700">Perfect. That's exactly who this is for. Every pose is guided step by step. I'll direct everything from your posture to your expression. By the end of your session, you'll feel like a supermodel. The first five minutes might feel awkward, but then it becomes second nature.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Will you use all my photos?</h3>
-              <p className="text-gray-700">You'll receive 10-18 edited digital images from your session, and together we'll decide which ones get featured on my social media, website, and portfolio. Every image you receive is a keeper.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Can I stay anonymous?</h3>
-              <p className="text-gray-700">Absolutely. You can choose to have your photos shared anonymously or kept completely private. Many models love seeing themselves represented without being identified. It's entirely your choice.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">When are sessions available?</h3>
-              <p className="text-gray-700">I'm scheduling portfolio collaboration sessions now through the end of the year. Once we connect, we'll find a time that works for both of us. Sessions are 1 hour of photography, plus additional time for styling and preparation.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">What should I wear?</h3>
-              <p className="text-gray-700">Whatever makes you feel confident. Lingerie, an oversized shirt, your favorite dress, jewelry, heels. We'll style you for different looks throughout the session. I'll guide you on what works best for each set.</p>
-            </div>
+          <Eyebrow>Questions?</Eyebrow>
+          <Heading>Everything you need to know about collaboration.</Heading>
+          <div className="mt-8">
+            <FAQAccordion items={[
+              ['Is this really free?', 'Yes. You don\'t pay for the session or styling. The only thing we\'re asking for in return is permission to use select photos for portfolio, website, and social media purposes. You have full control over what gets shared.'],
+              ['What if I\'m nervous or inexperienced?', 'Perfect. That\'s exactly who this is for. Every pose is guided step by step. I\'ll direct everything from your posture to your expression. By the end of your session, you\'ll feel like a supermodel. The first five minutes might feel awkward, but then it becomes second nature.'],
+              ['Will you use all my photos?', 'You\'ll receive 10-18 edited digital images from your session, and together we\'ll decide which ones get featured on my social media, website, and portfolio. Every image you receive is a keeper.'],
+              ['Can I stay anonymous?', 'Absolutely. You can choose to have your photos shared anonymously or kept completely private. Many models love seeing themselves represented without being identified. It\'s entirely your choice.'],
+              ['When are sessions available?', 'I\'m scheduling portfolio collaboration sessions now through the end of the year. Once we connect, we\'ll find a time that works for both of us. Sessions are 1 hour of photography, plus additional time for styling and preparation.'],
+              ['What should I wear?', 'Whatever makes you feel confident. Lingerie, an oversized shirt, your favorite dress, jewelry, heels. We\'ll style you for different looks throughout the session. I\'ll guide you on what works best for each set.'],
+            ]}/>
           </div>
         </div>
       </Section>
