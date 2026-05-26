@@ -114,7 +114,7 @@ export default function Page() {
               ['Will you use all my photos?', 'You\'ll receive 10-18 edited digital images from your session, and together we\'ll decide which ones get featured on my social media, website, and portfolio. Every image you receive is a keeper.'],
               ['Can I stay anonymous?', 'Absolutely. You can choose to have your photos shared anonymously or kept completely private. Many models love seeing themselves represented without being identified. It\'s entirely your choice.'],
               ['When are sessions available?', 'I\'m scheduling portfolio collaboration sessions now through the end of the year. Once we connect, we\'ll find a time that works for both of us. Sessions are 1 hour of photography, plus additional time for styling and preparation.'],
-              ['What should I wear?', 'Whatever makes you feel confident. Lingerie, an oversized shirt, your favorite dress, jewelry, heels. We\'ll style you for different looks throughout the session. I\'ll guide you on what works best for each set.'],
+              ['What should I wear?', 'Whatever makes you feel confident. Lingerie, an oversized shirt, your favorite dress, jewelry, heels. We\'ll style you for different looks throughout the session. I\'ll guide you on what works best for each set. Once you book, you\'ll get a What to Wear guide with styling inspiration and photos to help you prepare.'],
             ]}/>
           </div>
         </div>

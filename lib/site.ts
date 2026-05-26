@@ -26,7 +26,7 @@ export const galleryImages = [
 
 export const faqs = [
   ['Is boudoir for me?', 'Yes. Boudoir is for any woman who wants to feel more connected to her beauty, confidence, sensuality, or body. You do not need to be a certain size, age, relationship status, or confidence level.'],
-  ['What should I wear?', 'Whatever feels like your second skin. Lingerie, an oversized shirt, a favorite dress, or nothing at all — we will help you choose pieces that make you feel powerful, comfortable, and gorgeous.'],
+  ['What should I wear?', 'Whatever feels like your second skin. Lingerie, an oversized shirt, a favorite dress, or nothing at all — we will help you choose pieces that make you feel powerful, comfortable, and gorgeous. Once you book your session, you'll receive a detailed What to Wear guide with styling tips and inspiration photos tailored to your session type.'],
   ['Will it be awkward?', 'Only for the first five minutes. We guide your posing, talk you through every step, and keep the vibe fun and relaxed until being in front of the camera feels like second nature.'],
   ['How long does it take?', 'Most sessions run a couple of hours, depending on your package and outfit changes. We take our time so you never feel rushed — just fully in the moment.'],
   ['What if I\'m nervous about how I look?', 'That is totally normal. That is why Second Skin Boudoir exists — to help you see what is already there. We pose you, light you, and cheer you on so when you see the final images, you recognize the person you have always been.'],
