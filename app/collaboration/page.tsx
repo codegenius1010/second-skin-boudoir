@@ -69,7 +69,7 @@ export default function Page() {
 
       <Section className="bg-white">
         <Eyebrow>Safety & Comfort First</Eyebrow>
-        <Heading>Your Trust Matters to Us</Heading>
+        <h2 className="text-4xl font-bold text-slate-700 mb-8">Your Trust Matters to Us</h2>
         <div className="mt-12 max-w-3xl">
           <div className="bg-gradient-to-br from-rose-50 to-amber-50 border border-rose-200 rounded-3xl p-8 mb-8">
             <p className="text-charcoal text-lg leading-relaxed mb-6">
@@ -154,7 +154,7 @@ export default function Page() {
 
       <Section className="bg-white">
         <Eyebrow>Questions?</Eyebrow>
-        <Heading>Everything About Collaboration</Heading>
+        <h2 className="text-4xl font-bold text-slate-700 mb-8">Everything About Collaboration</h2>
         <div className="mt-12">
           <FAQAccordion items={[
             ['Is this really free?', 'Yes. Zero session fee, zero styling fee. You invest your time, we invest in creating beautiful images. You get professional photos you love and own completely. Win-win.'],

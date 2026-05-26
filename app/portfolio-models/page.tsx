@@ -153,7 +153,7 @@ export default function PortfolioModels() {
 
       <Section className="bg-white">
         <Eyebrow>Questions?</Eyebrow>
-        <Heading>For Portfolio Models</Heading>
+        <h2 className="text-4xl font-bold text-slate-700 mb-8">For Portfolio Models</h2>
         <div className="mt-12">
           <FAQAccordion items={[
             ['Is this really free?', 'Yes. Zero session fee, zero styling fee. You invest your time, we invest in creating beautiful images. We both benefit—you get portfolio photos, we get portfolio images. Win-win.'],
