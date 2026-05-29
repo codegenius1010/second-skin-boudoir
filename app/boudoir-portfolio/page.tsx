@@ -3,7 +3,6 @@ import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
-import { GalleryGrid } from '@/components/GalleryGrid'
 
 export const metadata: Metadata = {
   title: 'Boudoir Photography Gallery | Privacy-First Portfolio',
@@ -43,13 +42,67 @@ export default function BoudoirPortfolio() {
       </Section>
 
       <Section className="bg-smoke">
-        <Eyebrow>Portfolio Gallery</Eyebrow>
-        <Heading>Boudoir Photography Examples</Heading>
+        <Eyebrow>Our Photography Styles</Eyebrow>
+        <Heading>The Range of Beauty We Capture</Heading>
         <p className="mt-5 max-w-2xl text-ivory/68">
-          Scroll through to see soft portraits, editorial details, bridal inspirations, and the range of looks possible in a single session.
+          Every boudoir session is unique. Here's the range of styles, moods, and visions our clients choose to bring to life.
         </p>
-        <div className="mt-12">
-          <GalleryGrid />
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Soft & Romantic</h3>
+            <p className="text-ivory/70 mb-4">
+              Warm window light, gentle poses, intimate moments. Perfect for first-time clients or anyone seeking a tender, romantic aesthetic.
+            </p>
+            <p className="text-champagne text-sm">Natural elegance • Confidence building • Timeless appeal</p>
+          </div>
+          
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Bold & Empowering</h3>
+            <p className="text-ivory/70 mb-4">
+              Strong poses, intentional styling, powerful energy. For women who want to feel their best and celebrate their strength.
+            </p>
+            <p className="text-champagne text-sm">Self-love • Confidence boost • Strong presence</p>
+          </div>
+          
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Editorial & Artistic</h3>
+            <p className="text-ivory/70 mb-4">
+              Fashion-forward styling, creative angles, dramatic mood. For the artistic soul who wants high-fashion boudoir photography.
+            </p>
+            <p className="text-champagne text-sm">High-fashion • Artistic vision • Editorial quality</p>
+          </div>
+          
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Bridal & Elegant</h3>
+            <p className="text-ivory/70 mb-4">
+              Veils, robes, wedding details, luxury intimacy. Whether for your partner, your wedding album, or pure self-celebration.
+            </p>
+            <p className="text-champagne text-sm">Wedding gift • Special occasion • Timeless keepsake</p>
+          </div>
+          
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Private Details</h3>
+            <p className="text-ivory/70 mb-4">
+              Close-up textures, intimate details, tasteful silhouettes. Anonymous, artistic, and deeply personal to you alone.
+            </p>
+            <p className="text-champagne text-sm">Intimate • Private • Artistically handled</p>
+          </div>
+          
+          <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-8 hover:border-champagne/30 transition-colors">
+            <h3 className="text-lg font-semibold text-ivory mb-3">Mixed Sessions</h3>
+            <p className="text-ivory/70 mb-4">
+              Most of our clients want it all. Soft AND bold, romantic AND editorial. We blend styles throughout your session.
+            </p>
+            <p className="text-champagne text-sm">Variety • Range • Full experience</p>
+          </div>
+        </div>
+        <div className="mt-12 text-center p-8 rounded-2xl border border-champagne/20 bg-gradient-to-r from-champagne/5 to-ivory/5">
+          <p className="text-ivory/68 mb-4">
+            <span className="text-champagne font-semibold">New clients:</span> As we grow our portfolio, your session might be featured in our gallery next — with your full permission, of course.
+          </p>
+          <p className="text-ivory/68">
+            Want to see more? We'd love to show you examples in your <a href="/contact" className="text-champagne hover:text-ivory transition-colors">private consultation</a>.
+          </p>
         </div>
       </Section>
 
