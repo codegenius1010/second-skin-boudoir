@@ -5,8 +5,8 @@ import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
 
 export const metadata: Metadata = {
-  title: 'About Second Skin Boudoir',
-  description: 'Meet the photographer behind Second Skin Boudoir, a privacy-first luxury boudoir photography experience in Destin and 30A.'
+  title: 'About Second Skin Boudoir | Meet Your Photographer',
+  description: 'Meet Matthew, a privacy-first luxury boudoir photographer in Destin and 30A. Learn about the philosophy behind safe, guided, fully-directed sessions for women.',
 }
 
 export default function Page() {
@@ -53,8 +53,8 @@ export default function Page() {
           </div>
           <div className="prose-luxury text-lg">
             <p>My entire approach is built on one core belief: every woman deserves to feel powerful, beautiful, and safe.</p>
-            <p>Before your session, we'll have a consultation so you know exactly what to expect. During your session, every pose is guided step by step. You don't need any modeling experience. I'll direct everything from your posture to your expression to your fingertips.</p>
-            <p>The goal is simple: to create images that feel like the way someone who adores you sees you, through a flattering, romantic, and deeply respectful lens.</p>
+            <p>Before your session, we'll have a consultation so you know exactly what to expect. Learn more about <a href="/experience" className="text-champagne hover:text-ivory transition-colors">our fully guided experience</a>. During your session, every pose is guided step by step. You don't need any modeling experience. I'll direct everything from your posture to your expression to your fingertips.</p>
+            <p>The goal is simple: to create images that feel like the way someone who adores you sees you, through a flattering, romantic, and deeply respectful lens. See our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">portfolio gallery</a> for examples.</p>
             <p>Nothing is shared publicly without your written permission. Your privacy, your comfort, and your experience matter most.</p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Page() {
             <p><strong>This consultation is free, private, and pressure-free.</strong> You do not need to have everything figured out. The goal is simply to see if the experience feels right for you.</p>
           </div>
           <div className="mt-8">
-            <Button href="/contact">Book Your Consultation</Button>
+            <Button href="/contact">Request Private Consultation</Button>
           </div>
         </div>
       </Section>
@@ -123,7 +123,7 @@ export default function Page() {
           <Card title="Direction">You are guided through every detail.</Card>
         </div>
         <div className="mt-10">
-          <Button href="/contact">Ask a Question or Book a Consultation</Button>
+          <Button href="/contact">Request Private Consultation</Button>
         </div>
       </Section>
     </main>

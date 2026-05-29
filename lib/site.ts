@@ -16,12 +16,12 @@ export const nav = [
 ]
 
 export const galleryImages = [
-  { title: 'Soft window light portrait', category: 'Soft & Romantic', image: 'https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1400&auto=format&fit=crop', alt: 'Tasteful editorial boudoir portrait in soft window light' },
-  { title: 'Anonymous lace detail', category: 'Anonymous Details', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1400&auto=format&fit=crop', alt: 'Anonymous tasteful boudoir detail with lace and soft shadows' },
-  { title: 'Editorial silhouette', category: 'Dark & Moody', image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1400&auto=format&fit=crop', alt: 'Moody editorial silhouette portrait' },
-  { title: 'Bridal robe moment', category: 'Bridal', image: 'https://images.unsplash.com/photo-1523264766116-1e09b3145b84?q=80&w=1400&auto=format&fit=crop', alt: 'Elegant bridal robe detail for boudoir inspiration' },
-  { title: 'Luxury hotel mood', category: 'Editorial', image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=1400&auto=format&fit=crop', alt: 'High-end editorial boudoir style portrait' },
-  { title: 'Quiet confidence', category: 'Confidence Sessions', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1400&auto=format&fit=crop', alt: 'Tasteful confidence portrait with warm light' },
+  { title: 'Soft window light portrait', category: 'Soft & Romantic', image: 'https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1400&auto=format&fit=crop', alt: 'Luxury boudoir photography portrait with soft natural window light - elegant intimate portrait example' },
+  { title: 'Anonymous lace detail', category: 'Anonymous Details', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1400&auto=format&fit=crop', alt: 'Private boudoir portrait showing tasteful lace lingerie detail with soft romantic shadows' },
+  { title: 'Editorial silhouette', category: 'Dark & Moody', image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1400&auto=format&fit=crop', alt: 'Artistic boudoir photography silhouette portrait with moody dramatic lighting' },
+  { title: 'Bridal robe moment', category: 'Bridal', image: 'https://images.unsplash.com/photo-1523264766116-1e09b3145b84?q=80&w=1400&auto=format&fit=crop', alt: 'Bridal boudoir photography - elegant silk robe detail for wedding gift inspiration' },
+  { title: 'Luxury hotel mood', category: 'Editorial', image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=1400&auto=format&fit=crop', alt: 'High-end luxury boudoir photography portrait in editorial style with professional lighting' },
+  { title: 'Quiet confidence', category: 'Confidence Sessions', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1400&auto=format&fit=crop', alt: 'Empowerment boudoir photography portrait showcasing confidence with warm golden light' },
 ]
 
 export const faqs = [

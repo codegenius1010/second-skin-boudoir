@@ -18,7 +18,7 @@ export default function PortfolioModels() {
         title="Build Your Boudoir Portfolio For Free" 
         subtitle="Get professional photos for your modeling portfolio—with zero session fee. We collaborate with aspiring and experienced models to grow our portfolio while you grow yours." 
         primary="Book Your Free Consultation" 
-        image="/images/secondskinboudoir.jpg"
+        image="/images/second-skin-boudoir-luxury-brand-hero.jpg"
       />
       
       <Section>

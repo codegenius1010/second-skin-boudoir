@@ -19,7 +19,7 @@ export default function Page() {
         subtitle="Free boudoir session in exchange for beautiful portfolio photos. You control how your images are shared—publicly, anonymously, or privately." 
         eyebrow="Collaboration" 
         primary="Book Your Free Consultation" 
-        image="/images/secondskinboudoir.jpg"
+        image="/images/second-skin-boudoir-luxury-brand-hero.jpg"
       />
       
       <Section>

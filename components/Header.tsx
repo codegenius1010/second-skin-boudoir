@@ -12,11 +12,11 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ivory/10 bg-charcoal/75 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <Link href="/" className="flex items-center h-10">
-          <Image src="/images/logo.png" alt="Second Skin Boudoir" width={120} height={40} className="h-full w-auto" priority />
+          <Image src="/images/second-skin-boudoir-logo.png" alt="Second Skin Boudoir - luxury boudoir photography in Destin and 30A" width={120} height={40} className="h-full w-auto" priority />
         </Link>
         <nav className="hidden items-center gap-7 lg:flex">
           {nav.map((item) => <Link key={item.href} href={item.href} className="text-sm text-ivory/75 hover:text-champagne">{item.label}</Link>)}
-          <Button href="/contact" className="py-2.5">Book Now</Button>
+          <Button href="/contact" className="py-2.5">Request Consultation</Button>
         </nav>
         <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">{open ? <X /> : <Menu />}</button>
       </div>

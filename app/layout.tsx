@@ -12,6 +12,55 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const schema = { '@context': 'https://schema.org', '@type': 'PhotographyBusiness', name: site.name, url: site.url, telephone: site.phone, email: site.email, address: { '@type': 'PostalAddress', addressLocality: 'Destin', addressRegion: 'FL', addressCountry: 'US' }, areaServed: site.areas, priceRange: '$$$' }
-  return <html lang="en"><body className="font-sans antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /><Header />{children}<Footer /></body></html>
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    logo: `${site.url}/images/logo.png`,
+    description: 'Luxury boudoir photography in Destin, 30A, Santa Rosa Beach, and the Florida Gulf Coast. Private, guided, fully-photographed sessions.',
+    telephone: site.phone,
+    email: site.email,
+    areaServed: site.areas.map(area => ({ '@type': 'City', name: area, addressRegion: 'FL', addressCountry: 'US' })),
+    priceRange: '$$$',
+  }
+
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'PhotographyService',
+    name: site.name,
+    image: `${site.url}/images/logo.png`,
+    description: 'Luxury boudoir photography services',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Destin',
+      addressRegion: 'FL',
+      postalCode: '32541',
+      addressCountry: 'US',
+    },
+    areaServed: site.areas,
+    telephone: site.phone,
+    email: site.email,
+    url: site.url,
+    priceRange: '$$$',
+    serviceType: ['Boudoir Photography', 'Portrait Photography', 'Bridal Photography'],
+  }
+
+  return (
+    <html lang="en">
+      <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  )
 }

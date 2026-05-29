@@ -41,14 +41,21 @@ export function ContactForm({ hidePricingCheckbox = false }) {
     }
   }
   const input = 'w-full rounded-2xl border border-ivory/10 bg-charcoal px-4 py-3 text-ivory placeholder:text-ivory/35 outline-none focus:border-champagne'
-  return <form onSubmit={submit} className="grid gap-4 rounded-[2rem] border border-ivory/10 bg-smoke p-6 shadow-glow md:p-8">
-    <div className="grid gap-4 md:grid-cols-2"><input name="firstName" required placeholder="First name" className={input}/><input name="lastName" placeholder="Last name" className={input}/></div>
-    <div className="grid gap-4 md:grid-cols-2"><input name="email" type="email" required placeholder="Email" className={input}/><input name="phone" placeholder="Phone" className={input}/></div>
-    <div className="grid gap-4 md:grid-cols-2"><input name="city" placeholder="City" className={input}/><select name="sessionType" className={input} defaultValue=""><option value="" disabled>Session type</option><option>Self-love</option><option>Bridal</option><option>Anniversary gift</option><option>Birthday</option><option>Divorce / new chapter</option><option>Just because</option><option>Not sure yet</option></select></div>
-    <textarea name="nervousAbout" placeholder="What are you most nervous about?" rows={4} className={input}/>
-    <select name="consultationPreference" className={input} defaultValue=""><option value="" disabled>How would you prefer to consult?</option><option>Phone call</option><option>Zoom video call (recommended)</option><option>Text first, then call</option></select>
-    <input name="timeframe" placeholder="Desired timeframe" className={input}/>
+  return <>
+    <div className="mb-6 rounded-2xl border border-champagne/20 bg-champagne/5 p-4">
+      <p className="text-sm text-ivory/80">
+        <strong className="text-champagne">Privacy guaranteed:</strong> Your inquiry is completely private. We'll call or text only if you've shared those details.
+      </p>
+    </div>
+    <form onSubmit={submit} className="grid gap-4 rounded-[2rem] border border-ivory/10 bg-smoke p-6 shadow-glow md:p-8">
+    <div className="grid gap-4 md:grid-cols-2"><input name="firstName" required placeholder="First name *" className={input}/><input name="lastName" placeholder="Last name" className={input}/></div>
+    <div className="grid gap-4 md:grid-cols-2"><input name="email" type="email" required placeholder="Email *" className={input}/><input name="phone" placeholder="Phone or text number" className={input}/></div>
+    <div className="grid gap-4 md:grid-cols-2"><input name="city" placeholder="City or area" className={input}/><select name="sessionType" className={input} defaultValue=""><option value="" disabled>What's the occasion? *</option><option>Self-love & confidence</option><option>Bridal or wedding gift</option><option>Anniversary gift</option><option>Birthday celebration</option><option>New chapter (divorce, healing)</option><option>Just because I deserve it</option><option>Not sure yet</option></select></div>
+    <textarea name="nervousAbout" placeholder="Anything you're nervous about? (We'll put your mind at ease)" rows={4} className={input}/>
+    <select name="consultationPreference" className={input} defaultValue=""><option value="" disabled>How would you prefer to talk? *</option><option>Phone call</option><option>Zoom video call (recommended - more personal)</option><option>Text first, then call</option></select>
+    <input name="timeframe" placeholder="When are you hoping to do this? (e.g., next month, before wedding)" className={input}/>
     <label className="flex gap-3 text-sm leading-6 text-ivory/65"><input required type="checkbox" className="mt-1"/> {hidePricingCheckbox ? <>I understand my inquiry is private and my images will never be shared without written permission. By submitting this form, I consent to be contacted via phone, SMS, and email regarding my inquiry. I have read and agree to the <a href="/privacy-policy" className="text-champagne hover:text-ivory transition">Privacy Policy</a> and <a href="/terms-of-service" className="text-champagne hover:text-ivory transition">Terms of Service</a>.</> : <>I understand products begin at $995 and session fees are separate. I understand my inquiry is private and my images will never be shared without written permission. By submitting this form, I consent to be contacted via phone, SMS, and email regarding my inquiry. I have read and agree to the <a href="/privacy-policy" className="text-champagne hover:text-ivory transition">Privacy Policy</a> and <a href="/terms-of-service" className="text-champagne hover:text-ivory transition">Terms of Service</a>.</>}</label>
-    <button disabled={loading} className="rounded-full bg-champagne px-6 py-4 font-semibold text-charcoal transition hover:bg-ivory disabled:opacity-60">{loading ? 'Sending...' : 'Request My Consultation'}</button>
-  </form>
+    <button disabled={loading} className="rounded-full bg-champagne px-6 py-4 font-semibold text-charcoal transition hover:bg-ivory disabled:opacity-60">{loading ? 'Sending your inquiry...' : 'Request My Private Consultation'}</button>
+    </form>
+  </>
 }
