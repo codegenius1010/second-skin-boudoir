@@ -18,7 +18,7 @@ export default function BoudoirPricing() {
     <main>
       <Hero
         eyebrow="PRICING GUIDE"
-        title="The Boudoir Investment"
+        title="Transparent Boudoir Photography Pricing"
         subtitle="A private, fully guided luxury boudoir experience designed to help you feel safe, seen, and stunning—then choose only the artwork you love."
       />
 
@@ -364,7 +364,28 @@ export default function BoudoirPricing() {
           </div>
         </div>
 
-        <p className="mt-12 text-center text-lg text-champagne font-semibold">Most clients invest between $995 and $4,995 depending on the collection they choose.</p>
+        <div className="mt-12 mx-auto max-w-2xl">
+          <div className="rounded-[2rem] border border-champagne/30 bg-gradient-to-br from-champagne/10 to-amber-300/5 p-8 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.32em] text-champagne mb-3">Most Popular Choice</p>
+            <h3 className="text-2xl font-semibold text-ivory mb-4">Collection C + Signature Session</h3>
+            <div className="flex justify-center gap-8 mb-6">
+              <div>
+                <p className="text-champagne text-sm mb-1">Collection C</p>
+                <p className="text-3xl font-bold text-ivory">$2,995</p>
+              </div>
+              <div className="text-champagne/50">+</div>
+              <div>
+                <p className="text-champagne text-sm mb-1">Signature Session</p>
+                <p className="text-3xl font-bold text-ivory">$549</p>
+              </div>
+            </div>
+            <div className="border-t border-champagne/20 pt-6">
+              <p className="text-champagne text-sm mb-3">Total Investment:</p>
+              <p className="text-4xl font-bold text-transparent bg-gradient-to-r from-champagne to-amber-300 bg-clip-text">$3,544</p>
+              <p className="text-ivory/70 text-sm mt-4">21-30 professionally edited images, luxury leather album, matching digital collection, and elegant leather box.</p>
+            </div>
+          </div>
+        </div>
       </Section>
       <Section>
         <div className="text-center">
