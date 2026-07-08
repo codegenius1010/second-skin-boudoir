@@ -4,7 +4,7 @@ import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
 import { FAQAccordion } from '@/components/FAQAccordion'
-import { CollaborationForm } from '@/components/CollaborationForm'
+import { ContactForm } from '@/components/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Limited Boudoir Collaboration Sessions in Destin & 30A | Second Skin Boudoir',
@@ -435,7 +435,9 @@ export default function Page() {
             Let us learn about you, your vision, and your comfort level. No commitment—just a conversation.
           </p>
         </div>
-        <CollaborationForm />
+        <div className="max-w-2xl mx-auto">
+          <ContactForm hidePricingCheckbox={true} />
+        </div>
       </Section>
     </main>
   )
