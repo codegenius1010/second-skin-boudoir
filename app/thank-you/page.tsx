@@ -38,6 +38,13 @@ export default function Page() {
           alt=""
         />
       </noscript>
+      <Script
+        id="meta-submit-application"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `fbq('track', 'SubmitApplication');`,
+        }}
+      />
       <Section>
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow>Inquiry received</Eyebrow>
