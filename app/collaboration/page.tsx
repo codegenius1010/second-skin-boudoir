@@ -426,6 +426,20 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* MEET YOUR PHOTOGRAPHER */}
+      <Section>
+        <Eyebrow>Meet Your Photographer</Eyebrow>
+        <Heading>You're In Good Hands</Heading>
+        <div className="mt-8 max-w-3xl">
+          <p className="text-champagne text-lg mb-6">
+            These collaboration sessions are done by Matthew, Second Skin Boudoir's founder and photographer. He specializes in creating comfortable, professional experiences where you feel confident and supported. Your session will be fully guided, with direction every step of the way.
+          </p>
+          <p className="text-champagne text-lg">
+            Learn more about who you'll be working with on the <a href="/about" className="text-champagne hover:text-ivory transition-colors font-semibold">about page</a>.
+          </p>
+        </div>
+      </Section>
+
       {/* APPLICATION FORM */}
       <Section id="apply" className="bg-smoke">
         <div className="text-center mb-12">
