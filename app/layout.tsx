@@ -76,6 +76,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           alt=""
         />
       </noscript>
+      <Script
+        async
+        id="google-ads-conversion"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18309956218"
+        strategy="beforeInteractive"
+      />
+      <Script
+        id="google-ads-config"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18309956218');
+          `,
+        }}
+      />
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
