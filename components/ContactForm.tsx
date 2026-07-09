@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-export function ContactForm({ hidePricingCheckbox = false, formType = 'contact' }) {
+export function ContactForm({ hidePricingCheckbox = false, formType = 'contact', source = 'contact' }) {
   const [loading, setLoading] = useState(false)
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -12,6 +12,7 @@ export function ContactForm({ hidePricingCheckbox = false, formType = 'contact' 
     // Convert FormData to JSON
     const json = {
       formType,
+      source,
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
       email: data.get('email'),

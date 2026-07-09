@@ -177,7 +177,7 @@ export default function PortfolioModels() {
             Let us chat about your portfolio goals. No pressure, no commitment—just a conversation about how we can help each other grow.
           </p>
         </div>
-        <ContactForm hidePricingCheckbox={true} />
+        <ContactForm hidePricingCheckbox={true} formType="portfolio-models" source="portfolio-models" />
       </Section>
     </main>
   )

@@ -262,7 +262,7 @@ export default function ModelShoots() {
           </p>
         </div>
         <div className="max-w-2xl mx-auto">
-          <ContactForm hidePricingCheckbox={true} formType="model-shoot" />
+          <ContactForm hidePricingCheckbox={true} formType="model-shoot" source="model-shoot" />
         </div>
       </Section>
 

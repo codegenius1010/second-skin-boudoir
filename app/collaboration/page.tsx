@@ -450,7 +450,7 @@ export default function Page() {
           </p>
         </div>
         <div className="max-w-2xl mx-auto">
-          <ContactForm hidePricingCheckbox={true} formType="collaboration" />
+          <ContactForm hidePricingCheckbox={true} formType="collaboration" source="collaboration" />
         </div>
       </Section>
     </main>
