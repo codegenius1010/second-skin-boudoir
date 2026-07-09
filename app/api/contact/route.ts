@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
       nervousAbout,
       consultationPreference,
       timeframe,
+      formType,
+      source,
     } = data
 
     const webhookUrl = process.env.GHL_WEBHOOK_URL
@@ -41,6 +43,8 @@ export async function POST(request: NextRequest) {
         nervousAbout,
         consultationPreference,
         timeframe,
+        formType,
+        source,
       }),
     })
 
