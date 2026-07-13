@@ -1,0 +1,171 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Client contact information
+model Client {
+  id                  String   @id @default(cuid())
+  firstName           String
+  lastName            String
+  emailNormalized     String   @unique
+  phoneNormalized     String?  @unique
+  instagramHandle     String?
+  ghlContactId        String?
+
+  sessions            PhotographySession[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([emailNormalized])
+  @@index([phoneNormalized])
+  @@index([ghlContactId])
+}
+
+// Photography session booking metadata
+model PhotographySession {
+  id                      String   @id @default(cuid())
+  clientId                String
+  client                  Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  sessionType             String   // "private-client" | "collaboration" | "paid-model"
+  sessionDate             DateTime?
+  sessionLocation         String?
+  ghlOpportunityId        String?
+
+  agreementTemplateType   String?  // "standard-boudoir" | "bridal" | "collaboration" | etc
+  agreementStatus         String   @default("not_sent") // "not_sent" | "sent" | "viewed" | "signed" | "requires_attention" | "unavailable"
+  agreementDocumentId     String?
+  agreementCompletedAt    DateTime?
+
+  // Secure prep token for access control
+  securePrepTokenHash     String?  @unique
+  securePrepTokenExpiresAt DateTime?
+
+  intakes                 SessionIntake[]
+  webhookDeliveries       WebhookDelivery[]
+
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@index([clientId])
+  @@index([ghlOpportunityId])
+  @@index([securePrepTokenHash])
+}
+
+// Versioned session intake questionnaire
+model SessionIntake {
+  id                            String   @id @default(cuid())
+  sessionId                     String
+  session                       PhotographySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  schemaVersion                 String   @default("1.0")
+  status                        String   @default("draft") // "draft" | "submitted"
+  submittedAt                   DateTime?
+
+  // Session Vision
+  desiredFeelings               String[] // ["confident", "feminine", "powerful", etc]
+  visualStyles                  String[] // ["soft_romantic", "elegant_timeless", etc]
+  posingStyles                  String[] // ["soft_relaxed", "elegant_feminine", etc]
+  posingIntensity               String?  // "classic" | "sensual" | "bold" | "erotic_editorial" | "open_to_discussing" | "unsure"
+
+  // Coverage & Wardrobe
+  coveragePreferences           String[] // ["fully_covered", "robe", "bodysuit", "sheer", "implied", "topless", "nude"]
+  coverageDecision              String?  // "prefer_stay_within" | "open_less_coverage" | "open_how_feel" | "undecided" | "no_nudity"
+  hardCoverageBoundaries        String?  // Free text: "No frontal nude..."
+  poseBoundaries                String?  // Free text: "No X poses..."
+  cameraAngleBoundaries         String?  // Free text: "No upskirt angles..."
+  wardrobeAdjustmentBoundaries  String?  // Free text: "No lifting shirt..."
+
+  areasToEmphasize              String?  // Free text: "Eyes, waist, legs"
+  areasToPhotographDiscreetly   String?  // Free text: "Midsection"
+
+  // Music preferences
+  favoriteSong                  String?
+  favoriteArtists               String?
+  musicGenres                   String[]
+  playlistUrl                   String?
+  explicitLyricsAllowed         String?  // "yes" | "no" | "either"
+  musicToAvoid                  String?
+
+  // Wardrobe planning
+  wardrobePlans                 String[] // ["lingerie", "bodysuit", "robe", "shirt", "sweater", "dress", "bridal", "heels", "jewelry", "personal_item", "sheets", "unsure"]
+  wardrobeGuidanceRequested     Boolean  @default(false)
+  clothingSizes                 String?  // "S, 8, 34B..."
+  favoriteColorsStyles          String?  // Free text
+  dislikedColorsStyles          String?  // Free text
+
+  // Comfort & Support
+  mobilityPositioningNotes      String?  // Free text: mobility, positioning concerns
+  supportPersonAttending        Boolean  @default(false)
+  supportPersonName             String?
+
+  // Instagram & Tagging
+  instagramHandle               String?
+  instagramTagPermission        String?  // "yes" | "ask_me" | "no"
+  collaboratorCreditPermission  String?  // "yes" | "ask_me" | "no"
+
+  // Additional notes
+  additionalPrivateNotes        String?  // Free text: anything else to help Matthew
+
+  // Acknowledgments
+  ongoingConsentAcknowledged    Boolean  @default(false)
+  accurateInformationAcknowledged Boolean @default(false)
+
+  // Optional security info
+  submittedIpHash               String?  // SHA-256 hash of IP, never raw IP
+  userAgentSummary              String?  // e.g., "Chrome/MacOS"
+
+  webhookDeliveries             WebhookDelivery[]
+
+  createdAt                     DateTime @default(now())
+  updatedAt                     DateTime @updatedAt
+
+  @@index([sessionId])
+  @@index([status])
+  @@index([submittedAt])
+}
+
+// Transactional outbox for reliable webhook delivery
+model WebhookDelivery {
+  id                      String   @id @default(cuid())
+  
+  intakeId                String
+  intake                  SessionIntake @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+  
+  sessionId               String
+  session                 PhotographySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  destination             String   @default("GHL_SESSION_PREP_WEBHOOK")
+  eventType               String   @default("session_prep_submitted")
+  schemaVersion           String   @default("1.0")
+  
+  status                  String   @default("pending") // "pending" | "processing" | "completed" | "failed" | "requires_review"
+  attemptCount            Int      @default(0)
+  nextAttemptAt           DateTime?
+  lastAttemptAt           DateTime?
+  deliveredAt             DateTime?
+
+  lastHttpStatus          Int?
+  lastErrorCode           String?
+  lastErrorSafeMessage    String?  // Safe to display
+  
+  externalRequestId       String?  // GHL response ID for tracking
+  idempotencyKey          String   @unique // Same key across all retries
+  payloadHash             String   @unique // Hash of the payload, not full payload
+  
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@index([intakeId])
+  @@index([sessionId])
+  @@index([status])
+  @@index([nextAttemptAt])
+  @@index([idempotencyKey])
+}
