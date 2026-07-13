@@ -9,7 +9,7 @@ export const site = {
 
 export const nav = [
   { label: 'Experience', href: '/experience' },
-  { label: 'Collaboration', href: '/collaboration' },
+  { label: 'Opportunities', href: '/opportunities' },
   { label: 'Pricing', href: '/boudoir-pricing' },
   { label: 'FAQ', href: '/faq' },
   { label: 'About', href: '/about' },
