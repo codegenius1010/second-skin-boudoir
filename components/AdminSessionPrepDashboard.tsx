@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import AdminSessionTable from './AdminSessionTable'
 import AdminSessionDetail from './AdminSessionDetail'
+import GenerateTokenModal from './GenerateTokenModal'
 
 interface Submission {
   id: string
@@ -56,6 +57,8 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
 
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null)
   const [retryLoading, setRetryLoading] = useState(false)
+  const [showGenerateModal, setShowGenerateModal] = useState(false)
+  const [successNotification, setSuccessNotification] = useState<{ link: string; clientName: string } | null>(null)
 
   // Fetch submissions
   const fetchSubmissions = async () => {
@@ -130,11 +133,19 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
     <div className="min-h-screen bg-gradient-to-b from-ivory via-charcoal/2 to-ivory">
       <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-2">
-            Session Prep Dashboard
-          </h1>
-          <p className="text-lg text-smoke">Monitor intake submissions and webhook deliveries</p>
+        <div className="mb-12 flex justify-between items-start">
+          <div>
+            <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-2">
+              Session Prep Dashboard
+            </h1>
+            <p className="text-lg text-smoke">Monitor intake submissions and webhook deliveries</p>
+          </div>
+          <button
+            onClick={() => setShowGenerateModal(true)}
+            className="mt-2 px-6 py-3 bg-gradient-to-r from-champagne to-rose text-ivory rounded-lg hover:shadow-glow transition-all font-semibold whitespace-nowrap"
+          >
+            + New Session
+          </button>
         </div>
 
         {/* Stats */}
@@ -218,6 +229,38 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             adminToken={adminToken}
             onClose={() => setSelectedSessionId(null)}
           />
+        )}
+
+        {/* Generate Token Modal */}
+        {showGenerateModal && (
+          <GenerateTokenModal
+            adminToken={adminToken}
+            onClose={() => {
+              setShowGenerateModal(false)
+              fetchSubmissions()
+            }}
+            onSuccess={(link, clientName) => {
+              setSuccessNotification({ link, clientName })
+              setTimeout(() => setSuccessNotification(null), 8000)
+            }}
+          />
+        )}
+
+        {/* Success Notification */}
+        {successNotification && (
+          <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg max-w-sm animate-pulse">
+            <p className="font-semibold mb-2">✨ New session created for {successNotification.clientName}</p>
+            <p className="text-sm mb-3 break-all font-mono">{successNotification.link}</p>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(successNotification.link)
+                alert('Link copied!')
+              }}
+              className="w-full px-3 py-1 bg-white/20 rounded hover:bg-white/30 transition-colors text-sm font-medium"
+            >
+              Copy Link
+            </button>
+          </div>
         )}
       </div>
     </div>
