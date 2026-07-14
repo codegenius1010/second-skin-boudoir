@@ -96,7 +96,26 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (formData.ongoingConsentAcknowledged && formData.accurateInformationAcknowledged && formData.imageUseElection) {
-      onComplete(formData)
+      // Filter out empty strings and empty arrays from formData before submitting
+      const cleanedData = Object.entries(formData).reduce((acc, [key, value]) => {
+        if (typeof value === 'string') {
+          // Only include non-empty strings
+          if (value.trim() !== '') {
+            acc[key] = value
+          }
+        } else if (Array.isArray(value)) {
+          // Only include non-empty arrays
+          if (value.length > 0) {
+            acc[key] = value
+          }
+        } else {
+          // Include all other types (booleans, etc.)
+          acc[key] = value
+        }
+        return acc
+      }, {} as Record<string, unknown>)
+      
+      onComplete(cleanedData)
     }
   }
 
