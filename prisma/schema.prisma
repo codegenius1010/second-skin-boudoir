@@ -16,7 +16,7 @@ model Client {
   firstName           String
   lastName            String
   emailNormalized     String   @unique
-  phoneNormalized     String?  @unique
+  phoneNormalized     String?  // Allow multiple clients with same phone number
   instagramHandle     String?
   ghlContactId        String?
 

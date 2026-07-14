@@ -95,8 +95,13 @@ export async function POST(request: NextRequest) {
     )
   } catch (error) {
     console.error('[Admin] Generate token error:', error)
+    
+    // Provide more specific error message for debugging
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Error details:', errorMessage)
+    
     return NextResponse.json(
-      { error: 'Failed to generate session prep link' },
+      { error: 'Failed to generate session prep link', details: process.env.NODE_ENV === 'development' ? errorMessage : undefined },
       { status: 500 }
     )
   }
