@@ -7,6 +7,11 @@ interface SessionPrepStep3Props {
   isLoading?: boolean
 }
 
+// Helper to convert label text to schema format (e.g. "Soft romantic" → "soft_romantic")
+const labelToValue = (label: string): string => {
+  return label.toLowerCase().replace(/\s+/g, '_')
+}
+
 export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepStep3Props) {
   const [formData, setFormData] = useState({
     desiredFeelings: [] as string[],
@@ -142,9 +147,9 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                     <CheckboxOption
                       key={style}
                       label={style}
-                      value={style.toLowerCase()}
-                      checked={formData.visualStyles.includes(style.toLowerCase())}
-                      onChange={() => toggleCheckbox('visualStyles', style.toLowerCase())}
+                      value={labelToValue(style)}
+                      checked={formData.visualStyles.includes(labelToValue(style))}
+                      onChange={() => toggleCheckbox('visualStyles', labelToValue(style))}
                     />
                   )
                 )}
@@ -170,9 +175,9 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                   <CheckboxOption
                     key={pose}
                     label={pose}
-                    value={pose.toLowerCase()}
-                    checked={formData.posingStyles.includes(pose.toLowerCase())}
-                    onChange={() => toggleCheckbox('posingStyles', pose.toLowerCase())}
+                    value={labelToValue(pose)}
+                    checked={formData.posingStyles.includes(labelToValue(pose))}
+                    onChange={() => toggleCheckbox('posingStyles', labelToValue(pose))}
                   />
                 ))}
               </div>
