@@ -40,17 +40,20 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Build client filter conditions
+    const clientConditions: Record<string, unknown>[] = []
+
     if (clientEmail) {
-      where.client = {
+      clientConditions.push({
         emailNormalized: {
           contains: clientEmail.toLowerCase(),
           mode: 'insensitive',
         },
-      }
+      })
     }
 
     if (clientName) {
-      where.client = {
+      clientConditions.push({
         OR: [
           {
             firstName: {
@@ -65,7 +68,11 @@ export async function GET(request: NextRequest) {
             },
           },
         ],
-      }
+      })
+    }
+
+    if (clientConditions.length > 0) {
+      where.client = clientConditions.length === 1 ? clientConditions[0] : { AND: clientConditions }
     }
 
     if (sessionType) {
