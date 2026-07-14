@@ -21,7 +21,7 @@ const VISUAL_STYLES = [
   'moody_cinematic',
   'editorial_fashion',
   'erotic',
-  'guidance',
+  'sensual',
 ] as const
 
 const POSING_STYLES = [

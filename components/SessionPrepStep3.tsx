@@ -142,7 +142,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 What visual aesthetic appeals to you?
               </label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {['Soft romantic', 'Elegant timeless', 'Bright natural', 'Moody cinematic', 'Editorial fashion', 'Erotic', 'Guidance'].map(
+                {['Soft romantic', 'Elegant timeless', 'Bright natural', 'Moody cinematic', 'Editorial fashion', 'Erotic', 'Sensual'].map(
                   (style) => (
                     <CheckboxOption
                       key={style}
