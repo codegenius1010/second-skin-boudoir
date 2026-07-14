@@ -168,9 +168,3 @@ export default function SessionPrepStep2({
     </div>
   )
 }
-
-      {/* Form number indicator */}
-      <p className="text-center text-smoke text-sm mt-8">Step 2 of 4</p>
-    </div>
-  )
-}
