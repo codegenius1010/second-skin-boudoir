@@ -54,8 +54,15 @@ export async function POST(request: NextRequest) {
     } catch (error) {
       if (error instanceof ZodError) {
         const fieldErrors = error.issues.map(e => `${e.path.join('.')}: ${e.message}`)
+        console.error('[SessionPrep Validation Error]', {
+          timestamp: new Date().toISOString(),
+          sessionId,
+          receivedFields: Object.keys(intakeData || {}),
+          validationErrors: fieldErrors,
+          intakeData: JSON.stringify(intakeData, null, 2),
+        })
         return NextResponse.json(
-          { error: 'Validation failed', details: fieldErrors.slice(0, 5) },
+          { error: 'Validation failed', details: fieldErrors.slice(0, 10) },
           { status: 400 }
         )
       }

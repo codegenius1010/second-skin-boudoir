@@ -7,12 +7,12 @@ declare global {
 
 // Compute the database URL dynamically based on environment
 function getDatabaseUrl() {
-  // In production, use the PostgreSQL URL from environment
-  if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
+  // Use the DATABASE_URL from environment if available
+  if (process.env.DATABASE_URL) {
     return process.env.DATABASE_URL
   }
 
-  // In development, use SQLite file-based database
+  // Fallback to SQLite for local development without DATABASE_URL
   const projectRoot = process.cwd()
   const dbPath = path.join(projectRoot, 'prisma', 'dev.db')
   return `file:${dbPath}?connection_limit=1`
