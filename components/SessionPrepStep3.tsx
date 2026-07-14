@@ -39,6 +39,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     instagramTagPermission: '',
     collaboratorCreditPermission: '',
     additionalPrivateNotes: '',
+    additionalImageComments: '',
     imageUseElection: '',
     ongoingConsentAcknowledged: false,
     accurateInformationAcknowledged: false,
@@ -274,26 +275,21 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
           onToggle={() => toggleSection('wardrobe')}
         >
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-charcoal mb-3">
-                What will you bring?
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {['Lingerie', 'Bodysuit', 'Robe', 'Heels', 'Jewelry', 'Personal item'].map((item) => (
-                  <CheckboxOption
-                    key={item}
-                    label={item}
-                    value={item.toLowerCase()}
-                    checked={formData.wardrobePlans.includes(item.toLowerCase())}
-                    onChange={() => toggleCheckbox('wardrobePlans', item.toLowerCase())}
-                  />
-                ))}
-              </div>
+            {/* Styling Guide - Download Button */}
+            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4">
+              <a
+                href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQBk-cga6Qn9T6mODsItWU6_ATNGRPiIdk7yo2CVCyBa32k?e=tzagIz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
+              >
+                ⬇️ I've Downloaded the Styling Guide
+              </a>
             </div>
 
-            {/* Wardrobe Guidance Guide */}
+            {/* Wardrobe Options Reference */}
             <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4 space-y-3">
-              <h4 className="font-serif text-base text-charcoal font-semibold">Wardrobe Styling Guide</h4>
+              <h4 className="font-serif text-base text-charcoal font-semibold">What to Bring Guide</h4>
               
               <div className="space-y-2 text-sm text-charcoal">
                 <div>
@@ -337,18 +333,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               </p>
             </div>
 
-            <div className="flex items-center gap-2 p-3 bg-charcoal/5 rounded-lg">
-              <input
-                type="checkbox"
-                id="wardrobe-guidance"
-                checked={formData.wardrobeGuidanceRequested}
-                onChange={(e) => handleChange('wardrobeGuidanceRequested', e.target.checked)}
-                className="w-4 h-4 text-charcoal/70 cursor-pointer"
-              />
-              <label htmlFor="wardrobe-guidance" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
-                I'd like styling guidance in advance
-              </label>
-            </div>
+
           </div>
         </Section>
 
@@ -443,15 +428,15 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               </div>
             </div>
 
-            <div className="flex items-start gap-3 p-3 bg-charcoal/5 rounded-lg">
-              <input
-                type="checkbox"
-                id="posing-notes"
-                className="mt-1 w-4 h-4 text-charcoal/70 cursor-pointer"
-              />
-              <label className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
-                I'd like gentle guidance and have no prior posing experience
-              </label>
+            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4">
+              <a
+                href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQB8a_1O56ofSZseuZf5Oec-AX6VM7SJbsm-59kYvNok0b4?e=JKKkYb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
+              >
+                ⬇️ I've Downloaded the Posing Guide
+              </a>
             </div>
 
             <TextAreaField
@@ -478,19 +463,6 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               onChange={(value) => handleChange('mobilityPositioningNotes', value)}
               maxLength={500}
             />
-
-            <div className="flex items-center gap-3 p-3 bg-charcoal/5 rounded-lg">
-              <input
-                type="checkbox"
-                id="support"
-                checked={formData.supportPersonAttending}
-                onChange={(e) => handleChange('supportPersonAttending', e.target.checked)}
-                className="w-5 h-5 text-charcoal/70 cursor-pointer"
-              />
-              <label htmlFor="support" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
-                I'd like a support person present during my session
-              </label>
-            </div>
           </div>
         </Section>
 
@@ -545,7 +517,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               <p className="text-xs text-smoke mb-3">
                 Choose how comfortable you are with us sharing your session images.
               </p>
-              <div className="space-y-2">
+              <div className="space-y-2 mb-4">
                 {[
                   { value: 'no_public_sharing', label: 'No Public Sharing (Private Collection)', description: 'Images are for my personal use only and will not be shared publicly' },
                   { value: 'anonymous_detail', label: 'Anonymous/Detail Sharing', description: 'Images may be shared without my name, face cropped, or detailed shots only' },
@@ -569,6 +541,14 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                   </div>
                 ))}
               </div>
+              
+              <TextAreaField
+                label="Additional comments about your image preferences (optional)"
+                placeholder="E.g., 'Please avoid sharing full-body shots' or 'I'm open to anything creative'"
+                value={formData.additionalImageComments || ''}
+                onChange={(value) => handleChange('additionalImageComments', value)}
+                maxLength={500}
+              />
             </div>
           </div>
         </Section>
@@ -747,7 +727,7 @@ function TextInputField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all"
+        className="w-full px-4 py-2 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-white focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all"
       />
     </div>
   )
@@ -778,7 +758,7 @@ function TextAreaField({
         placeholder={placeholder}
         maxLength={maxLength}
         rows={3}
-        className="w-full px-4 py-3 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all resize-none"
+        className="w-full px-4 py-3 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-white focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all resize-none"
       />
     </div>
   )
