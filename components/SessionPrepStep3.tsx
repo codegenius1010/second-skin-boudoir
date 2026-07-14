@@ -642,8 +642,6 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
       <p className="text-center text-smoke text-sm mt-8">Step 3 of 4</p>
     </div>
   )
-    </div>
-  )
 }
 
 /* Helper Components */
