@@ -116,7 +116,7 @@ export default function SessionPrepStep2({
               <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
                 <li>Photographer retains copyright to all images and derivative works</li>
                 <li>Images may be used for portfolio, portfolio website, and promotional purposes</li>
-                <li>Client's purchase includes licensing rights as specified in Image Use Election (see section 10)</li>
+                <li>Client's image privacy preference is specified in your session questionnaire and will be respected</li>
               </ul>
             </div>
 
@@ -142,32 +142,7 @@ export default function SessionPrepStep2({
             </div>
 
             <div className="border-t border-smoke/20 pt-3">
-              <p className="font-semibold text-charcoal mb-1">10. IMAGE USE ELECTION - SELECT YOUR PREFERENCE</p>
-              <div className="bg-charcoal/5 p-3 rounded mt-2 space-y-2 text-xs">
-                <p className="font-semibold text-charcoal">My image privacy preference:</p>
-                <div className="space-y-2">
-                  <div>
-                    <p className="font-medium text-charcoal">☐ No Public Sharing (Private Collection)</p>
-                    <p className="text-smoke">Images are for my personal use only and will not be shared publicly</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-charcoal">☐ Anonymous/Detail Sharing</p>
-                    <p className="text-smoke">Images may be shared without my name, face cropped, or detailed shots only</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-charcoal">☐ Selected Images Only</p>
-                    <p className="text-smoke">Photographer may share specific pre-approved images with my name/tag</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-charcoal">☐ Full Model Release</p>
-                    <p className="text-smoke">Images may be shared in portfolio, social media, advertising with my name/tag</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t border-smoke/20 pt-3">
-              <p className="font-semibold text-charcoal mb-1">11. LIABILITY & INDEMNIFICATION</p>
+              <p className="font-semibold text-charcoal mb-1">10. LIABILITY & INDEMNIFICATION</p>
               <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
                 <li>Photography is an inherently subjective service; final images may not match expectations</li>
                 <li>Photographer is not responsible for equipment failure, power outages, or acts of God</li>
@@ -178,7 +153,7 @@ export default function SessionPrepStep2({
             </div>
 
             <div className="border-t border-smoke/20 pt-3">
-              <p className="font-semibold text-charcoal mb-1">12. CONSENT & ACKNOWLEDGMENTS</p>
+              <p className="font-semibold text-charcoal mb-1">11. CONSENT & ACKNOWLEDGMENTS</p>
               <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
                 <li>Client confirms they are 18+ years old and able to provide legal consent</li>
                 <li>Client acknowledges they have read this agreement in full and understand all terms</li>
@@ -188,7 +163,7 @@ export default function SessionPrepStep2({
             </div>
 
             <div className="border-t border-smoke/20 pt-3">
-              <p className="font-semibold text-charcoal mb-1">13. GOVERNING LAW & MODIFICATIONS</p>
+              <p className="font-semibold text-charcoal mb-1">12. GOVERNING LAW & MODIFICATIONS</p>
               <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
                 <li>This agreement is governed by the laws of the photographer's location</li>
                 <li>Any modifications to this agreement must be made in writing and signed by both parties</li>

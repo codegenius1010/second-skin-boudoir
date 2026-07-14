@@ -39,6 +39,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     instagramTagPermission: '',
     collaboratorCreditPermission: '',
     additionalPrivateNotes: '',
+    imageUseElection: '',
     ongoingConsentAcknowledged: false,
     accurateInformationAcknowledged: false,
   })
@@ -51,6 +52,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     posing: false,
     comfort: false,
     instagram: false,
+    imagePrivacy: false,
     acknowledgments: false,
   })
 
@@ -529,7 +531,49 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
           </div>
         </Section>
 
-        {/* Section 8: Acknowledgments */}
+        {/* Section 8: Image Privacy & Use */}
+        <Section
+          title="Image Privacy & Use"
+          expanded={expandedSections.imagePrivacy}
+          onToggle={() => toggleSection('imagePrivacy')}
+        >
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-charcoal mb-3">
+                How would you like your images used?
+              </label>
+              <p className="text-xs text-smoke mb-3">
+                Choose how comfortable you are with us sharing your session images.
+              </p>
+              <div className="space-y-2">
+                {[
+                  { value: 'no_public_sharing', label: 'No Public Sharing (Private Collection)', description: 'Images are for my personal use only and will not be shared publicly' },
+                  { value: 'anonymous_detail', label: 'Anonymous/Detail Sharing', description: 'Images may be shared without my name, face cropped, or detailed shots only' },
+                  { value: 'selected_images', label: 'Selected Images Only', description: 'You may share specific pre-approved images with my name/tag' },
+                  { value: 'full_model_release', label: 'Full Model Release', description: 'Images may be shared in portfolio, social media, and advertising with my name/tag' },
+                ].map((option) => (
+                  <div key={option.value} className="flex items-start gap-3 p-3 border border-smoke/20 rounded-lg hover:border-champagne/30 transition-colors">
+                    <input
+                      type="radio"
+                      id={option.value}
+                      name="imageUseElection"
+                      value={option.value}
+                      checked={formData.imageUseElection === option.value}
+                      onChange={(e) => handleChange('imageUseElection', e.target.value)}
+                      className="mt-1 w-4 h-4 text-champagne cursor-pointer flex-shrink-0"
+                    />
+                    <label htmlFor={option.value} className="cursor-pointer flex-1">
+                      <div className="font-medium text-charcoal text-sm">{option.label}</div>
+                      <div className="text-xs text-smoke">{option.description}</div>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Section 9: Acknowledgments */}
         <Section
           title="Final Confirmations"
           expanded={expandedSections.acknowledgments}
@@ -596,6 +640,8 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
 
       {/* Form number indicator */}
       <p className="text-center text-smoke text-sm mt-8">Step 3 of 4</p>
+    </div>
+  )
     </div>
   )
 }
