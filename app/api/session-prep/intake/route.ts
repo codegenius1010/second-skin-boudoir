@@ -63,9 +63,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Required acknowledgments must be true
-    if (!validatedIntake.ongoingConsentAcknowledged || !validatedIntake.accurateInformationAcknowledged) {
+    if (!validatedIntake.ongoingConsentAcknowledged || !validatedIntake.accurateInformationAcknowledged || !validatedIntake.imageUseElection) {
       return NextResponse.json(
-        { error: 'You must acknowledge all statements before submitting' },
+        { error: 'You must acknowledge all statements and select image preferences before submitting' },
         { status: 400 }
       )
     }

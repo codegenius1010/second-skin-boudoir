@@ -83,6 +83,8 @@ const MUSIC_EXPLICIT = ['yes', 'no', 'either'] as const
 
 const TAGGING_PERMISSION = ['yes', 'ask_me', 'no'] as const
 
+const IMAGE_USE_ELECTION = ['no_public_sharing', 'anonymous_detail', 'full_model_release'] as const
+
 // Session Intake Validation Schema
 export const SessionIntakeSchema = z.object({
   // Session Vision
@@ -129,6 +131,10 @@ export const SessionIntakeSchema = z.object({
 
   // Additional notes
   additionalPrivateNotes: z.string().max(5000).optional(),
+  additionalImageComments: z.string().max(500).optional(),
+
+  // Image use preferences
+  imageUseElection: z.enum(IMAGE_USE_ELECTION),
 
   // Acknowledgments (required)
   ongoingConsentAcknowledged: z.boolean(),
