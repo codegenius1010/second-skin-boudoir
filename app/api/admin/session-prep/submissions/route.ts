@@ -7,6 +7,7 @@ import { prisma } from '@/lib/prisma'
  * Query params:
  * - status: draft | submitted (filter)
  * - clientEmail: string (search)
+ * - clientName: string (search by firstName or lastName)
  * - sessionType: string (filter)
  * - page: number (pagination, default: 1)
  * - limit: number (results per page, default: 20)
@@ -22,6 +23,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
     const clientEmail = searchParams.get('clientEmail')
+    const clientName = searchParams.get('clientName')
     const sessionType = searchParams.get('sessionType')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '20')
@@ -44,6 +46,25 @@ export async function GET(request: NextRequest) {
           contains: clientEmail.toLowerCase(),
           mode: 'insensitive',
         },
+      }
+    }
+
+    if (clientName) {
+      where.client = {
+        OR: [
+          {
+            firstName: {
+              contains: clientName,
+              mode: 'insensitive',
+            },
+          },
+          {
+            lastName: {
+              contains: clientName,
+              mode: 'insensitive',
+            },
+          },
+        ],
       }
     }
 

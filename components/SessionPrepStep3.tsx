@@ -88,10 +88,10 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     <div className="w-full max-w-3xl mx-auto">
       {/* Header */}
       <div className="mb-8 md:mb-12 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl text-ivory mb-4">
+        <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">
           Your Session Preferences
         </h1>
-        <p className="text-lg text-champagne leading-relaxed">
+        <p className="text-lg text-charcoal/70 leading-relaxed">
           Share what matters most to you. Your answers help us create your perfect session.
         </p>
       </div>
@@ -201,7 +201,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                         id={coverage.value}
                         checked={formData.coveragePreferences.includes(coverage.value)}
                         onChange={() => toggleCheckbox('coveragePreferences', coverage.value)}
-                        className="mt-1 w-4 h-4 text-champagne cursor-pointer flex-shrink-0"
+                        className="mt-1 w-4 h-4 text-charcoal/70 cursor-pointer flex-shrink-0"
                       />
                       <label htmlFor={coverage.value} className="cursor-pointer flex-1">
                         <div className="font-medium text-charcoal text-sm">{coverage.label}</div>
@@ -343,7 +343,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 id="wardrobe-guidance"
                 checked={formData.wardrobeGuidanceRequested}
                 onChange={(e) => handleChange('wardrobeGuidanceRequested', e.target.checked)}
-                className="w-4 h-4 text-champagne cursor-pointer"
+                className="w-4 h-4 text-charcoal/70 cursor-pointer"
               />
               <label htmlFor="wardrobe-guidance" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
                 I'd like styling guidance in advance
@@ -370,49 +370,49 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               <h4 className="font-serif text-base text-charcoal font-semibold">Seven Posing Foundations</h4>
               <div className="space-y-2 text-sm text-charcoal">
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">1.</span>
+                  <span className="text-charcoal/70 font-semibold">1.</span>
                   <div>
                     <p className="font-medium">Long Neck</p>
                     <p className="text-smoke text-xs">Lengthen your neck by gently dropping shoulders down and back</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">2.</span>
+                  <span className="text-charcoal/70 font-semibold">2.</span>
                   <div>
                     <p className="font-medium">Soft Shoulders</p>
                     <p className="text-smoke text-xs">Relax shoulders away from ears for an elegant, confident appearance</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">3.</span>
+                  <span className="text-charcoal/70 font-semibold">3.</span>
                   <div>
                     <p className="font-medium">Gentle Chin</p>
                     <p className="text-smoke text-xs">Slightly angle chin forward and down for the most flattering neck line</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">4.</span>
+                  <span className="text-charcoal/70 font-semibold">4.</span>
                   <div>
                     <p className="font-medium">Relaxed Hands</p>
                     <p className="text-smoke text-xs">Keep hands graceful - touching hair, fabric, or gently curved</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">5.</span>
+                  <span className="text-charcoal/70 font-semibold">5.</span>
                   <div>
                     <p className="font-medium">Hip Shift</p>
                     <p className="text-smoke text-xs">Shift weight to back leg for curves and a more dynamic pose</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">6.</span>
+                  <span className="text-charcoal/70 font-semibold">6.</span>
                   <div>
                     <p className="font-medium">Pointed Toes</p>
                     <p className="text-smoke text-xs">Lengthen legs by pointing toes slightly - creates graceful lines</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-champagne font-semibold">7.</span>
+                  <span className="text-charcoal/70 font-semibold">7.</span>
                   <div>
                     <p className="font-medium">Breath & Movement</p>
                     <p className="text-smoke text-xs">Take deep breaths and relax - natural movement creates authentic beauty</p>
@@ -447,7 +447,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               <input
                 type="checkbox"
                 id="posing-notes"
-                className="mt-1 w-4 h-4 text-champagne cursor-pointer"
+                className="mt-1 w-4 h-4 text-charcoal/70 cursor-pointer"
               />
               <label className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
                 I'd like gentle guidance and have no prior posing experience
@@ -485,7 +485,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 id="support"
                 checked={formData.supportPersonAttending}
                 onChange={(e) => handleChange('supportPersonAttending', e.target.checked)}
-                className="w-5 h-5 text-champagne cursor-pointer"
+                className="w-5 h-5 text-charcoal/70 cursor-pointer"
               />
               <label htmlFor="support" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
                 I'd like a support person present during my session
@@ -560,7 +560,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                       value={option.value}
                       checked={formData.imageUseElection === option.value}
                       onChange={(e) => handleChange('imageUseElection', e.target.value)}
-                      className="mt-1 w-4 h-4 text-champagne cursor-pointer flex-shrink-0"
+                      className="mt-1 w-4 h-4 text-charcoal/70 cursor-pointer flex-shrink-0"
                     />
                     <label htmlFor={option.value} className="cursor-pointer flex-1">
                       <div className="font-medium text-charcoal text-sm">{option.label}</div>
@@ -629,8 +629,8 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               !formData.ongoingConsentAcknowledged || !formData.accurateInformationAcknowledged
                 ? 'bg-smoke/30 text-smoke/50 cursor-not-allowed'
                 : isLoading
-                  ? 'bg-smoke/50 cursor-not-allowed text-ivory'
-                  : 'bg-gradient-to-r from-champagne to-rose text-ivory hover:shadow-glow hover:scale-105 active:scale-95'
+                  ? 'bg-smoke/50 cursor-not-allowed text-charcoal'
+                  : 'bg-gradient-to-r from-champagne to-rose text-charcoal hover:shadow-glow hover:scale-105 active:scale-95'
             }`}
           >
             {isLoading ? 'Submitting Your Preferences...' : 'Submit & Complete Session Prep'}
@@ -664,8 +664,8 @@ function Section({
         onClick={onToggle}
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-charcoal/5 transition-colors"
       >
-        <h3 className="font-serif text-lg text-ivory">{title}</h3>
-        <span className={`text-champagne transition-transform ${expanded ? 'rotate-180' : ''}`}>
+        <h3 className="font-serif text-lg text-charcoal">{title}</h3>
+        <span className={`text-charcoal/70 transition-transform ${expanded ? 'rotate-180' : ''}`}>
           ▼
         </span>
       </button>
@@ -692,9 +692,9 @@ function CheckboxOption({
         id={value}
         checked={checked}
         onChange={onChange}
-        className="w-4 h-4 text-champagne cursor-pointer"
+        className="w-4 h-4 text-charcoal/70 cursor-pointer"
       />
-      <label htmlFor={value} className="text-sm text-ivory cursor-pointer">
+      <label htmlFor={value} className="text-sm text-charcoal cursor-pointer">
         {label}
       </label>
     </div>
@@ -719,9 +719,9 @@ function RadioOption({
         id={value}
         checked={checked}
         onChange={onChange}
-        className="w-4 h-4 text-champagne cursor-pointer"
+        className="w-4 h-4 text-charcoal/70 cursor-pointer"
       />
-      <label htmlFor={value} className="text-sm text-ivory cursor-pointer flex-1">
+      <label htmlFor={value} className="text-sm text-charcoal cursor-pointer flex-1">
         {label}
       </label>
     </div>
@@ -741,13 +741,13 @@ function TextInputField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-champagne mb-2">{label}</label>
+      <label className="block text-sm font-medium text-charcoal/70 mb-2">{label}</label>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 border border-champagne/50 rounded-lg bg-charcoal/40 text-ivory placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all"
+        className="w-full px-4 py-2 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all"
       />
     </div>
   )
@@ -768,9 +768,9 @@ function TextAreaField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-champagne mb-2">
+      <label className="block text-sm font-medium text-charcoal/70 mb-2">
         {label}
-        {maxLength && <span className="text-champagne/60 ml-1">({value.length}/{maxLength})</span>}
+        {maxLength && <span className="text-charcoal/70/60 ml-1">({value.length}/{maxLength})</span>}
       </label>
       <textarea
         value={value}
@@ -778,7 +778,7 @@ function TextAreaField({
         placeholder={placeholder}
         maxLength={maxLength}
         rows={3}
-        className="w-full px-4 py-3 border border-champagne/50 rounded-lg bg-charcoal/40 text-ivory placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all resize-none"
+        className="w-full px-4 py-3 border border-champagne/50 rounded-lg bg-charcoal/40 text-charcoal placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all resize-none"
       />
     </div>
   )

@@ -65,10 +65,10 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
     <div className="w-full max-w-2xl mx-auto">
       {/* Header */}
       <div className="mb-8 md:mb-12 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl text-ivory mb-4">
+        <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">
           Let's Prepare Your Session
         </h1>
-        <p className="text-lg text-champagne leading-relaxed">
+        <p className="text-lg text-smoke leading-relaxed">
           Your responses help us create an experience that's uniquely perfect for you.
         </p>
       </div>
@@ -88,10 +88,10 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
               type="text"
               value={formData.firstName}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg font-body text-ivory placeholder-champagne/50 transition-all ${
+              className={`w-full px-4 py-3 border rounded-lg font-body text-charcoal placeholder-smoke/50 transition-all ${
                 errors.firstName
                   ? 'border-rose bg-rose/10 focus:border-rose focus:ring-rose/20'
-                  : 'border-champagne/50 bg-charcoal/40 focus:border-champagne focus:ring-champagne/30'
+                  : 'border-champagne/50 bg-ivory/80 focus:border-champagne focus:ring-champagne/30'
               } focus:outline-none focus:ring-4`}
               placeholder="Your first name"
               disabled={isLoading}
@@ -110,10 +110,10 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
               type="text"
               value={formData.lastName}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg font-body text-ivory placeholder-champagne/50 transition-all ${
+              className={`w-full px-4 py-3 border rounded-lg font-body text-charcoal placeholder-smoke/50 transition-all ${
                 errors.lastName
                   ? 'border-rose bg-rose/10 focus:border-rose focus:ring-rose/20'
-                  : 'border-champagne/50 bg-charcoal/40 focus:border-champagne focus:ring-champagne/30'
+                  : 'border-champagne/50 bg-ivory/80 focus:border-champagne focus:ring-champagne/30'
               } focus:outline-none focus:ring-4`}
               placeholder="Your last name"
               disabled={isLoading}
@@ -133,10 +133,10 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg font-body text-ivory placeholder-champagne/50 transition-all ${
+            className={`w-full px-4 py-3 border rounded-lg font-body text-charcoal placeholder-smoke/50 transition-all ${
               errors.email
                 ? 'border-rose bg-rose/10 focus:border-rose focus:ring-rose/20'
-                : 'border-champagne/50 bg-charcoal/40 focus:border-champagne focus:ring-champagne/30'
+                : 'border-champagne/50 bg-ivory/80 focus:border-champagne focus:ring-champagne/30'
             } focus:outline-none focus:ring-4`}
             placeholder="your.email@example.com"
             disabled={isLoading}
@@ -155,10 +155,10 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
             type="tel"
             value={formData.phone}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg font-body text-ivory placeholder-champagne/50 transition-all ${
+            className={`w-full px-4 py-3 border rounded-lg font-body text-charcoal placeholder-smoke/50 transition-all ${
               errors.phone
                 ? 'border-rose bg-rose/10 focus:border-rose focus:ring-rose/20'
-                : 'border-champagne/50 bg-charcoal/40 focus:border-champagne focus:ring-champagne/30'
+                : 'border-champagne/50 bg-ivory/80 focus:border-champagne focus:ring-champagne/30'
             } focus:outline-none focus:ring-4`}
             placeholder="(555) 123-4567"
             disabled={isLoading}
@@ -168,8 +168,8 @@ export default function SessionPrepStep1({ sessionId, onComplete, isLoading }: S
 
         {/* Trust section */}
         <div className="bg-gradient-to-r from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-6 md:p-8 my-8">
-          <h3 className="font-serif text-lg text-ivory mb-3">Your Privacy & Safety</h3>
-          <ul className="space-y-2 text-sm md:text-base text-smoke leading-relaxed">
+          <h3 className="font-serif text-lg text-charcoal mb-3">Your Privacy & Safety</h3>
+          <ul className="space-y-2 text-sm md:text-base text-charcoal leading-relaxed">
             <li className="flex items-start gap-3">
               <span className="text-champagne mt-1">✓</span>
               <span>Your information is encrypted and secure</span>

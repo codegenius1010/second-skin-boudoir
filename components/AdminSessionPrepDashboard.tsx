@@ -51,6 +51,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
   const [filters, setFilters] = useState({
     status: '',
     clientEmail: '',
+    clientName: '',
     sessionType: '',
     page: 1,
   })
@@ -69,6 +70,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
       const params = new URLSearchParams()
       if (filters.status) params.append('status', filters.status)
       if (filters.clientEmail) params.append('clientEmail', filters.clientEmail)
+      if (filters.clientName) params.append('clientName', filters.clientName)
       if (filters.sessionType) params.append('sessionType', filters.sessionType)
       params.append('page', filters.page.toString())
       params.append('limit', '20')
@@ -167,7 +169,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
               <select
                 value={filters.status}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               >
                 <option value="">All</option>
                 <option value="draft">Draft</option>
@@ -182,7 +184,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
               <select
                 value={filters.sessionType}
                 onChange={(e) => setFilters({ ...filters, sessionType: e.target.value, page: 1 })}
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               >
                 <option value="">All</option>
                 <option value="Boudoir">Boudoir</option>
@@ -191,7 +193,20 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
               </select>
             </div>
 
-            <div className="md:col-span-2">
+            <div>
+              <label className="block text-sm font-medium text-charcoal mb-2">
+                Client Name
+              </label>
+              <input
+                type="text"
+                value={filters.clientName}
+                onChange={(e) => setFilters({ ...filters, clientName: e.target.value, page: 1 })}
+                placeholder="First or last name..."
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal placeholder-smoke/50 focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+              />
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-charcoal mb-2">
                 Client Email
               </label>
@@ -200,7 +215,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
                 value={filters.clientEmail}
                 onChange={(e) => setFilters({ ...filters, clientEmail: e.target.value, page: 1 })}
                 placeholder="Search by email..."
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal placeholder-smoke/50 focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal placeholder-smoke/50 focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               />
             </div>
           </div>

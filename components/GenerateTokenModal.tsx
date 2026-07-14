@@ -134,7 +134,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
                 onChange={handleInputChange}
                 required
                 placeholder="Jane"
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               />
             </div>
             <div>
@@ -148,7 +148,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
                 onChange={handleInputChange}
                 required
                 placeholder="Doe"
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
               onChange={handleInputChange}
               required
               placeholder="jane@example.com"
-              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
             />
           </div>
 
@@ -174,7 +174,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
               value={formData.phone}
               onChange={handleInputChange}
               placeholder="850-608-0844"
-              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
             />
           </div>
 
@@ -185,7 +185,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
                 name="sessionType"
                 value={formData.sessionType}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               >
                 <option>Boudoir</option>
                 <option>Bridal Boudoir</option>
@@ -199,7 +199,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
                 name="sessionDate"
                 value={formData.sessionDate}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
               />
             </div>
           </div>
@@ -212,7 +212,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
               value={formData.sessionLocation}
               onChange={handleInputChange}
               placeholder="Destin Studio"
-              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+              className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
             />
           </div>
 
@@ -222,7 +222,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 bg-charcoal/10 text-charcoal rounded-lg hover:bg-charcoal/20 transition-colors font-medium"
+              className="flex-1 px-4 py-2 bg-charcoal/10 text-charcoal rounded-lg hover:bg-ivory0 transition-colors font-medium"
             >
               Cancel
             </button>
