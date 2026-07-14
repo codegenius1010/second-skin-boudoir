@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SessionPrepProgress from './SessionPrepProgress'
 import SessionPrepStep1 from './SessionPrepStep1'
 import SessionPrepStep2 from './SessionPrepStep2'
@@ -23,6 +23,7 @@ export interface SessionPrepWizardProps {
 }
 
 export default function SessionPrepWizard({ sessionId, token, sessionData }: SessionPrepWizardProps) {
+  const [isMounted, setIsMounted] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -33,6 +34,11 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
     email: '',
     phone: '',
   })
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   // Step 1: Client verification
   const handleStep1Complete = async (data: { firstName: string; lastName: string; email: string; phone: string }) => {
@@ -64,22 +70,16 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
 
       if (!response.ok) {
         const errorData = await response.json()
-        const debugInfo = {
-          errorMessage: errorData.error,
-          validationErrors: errorData.validationErrors,
-          debugMessage: errorData.debugMessage,
-          timestamp: errorData.timestamp,
-          receivedFieldCount: errorData.receivedFieldCount,
-          sessionId,
-          clientEmail: wizardData.email,
-          clientName: wizardData.firstName,
-        }
-        console.error('[SessionPrep] API Response Error:', debugInfo)
-        console.error('[SessionPrep] Full Response:', errorData)
+        console.error('[SessionPrep] ❌ API Response Error Status:', response.status)
+        console.error('[SessionPrep] Error Data:', errorData)
+        console.table(errorData.validationErrors || [])
         console.error('[SessionPrep] Submitted Data:', intakeData)
-        
-        // Store full error info for display
-        sessionStorage.setItem('_session_prep_last_error', JSON.stringify(debugInfo))
+        console.table(Object.entries(intakeData).slice(0, 20))
+        console.error('[SessionPrep] Client Info:', {
+          sessionId,
+          email: wizardData.email,
+          name: wizardData.firstName,
+        })
         
         throw new Error(errorData.error || 'Failed to submit session preferences')
       }
@@ -105,6 +105,13 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
     <div className="min-h-screen w-full bg-gradient-to-b from-ivory via-charcoal/2 to-ivory">
       {/* Container */}
       <div className="w-full max-w-5xl mx-auto px-4 py-8 md:py-12 lg:py-16">
+        {/* Only render after mount to prevent hydration mismatch */}
+        {!isMounted ? (
+          <div className="text-center py-20">
+            <p className="text-smoke">Loading...</p>
+          </div>
+        ) : (
+          <>
         {/* Header logo/branding */}
         <div className="text-center mb-8 md:mb-12">
           <h2 className="font-serif text-2xl md:text-3xl text-charcoal">Second Skin Boudoir</h2>
@@ -187,6 +194,8 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
             </a>
           </p>
         </div>
+          </>
+        )}
       </div>
     </div>
   )
