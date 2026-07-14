@@ -40,20 +40,46 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Build client filter conditions
-    const clientConditions: Record<string, unknown>[] = []
-
-    if (clientEmail) {
-      clientConditions.push({
+    // Build client filter - handle name and email searches
+    if (clientName && clientEmail) {
+      // Both filters: email AND (firstName OR lastName)
+      where.client = {
+        AND: [
+          {
+            emailNormalized: {
+              contains: clientEmail.toLowerCase(),
+              mode: 'insensitive',
+            },
+          },
+          {
+            OR: [
+              {
+                firstName: {
+                  contains: clientName,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                lastName: {
+                  contains: clientName,
+                  mode: 'insensitive',
+                },
+              },
+            ],
+          },
+        ],
+      }
+    } else if (clientEmail) {
+      // Email only
+      where.client = {
         emailNormalized: {
           contains: clientEmail.toLowerCase(),
           mode: 'insensitive',
         },
-      })
-    }
-
-    if (clientName) {
-      clientConditions.push({
+      }
+    } else if (clientName) {
+      // Name only: firstName OR lastName
+      where.client = {
         OR: [
           {
             firstName: {
@@ -68,11 +94,7 @@ export async function GET(request: NextRequest) {
             },
           },
         ],
-      })
-    }
-
-    if (clientConditions.length > 0) {
-      where.client = clientConditions.length === 1 ? clientConditions[0] : { AND: clientConditions }
+      }
     }
 
     if (sessionType) {
