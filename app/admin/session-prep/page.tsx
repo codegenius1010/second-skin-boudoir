@@ -7,6 +7,7 @@ export default function AdminSessionPrepPage() {
   const [adminToken, setAdminToken] = useState<string | null>(null)
   const [inputToken, setInputToken] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   // Check if already authenticated via session storage
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function AdminSessionPrepPage() {
     if (stored) {
       setAdminToken(stored)
     }
+    setIsMounted(true)
   }, [])
 
   const handleLogin = (e: React.FormEvent) => {
@@ -33,6 +35,11 @@ export default function AdminSessionPrepPage() {
     sessionStorage.removeItem('admin_session_prep_token')
     setAdminToken(null)
     setInputToken('')
+  }
+
+  // Don't render until mounted (prevents hydration mismatch)
+  if (!isMounted) {
+    return null
   }
 
   if (!adminToken) {
