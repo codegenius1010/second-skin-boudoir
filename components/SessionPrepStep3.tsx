@@ -275,18 +275,6 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
           onToggle={() => toggleSection('wardrobe')}
         >
           <div className="space-y-4">
-            {/* Styling Guide - Download Button */}
-            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4">
-              <a
-                href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQBk-cga6Qn9T6mODsItWU6_ATNGRPiIdk7yo2CVCyBa32k?e=tzagIz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
-              >
-                ⬇️ I've Downloaded the Styling Guide
-              </a>
-            </div>
-
             {/* Wardrobe Options Reference */}
             <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4 space-y-3">
               <h4 className="font-serif text-base text-charcoal font-semibold">What to Bring Guide</h4>
@@ -333,6 +321,17 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               </p>
             </div>
 
+            {/* Styling Guide - Download Button */}
+            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4">
+              <a
+                href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQBk-cga6Qn9T6mODsItWU6_ATNGRPiIdk7yo2CVCyBa32k?e=tzagIz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
+              >
+                ⬇️ I've Download the Styling Guide
+              </a>
+            </div>
 
           </div>
         </Section>
@@ -435,7 +434,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
               >
-                ⬇️ I've Downloaded the Posing Guide
+                ⬇️ I've Download the Posing Guide
               </a>
             </div>
 
@@ -487,7 +486,6 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               <div className="space-y-2">
                 {[
                   { value: 'yes', label: 'Yes, tag me' },
-                  { value: 'ask_me', label: 'Ask me first' },
                   { value: 'no', label: 'No, keep it private' },
                 ].map((option) => (
                   <RadioOption
@@ -521,7 +519,6 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 {[
                   { value: 'no_public_sharing', label: 'No Public Sharing (Private Collection)', description: 'Images are for my personal use only and will not be shared publicly' },
                   { value: 'anonymous_detail', label: 'Anonymous/Detail Sharing', description: 'Images may be shared without my name, face cropped, or detailed shots only' },
-                  { value: 'selected_images', label: 'Selected Images Only', description: 'You may share specific pre-approved images with my name/tag' },
                   { value: 'full_model_release', label: 'Full Model Release', description: 'Images may be shared in portfolio, social media, and advertising with my name/tag' },
                 ].map((option) => (
                   <div key={option.value} className="flex items-start gap-3 p-3 border border-smoke/20 rounded-lg hover:border-champagne/30 transition-colors">
@@ -603,10 +600,11 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
             disabled={
               isLoading ||
               !formData.ongoingConsentAcknowledged ||
-              !formData.accurateInformationAcknowledged
+              !formData.accurateInformationAcknowledged ||
+              !formData.imageUseElection
             }
             className={`w-full py-4 px-6 rounded-lg font-body font-semibold transition-all duration-300 ${
-              !formData.ongoingConsentAcknowledged || !formData.accurateInformationAcknowledged
+              !formData.ongoingConsentAcknowledged || !formData.accurateInformationAcknowledged || !formData.imageUseElection
                 ? 'bg-smoke/30 text-smoke/50 cursor-not-allowed'
                 : isLoading
                   ? 'bg-smoke/50 cursor-not-allowed text-charcoal'
