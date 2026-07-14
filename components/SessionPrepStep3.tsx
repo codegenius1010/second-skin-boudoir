@@ -88,10 +88,10 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     <div className="w-full max-w-3xl mx-auto">
       {/* Header */}
       <div className="mb-8 md:mb-12 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">
+        <h1 className="font-serif text-4xl md:text-5xl text-ivory mb-4">
           Your Session Preferences
         </h1>
-        <p className="text-lg text-smoke leading-relaxed">
+        <p className="text-lg text-champagne leading-relaxed">
           Share what matters most to you. Your answers help us create your perfect session.
         </p>
       </div>
@@ -664,7 +664,7 @@ function Section({
         onClick={onToggle}
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-charcoal/5 transition-colors"
       >
-        <h3 className="font-serif text-lg text-charcoal">{title}</h3>
+        <h3 className="font-serif text-lg text-ivory">{title}</h3>
         <span className={`text-champagne transition-transform ${expanded ? 'rotate-180' : ''}`}>
           ▼
         </span>
@@ -694,7 +694,7 @@ function CheckboxOption({
         onChange={onChange}
         className="w-4 h-4 text-champagne cursor-pointer"
       />
-      <label htmlFor={value} className="text-sm text-charcoal cursor-pointer">
+      <label htmlFor={value} className="text-sm text-ivory cursor-pointer">
         {label}
       </label>
     </div>
@@ -721,7 +721,7 @@ function RadioOption({
         onChange={onChange}
         className="w-4 h-4 text-champagne cursor-pointer"
       />
-      <label htmlFor={value} className="text-sm text-charcoal cursor-pointer flex-1">
+      <label htmlFor={value} className="text-sm text-ivory cursor-pointer flex-1">
         {label}
       </label>
     </div>
@@ -741,13 +741,13 @@ function TextInputField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-charcoal mb-2">{label}</label>
+      <label className="block text-sm font-medium text-champagne mb-2">{label}</label>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal placeholder-smoke/50 focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none transition-all"
+        className="w-full px-4 py-2 border border-champagne/50 rounded-lg bg-charcoal/40 text-ivory placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all"
       />
     </div>
   )
@@ -768,9 +768,9 @@ function TextAreaField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-charcoal mb-2">
+      <label className="block text-sm font-medium text-champagne mb-2">
         {label}
-        {maxLength && <span className="text-smoke/50 ml-1">({value.length}/{maxLength})</span>}
+        {maxLength && <span className="text-champagne/60 ml-1">({value.length}/{maxLength})</span>}
       </label>
       <textarea
         value={value}
@@ -778,7 +778,7 @@ function TextAreaField({
         placeholder={placeholder}
         maxLength={maxLength}
         rows={3}
-        className="w-full px-4 py-3 border border-smoke/30 rounded-lg bg-charcoal/2 text-charcoal placeholder-smoke/50 focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none transition-all resize-none"
+        className="w-full px-4 py-3 border border-champagne/50 rounded-lg bg-charcoal/40 text-ivory placeholder-champagne/50 focus:border-champagne focus:ring-4 focus:ring-champagne/30 focus:outline-none transition-all resize-none"
       />
     </div>
   )
