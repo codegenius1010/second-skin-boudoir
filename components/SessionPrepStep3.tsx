@@ -76,7 +76,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.ongoingConsentAcknowledged && formData.accurateInformationAcknowledged) {
+    if (formData.ongoingConsentAcknowledged && formData.accurateInformationAcknowledged && formData.imageUseElection) {
       onComplete(formData)
     }
   }
@@ -329,7 +329,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
               >
-                ⬇️ I've Download the Styling Guide
+                ⬇️ Download the Styling Guide
               </a>
             </div>
 
@@ -434,7 +434,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-champagne to-rose text-charcoal font-semibold rounded-lg hover:shadow-glow hover:scale-105 transition-all"
               >
-                ⬇️ I've Download the Posing Guide
+                ⬇️ Download the Posing Guide
               </a>
             </div>
 
