@@ -48,6 +48,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     coverage: false,
     music: false,
     wardrobe: false,
+    posing: false,
     comfort: false,
     instagram: false,
     acknowledgments: false,
@@ -133,7 +134,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 What visual aesthetic appeals to you?
               </label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {['Soft romantic', 'Elegant timeless', 'Bright natural', 'Moody cinematic', 'Bold sultry'].map(
+                {['Soft romantic', 'Elegant timeless', 'Bright natural', 'Moody cinematic', 'Bold sultry', 'Erotic'].map(
                   (style) => (
                     <CheckboxOption
                       key={style}
@@ -185,15 +186,26 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
                 What coverage level appeals to you?
               </label>
               <div className="space-y-2">
-                {['Fully covered', 'Robe or sweater', 'Bodysuit or lingerie', 'Implied nudity', 'Artistic topless'].map(
+                {[
+                  { value: 'fully covered', label: 'Fully Covered', description: 'Lingerie, robes, or bodysuit with complete coverage throughout the session' },
+                  { value: 'implied nudity', label: 'Implied Nudity', description: 'Strategically draped sheets, fabric, or positioning that suggests nudity without explicit exposure' },
+                  { value: 'artistic topless', label: 'Artistic Topless', description: 'Artistic chest coverage or angles that create tasteful, editorial-style images' },
+                  { value: 'artistic fully nude', label: 'Artistic Fully Nude', description: 'Artistic positioning, angles, shadows, and composition that create tasteful, non-explicit nudity' },
+                ].map(
                   (coverage) => (
-                    <CheckboxOption
-                      key={coverage}
-                      label={coverage}
-                      value={coverage.toLowerCase()}
-                      checked={formData.coveragePreferences.includes(coverage.toLowerCase())}
-                      onChange={() => toggleCheckbox('coveragePreferences', coverage.toLowerCase())}
-                    />
+                    <div key={coverage.value} className="flex items-start gap-3 p-3 bg-charcoal/2 rounded-lg hover:bg-charcoal/5 transition-colors">
+                      <input
+                        type="checkbox"
+                        id={coverage.value}
+                        checked={formData.coveragePreferences.includes(coverage.value)}
+                        onChange={() => toggleCheckbox('coveragePreferences', coverage.value)}
+                        className="mt-1 w-4 h-4 text-champagne cursor-pointer flex-shrink-0"
+                      />
+                      <label htmlFor={coverage.value} className="cursor-pointer flex-1">
+                        <div className="font-medium text-charcoal text-sm">{coverage.label}</div>
+                        <div className="text-xs text-smoke">{coverage.description}</div>
+                      </label>
+                    </div>
                   )
                 )}
               </div>
@@ -277,23 +289,180 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               </div>
             </div>
 
-            <TextInputField
-              label="Your clothing sizes (optional)"
-              placeholder="E.g., 'Top: M, Bottom: 8'"
-              value={formData.wardrobePlans.join(', ')}
-              onChange={(value) => handleChange('wardrobePlans', value.split(',').map((s) => s.trim()))}
-            />
+            {/* Wardrobe Guidance Guide */}
+            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4 space-y-3">
+              <h4 className="font-serif text-base text-charcoal font-semibold">Wardrobe Styling Guide</h4>
+              
+              <div className="space-y-2 text-sm text-charcoal">
+                <div>
+                  <p className="font-medium text-charcoal">Lingerie</p>
+                  <p className="text-smoke text-xs">Beautiful for intimate, sensual poses with excellent movement and confidence</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Bodysuit</p>
+                  <p className="text-smoke text-xs">Great for structured, elegant poses with clean lines and defined shape</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Robe or Sweater</p>
+                  <p className="text-smoke text-xs">Perfect for soft, relaxed, cozy images with beautiful draping and movement</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Oversized Shirt</p>
+                  <p className="text-smoke text-xs">Relaxed, natural, and timeless for casual editorial looks</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Heels</p>
+                  <p className="text-smoke text-xs">Helpful for posture and leg shape - you don't need to walk in them</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Jewelry & Accessories</p>
+                  <p className="text-smoke text-xs">Veil, garters, rings, necklaces, or bracelets add personality and detail</p>
+                </div>
+                
+                <div>
+                  <p className="font-medium text-charcoal">Personal Items</p>
+                  <p className="text-smoke text-xs">Anything that makes you feel confident - blanket, favorite sweater, etc.</p>
+                </div>
+              </div>
 
-            <TextInputField
-              label="Colors or styles you love"
-              placeholder="E.g., 'Gold accents, jewel tones'"
-              value={formData.favoriteColorsStyles}
-              onChange={(value) => handleChange('favoriteColorsStyles', value)}
+              <p className="text-xs text-smoke border-t border-smoke/20 pt-3">
+                <strong>Tip:</strong> Bring 2-4 options. We'll help you choose what photographs beautifully and feels most comfortable.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 p-3 bg-charcoal/5 rounded-lg">
+              <input
+                type="checkbox"
+                id="wardrobe-guidance"
+                checked={formData.wardrobeGuidanceRequested}
+                onChange={(e) => handleChange('wardrobeGuidanceRequested', e.target.checked)}
+                className="w-4 h-4 text-champagne cursor-pointer"
+              />
+              <label htmlFor="wardrobe-guidance" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
+                I'd like styling guidance in advance
+              </label>
+            </div>
+          </div>
+        </Section>
+
+        {/* Section 5: Posing & Guidance */}
+        <Section
+          title="Posing & Guidance"
+          expanded={expandedSections.posing}
+          onToggle={() => toggleSection('posing')}
+        >
+          <div className="space-y-4">
+            <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-4 space-y-3">
+              <h4 className="font-serif text-base text-charcoal font-semibold">Posing Philosophy</h4>
+              <p className="text-sm text-charcoal leading-relaxed">
+                Our approach focuses on three core principles: <strong>Lengthen</strong> (create graceful lines), <strong>Curve</strong> (add dimension and shape), and <strong>Soften</strong> (emphasize comfort and confidence).
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="font-serif text-base text-charcoal font-semibold">Seven Posing Foundations</h4>
+              <div className="space-y-2 text-sm text-charcoal">
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">1.</span>
+                  <div>
+                    <p className="font-medium">Long Neck</p>
+                    <p className="text-smoke text-xs">Lengthen your neck by gently dropping shoulders down and back</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">2.</span>
+                  <div>
+                    <p className="font-medium">Soft Shoulders</p>
+                    <p className="text-smoke text-xs">Relax shoulders away from ears for an elegant, confident appearance</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">3.</span>
+                  <div>
+                    <p className="font-medium">Gentle Chin</p>
+                    <p className="text-smoke text-xs">Slightly angle chin forward and down for the most flattering neck line</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">4.</span>
+                  <div>
+                    <p className="font-medium">Relaxed Hands</p>
+                    <p className="text-smoke text-xs">Keep hands graceful - touching hair, fabric, or gently curved</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">5.</span>
+                  <div>
+                    <p className="font-medium">Hip Shift</p>
+                    <p className="text-smoke text-xs">Shift weight to back leg for curves and a more dynamic pose</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">6.</span>
+                  <div>
+                    <p className="font-medium">Pointed Toes</p>
+                    <p className="text-smoke text-xs">Lengthen legs by pointing toes slightly - creates graceful lines</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-champagne font-semibold">7.</span>
+                  <div>
+                    <p className="font-medium">Breath & Movement</p>
+                    <p className="text-smoke text-xs">Take deep breaths and relax - natural movement creates authentic beauty</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="font-serif text-base text-charcoal font-semibold">Pose Families We'll Explore</h4>
+              <div className="space-y-2 text-sm">
+                <div className="p-2 bg-charcoal/2 rounded">
+                  <p className="font-medium text-charcoal">Standing Poses</p>
+                  <p className="text-xs text-smoke">Powerful, confident positions with great variety</p>
+                </div>
+                <div className="p-2 bg-charcoal/2 rounded">
+                  <p className="font-medium text-charcoal">Seated Poses</p>
+                  <p className="text-xs text-smoke">Intimate, comfortable, great for posture control</p>
+                </div>
+                <div className="p-2 bg-charcoal/2 rounded">
+                  <p className="font-medium text-charcoal">Reclined Poses</p>
+                  <p className="text-xs text-smoke">Relaxed, sensual, beautifully vulnerable</p>
+                </div>
+                <div className="p-2 bg-charcoal/2 rounded">
+                  <p className="font-medium text-charcoal">Floor Poses</p>
+                  <p className="text-xs text-smoke">Artistic, creative, with stunning draping possibilities</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 bg-charcoal/5 rounded-lg">
+              <input
+                type="checkbox"
+                id="posing-notes"
+                className="mt-1 w-4 h-4 text-champagne cursor-pointer"
+              />
+              <label className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
+                I'd like gentle guidance and have no prior posing experience
+              </label>
+            </div>
+
+            <TextAreaField
+              label="Any specific pose requests or concerns?"
+              placeholder="E.g., 'I'd love to see poses that emphasize my waist' or 'I'm concerned about arm angles'"
+              value={formData.poseBoundaries}
+              onChange={(value) => handleChange('poseBoundaries', value)}
+              maxLength={500}
             />
           </div>
         </Section>
 
-        {/* Section 5: Comfort & Support */}
+        {/* Section 6: Comfort & Support */}
         <Section
           title="Comfort & Support"
           expanded={expandedSections.comfort}
@@ -323,7 +492,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
           </div>
         </Section>
 
-        {/* Section 6: Instagram & Sharing */}
+        {/* Section 7: Instagram & Sharing */}
         <Section
           title="Instagram & Sharing"
           expanded={expandedSections.instagram}
@@ -360,7 +529,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
           </div>
         </Section>
 
-        {/* Section 7: Acknowledgments */}
+        {/* Section 8: Acknowledgments */}
         <Section
           title="Final Confirmations"
           expanded={expandedSections.acknowledgments}

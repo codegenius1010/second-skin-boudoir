@@ -43,65 +43,161 @@ export default function SessionPrepStep2({
       {/* Agreement Content */}
       {!isAgreed && (
         <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-6 md:p-8 mb-8">
-          <div className="max-h-96 overflow-y-auto pr-4 space-y-6 text-sm md:text-base text-smoke leading-relaxed">
+          <div className="max-h-96 overflow-y-auto pr-4 space-y-4 text-xs md:text-sm text-charcoal leading-relaxed">
             <div>
-              <h3 className="font-serif text-xl text-charcoal mb-3">Photography Session Agreement</h3>
-              <p>
-                This agreement confirms that you are scheduling a boudoir photography session with Second Skin Boudoir. 
-                Our sessions are carefully designed to create a comfortable, empowering experience for every client.
+              <h3 className="font-serif text-lg text-charcoal mb-2 font-semibold">SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE</h3>
+              <p className="text-smoke text-xs">
+                This Agreement is entered into between the Client and Second Skin Boudoir (the "Photographer").
               </p>
             </div>
 
-            <div>
-              <p className="font-semibold text-charcoal mb-2">Session Details & Reservation:</p>
-              <p className="text-sm">
-                The session fee reserves your selected date and covers planning, wardrobe guidance, the private boudoir 
-                session, fully guided posing, and your private reveal and ordering appointment. Additional services, 
-                products, albums, digital files, hair and makeup, and location fees are selected separately.
-              </p>
-            </div>
-
-            <div>
-              <p className="font-semibold text-charcoal mb-2">Your Comfort & Control:</p>
-              <ul className="space-y-1 ml-4 text-sm">
-                <li>✓ You control all coverage and posing boundaries at all times</li>
-                <li>✓ You can pause, modify, or end any pose at any time</li>
-                <li>✓ Your personal questionnaire guides our entire session</li>
-                <li>✓ You have final approval on all images before delivery</li>
-                <li>✓ Full creative discretion remains with the photographer</li>
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">1. SESSION BOOKING & FEES</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>The session fee reserves your selected date and time</li>
+                <li>Session fees cover: pre-session planning, wardrobe guidance, studio session, fully guided posing, and private reveal appointment</li>
+                <li>Additional services (hair/makeup, location fees, digital files, albums, prints) are optional and priced separately</li>
+                <li>A 50% non-refundable deposit confirms your booking</li>
               </ul>
             </div>
 
-            <div>
-              <p className="font-semibold text-charcoal mb-2">Image Rights & Privacy:</p>
-              <p className="text-sm">
-                All images and personal information shared during your session remain strictly confidential. Your images 
-                will not be shared publicly, in advertising, or on social media unless you provide written permission via 
-                the Image Use Election section.
-              </p>
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">2. PAYMENT & INVOICING</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Payment terms and deadlines will be specified on your invoice</li>
+                <li>Accepted payment methods: credit card, bank transfer, or as mutually agreed</li>
+                <li>Late payments may affect image delivery timelines</li>
+              </ul>
             </div>
 
-            <div>
-              <p className="font-semibold text-charcoal mb-2">Cancellations & Rescheduling:</p>
-              <p className="text-sm">
-                You may request one free reschedule with at least 7 calendar days notice. Additional reschedules, 
-                short-notice cancellations, or no-shows may require a new session fee. Session fees are non-refundable 
-                as the date and creative resources are reserved for you.
-              </p>
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">3. CANCELLATION & RESCHEDULING POLICY</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>One free reschedule allowed with 7+ calendar days notice</li>
+                <li>Reschedules requested with less than 7 days notice require a new session fee</li>
+                <li>No-shows forfeit the entire session fee unless rescheduled within 7 days</li>
+                <li>Session fees are non-refundable as your date and resources are reserved</li>
+                <li>Photographer may reschedule due to emergency or illness with 72 hours notice</li>
+              </ul>
             </div>
 
-            <div>
-              <p className="font-semibold text-charcoal mb-2">Professional Standards:</p>
-              <p className="text-sm">
-                We maintain the highest professional and ethical standards. Your safety, comfort, dignity, and 
-                confidentiality are always our priority. Respectful conduct is required during your session.
-              </p>
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">4. CLIENT RESPONSIBILITIES & CONDUCT</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Client agrees to arrive on time, prepared, and in professional condition</li>
+                <li>Respectful, cooperative behavior is required throughout the session</li>
+                <li>Client must follow photographer's direction for safety and image quality</li>
+                <li>Any substances impairing judgment or safety are prohibited</li>
+              </ul>
             </div>
 
-            <div className="pt-2 border-t border-smoke/20">
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">5. COMFORT & BOUNDARIES</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Your completed questionnaire guides all session boundaries and preferences</li>
+                <li>You maintain full control of coverage levels and posing at all times</li>
+                <li>You may pause, modify, or decline any pose without explanation</li>
+                <li>Communication is encouraged throughout the session</li>
+                <li>Session may be rescheduled if boundaries are incompatible with photographer's practice</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">6. PHOTOGRAPHER CREATIVE CONTROL & APPROVAL</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Photographer retains full creative discretion over angles, lighting, editing, and composition</li>
+                <li>Client receives final approval before any images are shared publicly</li>
+                <li>Photographer may decline to shoot or complete session if boundaries conflict with professional standards</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">7. COPYRIGHT & OWNERSHIP</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Photographer retains copyright to all images and derivative works</li>
+                <li>Images may be used for portfolio, portfolio website, and promotional purposes</li>
+                <li>Client's purchase includes licensing rights as specified in Image Use Election (see section 10)</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">8. PRIVACY & CONFIDENTIALITY</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>All personal information is kept strictly confidential</li>
+                <li>Images will NOT be shared publicly, in advertising, or on social media without your written permission</li>
+                <li>Default: Images are private and for your personal use only</li>
+                <li>Client's Instagram handle is used only if explicit written permission is given</li>
+                <li>Photographer complies with all privacy laws and data protection regulations</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">9. IMAGE DELIVERY & STORAGE</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Images are delivered according to agreed-upon timeline and format</li>
+                <li>Digital files are stored securely and retained for minimum 90 days</li>
+                <li>Extended storage available upon request</li>
+                <li>Client is responsible for downloading and backing up purchased files</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">10. IMAGE USE ELECTION - SELECT YOUR PREFERENCE</p>
+              <div className="bg-charcoal/5 p-3 rounded mt-2 space-y-2 text-xs">
+                <p className="font-semibold text-charcoal">My image privacy preference:</p>
+                <div className="space-y-2">
+                  <div>
+                    <p className="font-medium text-charcoal">☐ No Public Sharing (Private Collection)</p>
+                    <p className="text-smoke">Images are for my personal use only and will not be shared publicly</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-charcoal">☐ Anonymous/Detail Sharing</p>
+                    <p className="text-smoke">Images may be shared without my name, face cropped, or detailed shots only</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-charcoal">☐ Selected Images Only</p>
+                    <p className="text-smoke">Photographer may share specific pre-approved images with my name/tag</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-charcoal">☐ Full Model Release</p>
+                    <p className="text-smoke">Images may be shared in portfolio, social media, advertising with my name/tag</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">11. LIABILITY & INDEMNIFICATION</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Photography is an inherently subjective service; final images may not match expectations</li>
+                <li>Photographer is not responsible for equipment failure, power outages, or acts of God</li>
+                <li>Session may be rescheduled or fees refunded only for photographer's negligence</li>
+                <li>Client assumes all risk related to physical positioning, movement, and comfort during session</li>
+                <li>Client waives liability claims unless photographer breaches fundamental agreement terms</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">12. CONSENT & ACKNOWLEDGMENTS</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>Client confirms they are 18+ years old and able to provide legal consent</li>
+                <li>Client acknowledges they have read this agreement in full and understand all terms</li>
+                <li>Client confirms all information provided in the session questionnaire is accurate</li>
+                <li>Client consents to being photographed and having images processed per this agreement</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-3">
+              <p className="font-semibold text-charcoal mb-1">13. GOVERNING LAW & MODIFICATIONS</p>
+              <ul className="space-y-1 ml-3 text-xs list-disc text-charcoal">
+                <li>This agreement is governed by the laws of the photographer's location</li>
+                <li>Any modifications to this agreement must be made in writing and signed by both parties</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-smoke/20 pt-4 bg-charcoal/2 p-3 rounded">
               <p className="text-xs text-smoke/80">
-                By checking the boxes below, you acknowledge that you have read and understood this agreement and consent 
-                to your photography session under these terms.
+                <strong>By checking the boxes below, you confirm that you have read and fully understand this complete agreement, and you consent to your photography session under all terms listed above.</strong>
               </p>
             </div>
           </div>
