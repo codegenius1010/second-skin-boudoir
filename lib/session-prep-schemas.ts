@@ -19,21 +19,16 @@ const VISUAL_STYLES = [
   'elegant_timeless',
   'bright_natural',
   'moody_cinematic',
-  'editorial_fashion',
-  'bold_sultry',
-  'guidance',
+  'erotic',
 ] as const
 
 const POSING_STYLES = [
-  'soft_relaxed',
   'elegant_feminine',
   'confident_powerful',
   'editorial_dramatic',
   'playful_flirty',
   'sensual_suggestive',
-  'bold_provocative',
-  'combination',
-  'guidance',
+  'erotic',
 ] as const
 
 const POSING_INTENSITY = [
