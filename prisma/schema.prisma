@@ -7,6 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // Client contact information
@@ -70,13 +71,13 @@ model SessionIntake {
   submittedAt                   DateTime?
 
   // Session Vision
-  desiredFeelings               String[] // ["confident", "feminine", "powerful", etc]
-  visualStyles                  String[] // ["soft_romantic", "elegant_timeless", etc]
-  posingStyles                  String[] // ["soft_relaxed", "elegant_feminine", etc]
+  desiredFeelings               String  @default("[]") // JSON array: ["confident", "feminine", "powerful", etc]
+  visualStyles                  String  @default("[]") // JSON array: ["soft_romantic", "elegant_timeless", etc]
+  posingStyles                  String  @default("[]") // JSON array: ["soft_relaxed", "elegant_feminine", etc]
   posingIntensity               String?  // "classic" | "sensual" | "bold" | "erotic_editorial" | "open_to_discussing" | "unsure"
 
   // Coverage & Wardrobe
-  coveragePreferences           String[] // ["fully_covered", "robe", "bodysuit", "sheer", "implied", "topless", "nude"]
+  coveragePreferences           String  @default("[]") // JSON array: ["fully_covered", "robe", "bodysuit", "sheer", "implied", "topless", "nude"]
   coverageDecision              String?  // "prefer_stay_within" | "open_less_coverage" | "open_how_feel" | "undecided" | "no_nudity"
   hardCoverageBoundaries        String?  // Free text: "No frontal nude..."
   poseBoundaries                String?  // Free text: "No X poses..."
@@ -89,13 +90,13 @@ model SessionIntake {
   // Music preferences
   favoriteSong                  String?
   favoriteArtists               String?
-  musicGenres                   String[]
+  musicGenres                   String  @default("[]") // JSON array
   playlistUrl                   String?
   explicitLyricsAllowed         String?  // "yes" | "no" | "either"
   musicToAvoid                  String?
 
   // Wardrobe planning
-  wardrobePlans                 String[] // ["lingerie", "bodysuit", "robe", "shirt", "sweater", "dress", "bridal", "heels", "jewelry", "personal_item", "sheets", "unsure"]
+  wardrobePlans                 String  @default("[]") // JSON array: ["lingerie", "bodysuit", "robe", "shirt", "sweater", "dress", "bridal", "heels", "jewelry", "personal_item", "sheets", "unsure"]
   wardrobeGuidanceRequested     Boolean  @default(false)
   clothingSizes                 String?  // "S, 8, 34B..."
   favoriteColorsStyles          String?  // Free text

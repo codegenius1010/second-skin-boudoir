@@ -7,3 +7,5 @@ out
 .vercel
 
 /lib/generated/prisma
+
+.vercel

@@ -136,37 +136,52 @@ export function sanitizeText(text: string): string {
 /**
  * Create a summary of session preferences from intake data
  * Used for GHL webhook and admin display
+ * Note: Array fields are now stored as JSON strings in SQLite
  */
 export function createSessionPreferencesSummary(intake: {
-  desiredFeelings?: string[] | null
-  visualStyles?: string[] | null
-  posingStyles?: string[] | null
+  desiredFeelings?: string | null
+  visualStyles?: string | null
+  posingStyles?: string | null
   posingIntensity?: string | null
-  coveragePreferences?: string[] | null
+  coveragePreferences?: string | null
   hardCoverageBoundaries?: string | null
   areasToEmphasize?: string | null
   areasToPhotographDiscreetly?: string | null
   favoriteSong?: string | null
   favoriteArtists?: string | null
-  musicGenres?: string[] | null
+  musicGenres?: string | null
   explicitLyricsAllowed?: string | null
-  wardrobePlans?: string[] | null
+  wardrobePlans?: string | null
   supportPersonAttending?: boolean | null
   instagramHandle?: string | null
   instagramTagPermission?: string | null
 }): string {
   const parts: string[] = []
 
-  if (intake.desiredFeelings?.length) {
-    parts.push(`Mood: ${intake.desiredFeelings.join(', ')}`)
+  // Helper to parse JSON arrays safely
+  const parseArray = (jsonStr: string | null | undefined): string[] => {
+    if (!jsonStr) return []
+    try {
+      const parsed = JSON.parse(jsonStr)
+      return Array.isArray(parsed) ? parsed : []
+    } catch {
+      return []
+    }
   }
 
-  if (intake.posingStyles?.length) {
-    parts.push(`Posing: ${intake.posingStyles.join(', ')}`)
+  const desiredFeelings = parseArray(intake.desiredFeelings)
+  if (desiredFeelings.length) {
+    parts.push(`Mood: ${desiredFeelings.join(', ')}`)
   }
 
-  if (intake.coveragePreferences?.length) {
-    parts.push(`Coverage: ${intake.coveragePreferences.join(', ')}`)
+  const posingStyles = parseArray(intake.posingStyles)
+  if (posingStyles.length) {
+    parts.push(`Posing: ${posingStyles.join(', ')}`)
+  }
+
+  const coveragePreferences = parseArray(intake.coveragePreferences)
+  if (coveragePreferences.length) {
+    parts.push(`Coverage: ${coveragePreferences.join(', ')}`)
   }
 
   if (intake.hardCoverageBoundaries) {
@@ -185,15 +200,17 @@ export function createSessionPreferencesSummary(intake: {
     parts.push(`Favorite song: ${intake.favoriteSong}`)
   }
 
-  if (intake.favoriteArtists || intake.musicGenres?.length) {
+  const musicGenres = parseArray(intake.musicGenres)
+  if (intake.favoriteArtists || musicGenres.length) {
     const musicParts: string[] = []
     if (intake.favoriteArtists) musicParts.push(intake.favoriteArtists)
-    if (intake.musicGenres?.length) musicParts.push(intake.musicGenres.join(', '))
+    if (musicGenres.length) musicParts.push(musicGenres.join(', '))
     parts.push(`Music: ${musicParts.join('; ')}`)
   }
 
-  if (intake.wardrobePlans?.length) {
-    parts.push(`Wardrobe: ${intake.wardrobePlans.join(', ')}`)
+  const wardrobePlans = parseArray(intake.wardrobePlans)
+  if (wardrobePlans.length) {
+    parts.push(`Wardrobe: ${wardrobePlans.join(', ')}`)
   }
 
   if (intake.supportPersonAttending) {
