@@ -54,15 +54,24 @@ export async function POST(request: NextRequest) {
     } catch (error) {
       if (error instanceof ZodError) {
         const fieldErrors = error.issues.map(e => `${e.path.join('.')}: ${e.message}`)
-        console.error('[SessionPrep Validation Error]', {
+        const errorDetails = {
           timestamp: new Date().toISOString(),
           sessionId,
           receivedFields: Object.keys(intakeData || {}),
           validationErrors: fieldErrors,
           intakeData: JSON.stringify(intakeData, null, 2),
-        })
+        }
+        console.error('[SessionPrep Validation Error]', errorDetails)
+        
+        // Return detailed error for debugging
         return NextResponse.json(
-          { error: 'Validation failed', details: fieldErrors.slice(0, 10) },
+          {
+            error: 'Validation failed - See details below',
+            validationErrors: fieldErrors,
+            receivedFieldCount: Object.keys(intakeData || {}).length,
+            timestamp: errorDetails.timestamp,
+            debugMessage: `${fieldErrors.length} validation error(s) found. First issue: ${fieldErrors[0] || 'Unknown'}`
+          },
           { status: 400 }
         )
       }

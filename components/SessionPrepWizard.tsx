@@ -64,6 +64,23 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
 
       if (!response.ok) {
         const errorData = await response.json()
+        const debugInfo = {
+          errorMessage: errorData.error,
+          validationErrors: errorData.validationErrors,
+          debugMessage: errorData.debugMessage,
+          timestamp: errorData.timestamp,
+          receivedFieldCount: errorData.receivedFieldCount,
+          sessionId,
+          clientEmail: wizardData.email,
+          clientName: wizardData.firstName,
+        }
+        console.error('[SessionPrep] API Response Error:', debugInfo)
+        console.error('[SessionPrep] Full Response:', errorData)
+        console.error('[SessionPrep] Submitted Data:', intakeData)
+        
+        // Store full error info for display
+        sessionStorage.setItem('_session_prep_last_error', JSON.stringify(debugInfo))
+        
         throw new Error(errorData.error || 'Failed to submit session preferences')
       }
 
@@ -72,7 +89,13 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred'
       setError(errorMsg)
-      console.error('[SessionPrep] Submission error:', errorMsg)
+      console.error('[SessionPrep] Submission error:', {
+        errorMessage: errorMsg,
+        timestamp: new Date().toISOString(),
+        sessionId,
+        wizardData: { firstName: wizardData.firstName, lastName: wizardData.lastName, email: wizardData.email },
+        intakeDataKeys: Object.keys(intakeData),
+      })
     } finally {
       setIsLoading(false)
     }
@@ -95,8 +118,31 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
         {error && (
           <div className="mb-8 p-4 bg-rose/10 border border-rose rounded-lg">
             <p className="text-rose font-semibold text-sm">
-              ⚠️ {error}
+              ⚠️ Validation failed - Please try again or contact us for support
             </p>
+            <details className="mt-3 text-xs text-smoke/80 bg-white/50 p-3 rounded border border-rose/20 cursor-pointer">
+              <summary className="font-medium text-smoke hover:text-charcoal select-none">
+                🔍 Debug Information (for support)
+              </summary>
+              <div className="mt-3 space-y-2 text-xs">
+                <div className="bg-charcoal/5 p-2 rounded font-mono">
+                  <p className="text-smoke font-semibold mb-1">Error Message:</p>
+                  <p className="text-charcoal break-words">{error}</p>
+                </div>
+                <div className="bg-charcoal/5 p-2 rounded font-mono">
+                  <p className="text-smoke font-semibold mb-1">Session ID:</p>
+                  <p className="text-charcoal break-all">{sessionId}</p>
+                </div>
+                <div className="bg-charcoal/5 p-2 rounded font-mono">
+                  <p className="text-smoke font-semibold mb-1">Email:</p>
+                  <p className="text-charcoal break-all">{wizardData.email}</p>
+                </div>
+                <p className="text-smoke/70 italic mt-2">
+                  💡 Open your browser's Developer Tools (F12) and check the Console tab for detailed error logs. 
+                  Share the console output with support for faster assistance.
+                </p>
+              </div>
+            </details>
             <p className="text-sm text-smoke/70 mt-1">
               Please try again or contact us for support.
             </p>

@@ -7,6 +7,20 @@ interface SessionPrepStep3Props {
   isLoading?: boolean
 }
 
+/**
+ * DEBUGGING GUIDE:
+ * If you see a validation error when submitting this form:
+ * 1. Open your browser's Developer Tools (F12 or Cmd+Option+I)
+ * 2. Click the "Console" tab
+ * 3. Look for messages starting with "[SessionPrep]" - these contain detailed error info
+ * 4. The Console will show:
+ *    - "API Response Error" with specific field validation failures
+ *    - "Submitted Data" showing exactly what was sent
+ *    - "Full Response" with complete error details
+ * 
+ * Share the console output with support for fastest resolution.
+ */
+
 // Helper to convert label text to schema format (e.g. "Soft romantic" → "soft_romantic")
 const labelToValue = (label: string): string => {
   return label.toLowerCase().replace(/\s+/g, '_')
