@@ -78,6 +78,7 @@ export async function GET(
             id: intake.id,
             status: intake.status,
             submittedAt: intake.submittedAt?.toISOString(),
+            reviewStatus: intake.reviewStatus || 'needs_review',
             schemaVersion: intake.schemaVersion,
             clientFirstName: intake.clientFirstName,
             clientLastName: intake.clientLastName,

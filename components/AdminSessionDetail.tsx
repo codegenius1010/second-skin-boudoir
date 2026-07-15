@@ -476,12 +476,66 @@ Privacy Default: Your images will not be shared online, in advertising, in print
             </h2>
             <p className="text-ivory/70">{data.session.sessionType}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-ivory text-2xl hover:opacity-70"
-          >
-            ✕
-          </button>
+          <div className="flex gap-3 items-center">
+            {intake && (
+              <div className="flex flex-col gap-2">
+                <select 
+                  value={intake.reviewStatus || 'needs_review'}
+                  onChange={(e) => {
+                    fetch(`/api/admin/session-prep/submissions`, {
+                      method: 'PATCH',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'x-admin-token': adminToken,
+                      },
+                      body: JSON.stringify({
+                        intakeId: intake.id,
+                        reviewStatus: e.target.value,
+                      }),
+                    }).then(() => window.location.reload())
+                  }}
+                  className="px-3 py-1 border border-ivory/30 rounded-lg bg-charcoal/80 text-ivory text-xs"
+                >
+                  <option value="needs_review">Needs Review</option>
+                  <option value="reviewed">Reviewed</option>
+                </select>
+                <button
+                  onClick={() => {
+                    fetch(`/api/admin/session-prep/generate-token?sessionId=${data.session.id}`, {
+                      headers: { 'x-admin-token': adminToken },
+                    })
+                    .then(r => r.json())
+                    .then(d => {
+                      navigator.clipboard.writeText(d.data.prepLink)
+                      alert('Session link copied!')
+                    })
+                  }}
+                  className="px-3 py-1 bg-champagne/20 text-champagne text-xs rounded hover:bg-champagne/30 transition-colors"
+                >
+                  Copy Link
+                </button>
+                <button
+                  onClick={() => {
+                    if(confirm('Delete this submission?')) {
+                      fetch(`/api/admin/session-prep/submissions?intakeId=${intake.id}`, {
+                        method: 'DELETE',
+                        headers: { 'x-admin-token': adminToken },
+                      }).then(() => onClose())
+                    }
+                  }}
+                  className="px-3 py-1 bg-rose/10 text-rose text-xs rounded hover:bg-rose/20 transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+            <button
+              onClick={onClose}
+              className="text-ivory text-2xl hover:opacity-70"
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         {/* Content - this div will be captured for PDF */}

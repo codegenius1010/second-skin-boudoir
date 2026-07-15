@@ -6,6 +6,7 @@ interface Submission {
   id: string
   sessionType: string
   sessionDate?: string
+  reviewStatus: string
   client: {
     id: string
     firstName: string
@@ -33,6 +34,9 @@ interface AdminSessionTableProps {
   onViewDetail: (sessionId: string) => void
   onRetry: (deliveryId: string) => Promise<void>
   onStatusChange: (status: string) => void
+  onUpdateReviewStatus: (sessionId: string, newStatus: string) => Promise<void>
+  onDelete: (sessionId: string, clientName: string) => Promise<void>
+  onRegenerateLink: (sessionId: string, clientName: string) => Promise<void>
 }
 
 export default function AdminSessionTable({
@@ -41,6 +45,9 @@ export default function AdminSessionTable({
   onViewDetail,
   onRetry,
   onStatusChange,
+  onUpdateReviewStatus,
+  onDelete,
+  onRegenerateLink,
 }: AdminSessionTableProps) {
   const [retryingId, setRetryingId] = useState<string | null>(null)
 
@@ -76,7 +83,7 @@ export default function AdminSessionTable({
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Client</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Session Type</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Intake Status</th>
-            <th className="px-4 py-3 text-left font-semibold text-charcoal">Webhook Status</th>
+            <th className="px-4 py-3 text-left font-semibold text-charcoal">Review Status</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Attempts</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Submitted</th>
             <th className="px-4 py-3 text-center font-semibold text-charcoal">Actions</th>
@@ -117,17 +124,14 @@ export default function AdminSessionTable({
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  {submission.webhook ? (
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(
-                        submission.webhook.status
-                      )}`}
-                    >
-                      {submission.webhook.status}
-                    </span>
-                  ) : (
-                    <span className="text-xs text-smoke">—</span>
-                  )}
+                  <select
+                    value={submission.reviewStatus || 'needs_review'}
+                    onChange={(e) => onUpdateReviewStatus(submission.id, e.target.value)}
+                    className="px-2 py-1 rounded text-xs font-medium border border-charcoal/20 bg-ivory text-charcoal hover:border-charcoal/50 focus:outline-none focus:ring-2 focus:ring-champagne/30"
+                  >
+                    <option value="needs_review">Needs Review</option>
+                    <option value="reviewed">Reviewed</option>
+                  </select>
                 </td>
                 <td className="px-4 py-3 text-charcoal text-center">
                   {submission.webhook?.attemptCount || 0}
@@ -138,12 +142,19 @@ export default function AdminSessionTable({
                     : '—'}
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <div className="flex gap-2 justify-center">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     <button
                       onClick={() => onViewDetail(submission.id)}
                       className="text-xs px-2 py-1 rounded bg-champagne/10 text-champagne hover:bg-champagne/20 transition-colors"
                     >
                       View
+                    </button>
+                    <button
+                      onClick={() => onRegenerateLink(submission.id, `${submission.client.firstName} ${submission.client.lastName}`)}
+                      className="text-xs px-2 py-1 rounded bg-charcoal/10 text-charcoal hover:bg-charcoal/20 transition-colors"
+                      title="Copy session prep link"
+                    >
+                      Copy Link
                     </button>
                     {submission.webhook?.status === 'requires_review' ||
                     submission.webhook?.status === 'pending' ? (
@@ -155,6 +166,13 @@ export default function AdminSessionTable({
                         {retryingId === submission.webhook?.id ? 'Retrying...' : 'Retry'}
                       </button>
                     ) : null}
+                    <button
+                      onClick={() => onDelete(submission.id, `${submission.client.firstName} ${submission.client.lastName}`)}
+                      className="text-xs px-2 py-1 rounded bg-rose/10 text-rose hover:bg-rose/20 transition-colors"
+                      title="Delete this session"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>

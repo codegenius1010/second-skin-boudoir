@@ -9,6 +9,7 @@ interface Submission {
   id: string
   sessionType: string
   sessionDate?: string
+  reviewStatus: string
   client: {
     id: string
     firstName: string
@@ -131,6 +132,91 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
     }
   }
 
+  const handleUpdateStatus = async (sessionId: string, newStatus: string) => {
+    setRetryLoading(true)
+    try {
+      const response = await fetch('/api/admin/session-prep/update-status', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': adminToken,
+        },
+        body: JSON.stringify({ sessionId, reviewStatus: newStatus }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to update status')
+      }
+
+      // Refresh submissions
+      await fetchSubmissions()
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to update status')
+    } finally {
+      setRetryLoading(false)
+    }
+  }
+
+  const handleDelete = async (sessionId: string, clientName: string) => {
+    if (!confirm(`Are you sure you want to delete the session for ${clientName}? This cannot be undone.`)) {
+      return
+    }
+
+    setRetryLoading(true)
+    try {
+      const response = await fetch(`/api/admin/session-prep/delete/${sessionId}`, {
+        method: 'DELETE',
+        headers: {
+          'x-admin-token': adminToken,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to delete session')
+      }
+
+      // Refresh submissions
+      await fetchSubmissions()
+      alert('Session deleted successfully')
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to delete session')
+    } finally {
+      setRetryLoading(false)
+    }
+  }
+
+  const handleRegenerateLink = async (sessionId: string, clientName: string) => {
+    setRetryLoading(true)
+    try {
+      const response = await fetch('/api/admin/session-prep/regenerate-link', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': adminToken,
+        },
+        body: JSON.stringify({ sessionId }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to regenerate link')
+      }
+
+      const result = await response.json()
+      const prepLink = result.data.prepLink
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(prepLink)
+      alert(`New session prep link copied to clipboard for ${clientName}!\n\n${prepLink}`)
+
+      // Refresh submissions
+      await fetchSubmissions()
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to regenerate link')
+    } finally {
+      setRetryLoading(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-ivory via-charcoal/2 to-ivory">
       <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
@@ -234,6 +320,9 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             onViewDetail={setSelectedSessionId}
             onRetry={handleRetry}
             onStatusChange={(status) => setFilters({ ...filters, status, page: 1 })}
+            onUpdateReviewStatus={handleUpdateStatus}
+            onDelete={handleDelete}
+            onRegenerateLink={handleRegenerateLink}
           />
         </div>
 

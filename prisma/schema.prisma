@@ -45,6 +45,9 @@ model PhotographySession {
   agreementDocumentId     String?
   agreementCompletedAt    DateTime?
 
+  // Admin review status for session prep
+  reviewStatus            String   @default("needs_review") // "needs_review" | "reviewed"
+
   // Secure prep token for access control
   securePrepTokenHash     String?  @unique
   securePrepTokenExpiresAt DateTime?
