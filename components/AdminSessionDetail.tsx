@@ -162,7 +162,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           pdf.setFontSize(8.5)
           pdf.setTextColor(espresso[0], espresso[1], espresso[2])
           pdf.text(label + ':', margin, yPos)
-          yPos += 4
+          yPos += 6  // Increased from 4 for better spacing
           
           // Put value on next line(s), indented slightly
           pdf.setFont('Helvetica', 'normal')
@@ -173,10 +173,10 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           pdf.text(valueLines, margin + 3, yPos)
           
           const textHeight = valueLines.length * lineHeight
-          yPos += textHeight + 3
+          yPos += textHeight + 4  // Increased from 3 for better spacing
         })
 
-        yPos += 2
+        yPos += 3  // Increased from 2 for better spacing between sections
       }
 
       const intake = data.intakes[0]
@@ -265,6 +265,44 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
             ['Private Notes', intake.additionalPrivateNotes]
           ])
         }
+
+        // Session Agreement
+        checkNewPage(15)
+        pdf.setFont('Helvetica', 'bold')
+        pdf.setFontSize(11)
+        pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+        pdf.text('AGREEMENT DETAILS', margin, yPos)
+        yPos += 7
+        
+        pdf.setDrawColor(champagne[0], champagne[1], champagne[2])
+        pdf.setLineWidth(0.5)
+        pdf.line(margin, yPos - 1, margin + contentWidth, yPos - 1)
+        yPos += 6
+        
+        pdf.setFont('Helvetica', 'normal')
+        pdf.setFontSize(7.5)
+        pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+        
+        const agreementText = `SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE
+
+This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Client," "you," or "your") for a private boudoir photography session and related products.
+
+Privacy Default: Your images will not be shared online, in advertising, in print, or publicly unless you give written permission in the Image Privacy section of this questionnaire or in a later signed release.
+
+1. Session Fee and Reservation: The session fee reserves the session date and covers planning, wardrobe guidance, the private boudoir session, fully guided posing, and the private reveal and ordering appointment. Unless expressly stated in writing, the session fee does not include albums, digital files, printed artwork, hair and makeup, location fees, parking, travel, sales tax, or products.
+
+2. Artwork, Products, and Collections: Albums, digital files, printed artwork, and collections are selected separately after the session at the private reveal and ordering appointment. Product pricing and collection details are provided in the current Second Skin Boudoir pricing guide and may change until the session is booked or an order is placed.
+
+3. Payments and Product Orders: Product orders, albums, digitals, collection upgrades, payment-plan deposits, and custom artwork orders are final once approved by you. Because products are custom-made, no product order may be canceled, refunded, reduced, or exchanged after your approval except as required by law or expressly agreed in writing by Photographer.
+
+4. Payment Plans: If a payment plan is used, products may not be delivered until the order is paid in full unless Photographer agrees otherwise in writing. Missed, late, reversed, or disputed payments may delay editing, production, delivery, or product release. You remain responsible for the full balance of any approved order.
+
+5. Rescheduling, Cancellation, and No-Show: You may request one reschedule with at least seven (7) calendar days notice, subject to availability. Additional reschedules, short-notice reschedules, cancellations, late arrivals, or no-shows may require a new session fee. Session fees are non-refundable because the date, planning time, and creative resources are reserved for you.
+
+Client Acknowledgments: I understand and agree to the terms outlined above. I have reviewed the studio's portfolio and understand that photography is subjective. Photographer retains all creative control including posing, angles, editing style, and final artistic interpretation.`
+        
+        const agreementLines = pdf.splitTextToSize(agreementText, contentWidth)
+        pdf.text(agreementLines, margin, yPos)
       }
 
       // Add footer to all pages
@@ -349,7 +387,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         </div>
 
         {/* Content - this div will be captured for PDF */}
-        <div className="flex-1 overflow-y-auto p-6" ref={contentRef}>
+        <div className="flex-1 overflow-y-auto p-6 space-y-8" ref={contentRef}>
           <div className="space-y-8 max-w-4xl">
             {/* Session Info */}
             <Section title="Session Information">
@@ -516,6 +554,40 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
                     <Detail label="Notes" value={intake.additionalPrivateNotes} isLong={true} />
                   </Section>
                 )}
+
+                {/* Agreement Details */}
+                <Section title="Session Agreement">
+                  <div className="space-y-4 bg-charcoal/2 p-4 rounded-lg border border-smoke/20 max-h-96 overflow-y-auto">
+                    <p className="text-sm text-charcoal leading-relaxed whitespace-pre-wrap font-serif text-lg font-bold mb-4">
+                      SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE
+                    </p>
+                    <p className="text-xs text-charcoal leading-relaxed whitespace-pre-wrap">
+{`This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Client," "you," or "your") for a private boudoir photography session and related products.
+
+Privacy Default: Your images will not be shared online, in advertising, in print, or publicly unless you give written permission in the Image Privacy section of this questionnaire or in a later signed release.
+
+1. Session Fee and Reservation: The session fee reserves the session date and covers planning, wardrobe guidance, the private boudoir session, fully guided posing, and the private reveal and ordering appointment. Unless expressly stated in writing, the session fee does not include albums, digital files, printed artwork, hair and makeup, location fees, parking, travel, sales tax, or products.
+
+2. Artwork, Products, and Collections: Albums, digital files, printed artwork, and collections are selected separately after the session at the private reveal and ordering appointment. Product pricing and collection details are provided in the current Second Skin Boudoir pricing guide and may change until the session is booked or an order is placed.
+
+3. Payments and Product Orders: Product orders, albums, digitals, collection upgrades, payment-plan deposits, and custom artwork orders are final once approved by you. Because products are custom-made, no product order may be canceled, refunded, reduced, or exchanged after your approval except as required by law or expressly agreed in writing by Photographer.
+
+4. Payment Plans: If a payment plan is used, products may not be delivered until the order is paid in full unless Photographer agrees otherwise in writing. Missed, late, reversed, or disputed payments may delay editing, production, delivery, or product release. You remain responsible for the full balance of any approved order.
+
+5. Rescheduling, Cancellation, and No-Show: You may request one reschedule with at least seven (7) calendar days notice, subject to availability. Additional reschedules, short-notice reschedules, cancellations, late arrivals, or no-shows may require a new session fee. Session fees are non-refundable because the date, planning time, and creative resources are reserved for you.
+
+6. Late Arrival: If you arrive late, the session may be shortened to protect the schedule and location booking. Full session fees and product pricing still apply. Arrival more than thirty (30) minutes late may be treated as a no-show unless Photographer agrees otherwise.
+
+7. Hair, Makeup, Wardrobe, and Styling: If hair and makeup are included, you agree to arrive on time with clean, dry hair and a clean face. You are responsible for bringing wardrobe pieces and accessories. Photographer may provide styling guidance but does not guarantee fit or performance of any garment.
+
+8. Artistic Style and Creative Control: You have reviewed the style and portfolio and understand that photography is subjective. Photographer retains full creative discretion over lighting, posing, angles, image selection, editing style, cropping, color, retouching, and final artistic interpretation.
+
+9. Image Selection and Editing: Photographer selects the images presented at reveal. Raw, unedited, or rejected images are not included. Final images receive professional editing consistent with Studio style. Extensive body modification or retouching may require additional fees.
+
+10. Client Acknowledgments: I understand and agree to the terms outlined above. I have reviewed Second Skin Boudoir's portfolio and understand that photography is subjective. Photographer retains all creative control.`}
+                    </p>
+                  </div>
+                </Section>
               </>
             )}
 
