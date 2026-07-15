@@ -26,11 +26,15 @@ import { ZodError } from 'zod'
 export async function POST(request: NextRequest) {
   let sessionId: string | undefined
   try {
+    console.log('[SessionPrep API] ⏱️ Request started at', new Date().toISOString())
+    
     // Parse request
     let body: Record<string, unknown>
     try {
       body = await request.json()
+      console.log('[SessionPrep API] ✅ Request JSON parsed successfully')
     } catch (e) {
+      console.error('[SessionPrep API] ❌ JSON parse error:', e instanceof Error ? e.message : String(e))
       return NextResponse.json(
         { error: 'Invalid JSON in request body' },
         { status: 400 }
@@ -41,7 +45,13 @@ export async function POST(request: NextRequest) {
     sessionId = body.sessionId as string
     const intakeData = body.intake as Record<string, unknown>
 
+    console.log('[SessionPrep API] 📋 Received data:', {
+      sessionId: sessionId?.substring(0, 8) + '...',
+      intakeFieldCount: Object.keys(intakeData || {}).length,
+    })
+
     if (!sessionId) {
+      console.error('[SessionPrep API] ❌ Missing sessionId')
       return NextResponse.json(
         { error: 'Missing sessionId' },
         { status: 400 }
@@ -51,7 +61,9 @@ export async function POST(request: NextRequest) {
     // Validate intake data schema
     let validatedIntake: Record<string, unknown>
     try {
+      console.log('[SessionPrep API] 🔍 Validating intake data with schema...')
       validatedIntake = SessionIntakeSchema.parse(intakeData)
+      console.log('[SessionPrep API] ✅ Schema validation passed')
     } catch (error) {
       if (error instanceof ZodError) {
         const fieldErrors = error.issues.map(e => `${e.path.join('.')}: ${e.message}`)
@@ -76,6 +88,7 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         )
       }
+      console.error('[SessionPrep API] ❌ Unexpected validation error:', error instanceof Error ? error.message : String(error))
       throw error
     }
 
@@ -165,11 +178,14 @@ export async function POST(request: NextRequest) {
           userAgentSummary: uaSummary,
         },
       })
+      
+      console.log('[SessionPrep API] ✅ Session intake created:', intake.id?.substring(0, 8) + '...')
 
       // Create preferences summary for webhook and admin display
       const summary = createSessionPreferencesSummary(intake)
 
       // Update session agreement status to completed
+      console.log('[SessionPrep API] 🔄 Updating session agreement status to completed...')
       await tx.photographySession.update({
         where: { id: sessionId },
         data: { 
@@ -177,8 +193,10 @@ export async function POST(request: NextRequest) {
           agreementCompletedAt: new Date(),
         },
       })
+      console.log('[SessionPrep API] ✅ Agreement status updated')
 
       // Create webhook delivery record
+      console.log('[SessionPrep API] 📨 Creating webhook delivery record...')
       const idempotencyKey = generateIdempotencyKey()
       const payload = buildWebhookPayload(session.client, session, intake, summary)
       const payloadHash = hashPayload(payload)
@@ -199,9 +217,16 @@ export async function POST(request: NextRequest) {
 
     const { intake, webhookDelivery, session, summary, payload, isNewSubmission } = result
 
+    console.log('[SessionPrep API] ✅ Database transaction completed successfully:', {
+      intakeId: intake.id?.substring(0, 8) + '...',
+      sessionId: session.id?.substring(0, 8) + '...',
+      isNewSubmission,
+    })
+
     // ATTEMPT WEBHOOK DELIVERY (non-blocking)
     // Even if this fails, the intake is safely stored
     if (isNewSubmission && payload) {
+      console.log('[SessionPrep API] 🔗 Attempting webhook delivery asynchronously...')
       // Fire and forget: attempt delivery without blocking response
       attemptWebhookDelivery(webhookDelivery.id, payload as Record<string, unknown>).catch(error => {
         console.error('[Webhook] Failed to attempt delivery:', createSafeErrorMessage(error.message))
@@ -211,6 +236,7 @@ export async function POST(request: NextRequest) {
     // Return success to client
     // Note: We tell the client success even if GHL delivery is pending
     // The database is the system of record
+    console.log('[SessionPrep API] 📤 Returning success response to client')
     return NextResponse.json(
       {
         success: true,
@@ -224,16 +250,21 @@ export async function POST(request: NextRequest) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     const errorStack = error instanceof Error ? error.stack : 'No stack trace'
     
-    console.error('[SessionPrep] Intake submission error:', {
+    console.error('[SessionPrep] ❌ CRITICAL ERROR in intake submission:', {
       message: errorMessage,
       stack: errorStack,
       sessionId: sessionId,
       timestamp: new Date().toISOString(),
+      errorType: error instanceof Error ? error.constructor.name : typeof error,
     })
 
     // Don't expose internal errors to client
     return NextResponse.json(
-      { error: 'Failed to process session questionnaire. Please try again or contact support.' },
+      { 
+        error: 'Failed to process session questionnaire. Please try again or contact support.',
+        sessionId: sessionId,
+        timestamp: new Date().toISOString(),
+      },
       { status: 500 }
     )
   }
