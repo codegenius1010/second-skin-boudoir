@@ -303,7 +303,11 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         }
 
         // Session Agreement - Part 1 (Items 1-14)
-        checkNewPage(15)
+        // Force new page to ensure agreement starts on page 4
+        pdf.addPage()
+        yPos = margin
+        addPageHeader()
+        
         pdf.setFont('Helvetica', 'bold')
         pdf.setFontSize(11)
         pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
