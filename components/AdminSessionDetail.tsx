@@ -198,13 +198,20 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         ['Note', 'This information was entered by the admin when creating the session'],
       ])
 
-      // Client Information from Form Submission - Contact Details
-      if (intake && (intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone)) {
+      // Client Information from Form Submission - Contact Details (with admin fallback)
+      if (intake) {
+        const hasFormClientData = !!(intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone)
         addSection('CLIENT INFORMATION (from Form Submission - Contact Details)', [
-          ['Name', (intake.clientFirstName && intake.clientLastName) ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName || '—')],
-          ['Email', intake.clientEmail || '—'],
-          ['Phone', intake.clientPhone || '—'],
-          ['Note', 'This information was entered by the client during form submission. Compare with admin setup above to verify consistency.'],
+          ['Name', 
+            intake.clientFirstName || intake.clientLastName 
+              ? (intake.clientFirstName && intake.clientLastName ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName))
+              : `${data.client.firstName} ${data.client.lastName}`
+          ],
+          ['Email', intake.clientEmail || data.client.emailNormalized],
+          ['Phone', intake.clientPhone || data.client.phoneNormalized || '—'],
+          ['Note', hasFormClientData 
+            ? 'This information was entered by the client during form submission. Compare with admin setup above to verify consistency.'
+            : 'This submission predates the form capture feature. Contact information shown is from admin session setup.'],
         ])
       }
 
@@ -504,16 +511,25 @@ Privacy Default: Your images will not be shared online, in advertising, in print
               </div>
             </Section>
 
-            {/* Client Submitted Contact Info */}
-            {intake && (intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone) && (
+            {/* Client Submitted Contact Info (with admin fallback for old submissions) */}
+            {intake && (
               <Section title="Client Information (from Form Submission - Contact Details)">
                 <div className="grid grid-cols-2 gap-4">
-                  <Detail label="Name" value={intake.clientFirstName && intake.clientLastName ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName || '—')} />
-                  <Detail label="Email" value={intake.clientEmail || '—'} />
-                  <Detail label="Phone" value={intake.clientPhone || '—'} />
+                  <Detail 
+                    label="Name" 
+                    value={
+                      intake.clientFirstName || intake.clientLastName 
+                        ? (intake.clientFirstName && intake.clientLastName ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName))
+                        : `${data.client.firstName} ${data.client.lastName}`
+                    } 
+                  />
+                  <Detail label="Email" value={intake.clientEmail || data.client.emailNormalized} />
+                  <Detail label="Phone" value={intake.clientPhone || data.client.phoneNormalized || '—'} />
                 </div>
                 <div className="mt-4 p-3 bg-charcoal/5 rounded border border-smoke/20 text-xs text-smoke italic">
-                  Note: This information was entered by the client during form submission. Compare with admin setup above to verify consistency.
+                  {intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone 
+                    ? "Note: This information was entered by the client during form submission. Compare with admin setup above to verify consistency."
+                    : "Note: This submission predates the form capture feature. Contact information shown is from admin session setup."}
                 </div>
               </Section>
             )}
