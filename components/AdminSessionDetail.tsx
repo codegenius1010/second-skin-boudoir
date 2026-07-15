@@ -365,22 +365,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
           yPos += lineHeight
         })
         
-        // Add new page for Agreement Part 2 (Items 15-26)
-        pdf.addPage()
-        yPos = margin + 10
-        
-        // Page header for agreement continuation
-        pdf.setFont('Helvetica', 'bold')
-        pdf.setFontSize(10)
-        pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
-        pdf.text('AGREEMENT DETAILS (continued)', margin, yPos)
-        yPos += 7
-        
-        pdf.setDrawColor(champagne[0], champagne[1], champagne[2])
-        pdf.setLineWidth(0.5)
-        pdf.line(margin, yPos - 1, margin + contentWidth, yPos - 1)
-        yPos += 6
-        
+        // Continue with Agreement Part 2 (Items 15-26) - let it flow naturally
         pdf.setFont('Helvetica', 'normal')
         pdf.setFontSize(7.5)
         pdf.setTextColor(smoke[0], smoke[1], smoke[2])
