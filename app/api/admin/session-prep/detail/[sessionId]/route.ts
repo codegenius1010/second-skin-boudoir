@@ -62,16 +62,28 @@ export async function GET(
             ghlContactId: session.client.ghlContactId,
             createdAt: session.client.createdAt.toISOString(),
           },
-          intakes: session.intakes.map((intake) => ({
+          intakes: session.intakes.map((intake) => {
+          // Helper function to parse JSON strings
+          const parseJsonField = (field: string | null): string[] => {
+            if (!field) return []
+            try {
+              const parsed = JSON.parse(field)
+              return Array.isArray(parsed) ? parsed : []
+            } catch {
+              return []
+            }
+          }
+
+          return {
             id: intake.id,
             status: intake.status,
             submittedAt: intake.submittedAt?.toISOString(),
             schemaVersion: intake.schemaVersion,
-            desiredFeelings: intake.desiredFeelings,
-            visualStyles: intake.visualStyles,
-            posingStyles: intake.posingStyles,
+            desiredFeelings: parseJsonField(intake.desiredFeelings),
+            visualStyles: parseJsonField(intake.visualStyles),
+            posingStyles: parseJsonField(intake.posingStyles),
             posingIntensity: intake.posingIntensity,
-            coveragePreferences: intake.coveragePreferences,
+            coveragePreferences: parseJsonField(intake.coveragePreferences),
             coverageDecision: intake.coverageDecision,
             hardCoverageBoundaries: intake.hardCoverageBoundaries,
             poseBoundaries: intake.poseBoundaries,
@@ -81,11 +93,11 @@ export async function GET(
             areasToPhotographDiscreetly: intake.areasToPhotographDiscreetly,
             favoriteSong: intake.favoriteSong,
             favoriteArtists: intake.favoriteArtists,
-            musicGenres: intake.musicGenres,
+            musicGenres: parseJsonField(intake.musicGenres),
             playlistUrl: intake.playlistUrl,
             explicitLyricsAllowed: intake.explicitLyricsAllowed,
             musicToAvoid: intake.musicToAvoid,
-            wardrobePlans: intake.wardrobePlans,
+            wardrobePlans: parseJsonField(intake.wardrobePlans),
             wardrobeGuidanceRequested: intake.wardrobeGuidanceRequested,
             clothingSizes: intake.clothingSizes,
             favoriteColorsStyles: intake.favoriteColorsStyles,
@@ -99,7 +111,8 @@ export async function GET(
             additionalPrivateNotes: intake.additionalPrivateNotes,
             ongoingConsentAcknowledged: intake.ongoingConsentAcknowledged,
             accurateInformationAcknowledged: intake.accurateInformationAcknowledged,
-          })),
+          }
+        }),
           webhookDeliveries: session.webhookDeliveries.map((delivery) => ({
             id: delivery.id,
             status: delivery.status,
