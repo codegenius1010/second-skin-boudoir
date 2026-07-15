@@ -358,7 +358,12 @@ Privacy Default: Your images will not be shared online, in advertising, in print
 14. Client Conduct, Safety, and Boundaries: This is a professional photography session. You agree to respectful communication and conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In that event, no refund is due.`
         
         const agreementLines1 = pdf.splitTextToSize(agreementPart1, contentWidth)
-        pdf.text(agreementLines1, margin, yPos)
+        // Render agreement lines with page break checking
+        agreementLines1.forEach((line: string) => {
+          checkNewPage(6)
+          pdf.text(line, margin, yPos)
+          yPos += lineHeight
+        })
         
         // Add new page for Agreement Part 2 (Items 15-26)
         pdf.addPage()
@@ -405,7 +410,12 @@ Privacy Default: Your images will not be shared online, in advertising, in print
 26. Entire Agreement and Severability: This Agreement, any signed product order, and any written pricing or invoice terms form the entire agreement between the parties. If any provision is found unenforceable, the remaining provisions remain in effect. Changes must be in writing and signed or acknowledged by both parties.`
         
         const agreementLines2 = pdf.splitTextToSize(agreementPart2, contentWidth)
-        pdf.text(agreementLines2, margin, yPos)
+        // Render agreement lines with page break checking
+        agreementLines2.forEach((line: string) => {
+          checkNewPage(6)
+          pdf.text(line, margin, yPos)
+          yPos += lineHeight
+        })
       }
 
       // Add footer to all pages
