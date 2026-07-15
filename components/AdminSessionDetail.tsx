@@ -75,6 +75,18 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         format: 'a4',
       })
 
+      // Safe date formatter
+      const formatDate = (date: any): string => {
+        try {
+          if (!date) return '—'
+          const dateObj = new Date(date)
+          if (isNaN(dateObj.getTime())) return '—'
+          return dateObj.toLocaleString()
+        } catch {
+          return '—'
+        }
+      }
+
       const pageWidth = pdf.internal.pageSize.getWidth()
       const pageHeight = pdf.internal.pageSize.getHeight()
       const margin = 15
@@ -127,7 +139,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
       pdf.text('Session Preparation Questionnaire - Complete Record', margin, yPos)
       yPos += 12
 
-      // Function to add a section
+      // Function to add a section with better layout to prevent overlapping
       const addSection = (title: string, content: Array<[string, string]>) => {
         checkNewPage(8)
         
@@ -143,25 +155,28 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         yPos += 4
 
         content.forEach(([label, value]) => {
-          checkNewPage(6)
+          checkNewPage(8)
           
+          // Put label on its own line with colon
           pdf.setFont('Helvetica', 'bold')
-          pdf.setFontSize(9)
+          pdf.setFontSize(8.5)
           pdf.setTextColor(espresso[0], espresso[1], espresso[2])
           pdf.text(label + ':', margin, yPos)
+          yPos += 4
           
+          // Put value on next line(s), indented slightly
           pdf.setFont('Helvetica', 'normal')
-          pdf.setFontSize(9)
+          pdf.setFontSize(8.5)
           pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
           
-          const valueLines = pdf.splitTextToSize(value, contentWidth - 40)
-          pdf.text(valueLines, margin + 40, yPos)
+          const valueLines = pdf.splitTextToSize(value, contentWidth - 8)
+          pdf.text(valueLines, margin + 3, yPos)
           
           const textHeight = valueLines.length * lineHeight
-          yPos += textHeight + 2
+          yPos += textHeight + 3
         })
 
-        yPos += 4
+        yPos += 2
       }
 
       const intake = data.intakes[0]
@@ -186,8 +201,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
       if (intake) {
         addSection('SUBMISSION DETAILS', [
           ['Status', intake.status],
-          ['Submitted At', intake.submittedAt ? new Date(intake.submittedAt).toLocaleString() : 'Not submitted'],
-          ['Form Completed At', new Date(intake.createdAt).toLocaleString()],
+          ['Submitted At', formatDate(intake.submittedAt) !== '—' ? formatDate(intake.submittedAt) : 'Not submitted'],
+          ['Form Completed At', formatDate(intake.createdAt)],
           ['Ongoing Consent Acknowledged', intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'],
           ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
         ])

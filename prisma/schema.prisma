@@ -41,7 +41,7 @@ model PhotographySession {
   ghlOpportunityId        String?
 
   agreementTemplateType   String?  // "standard-boudoir" | "bridal" | "collaboration" | etc
-  agreementStatus         String   @default("not_sent") // "not_sent" | "sent" | "viewed" | "signed" | "requires_attention" | "unavailable"
+  agreementStatus         String   @default("not_sent") // "not_sent" | "sent" | "viewed" | "signed" | "completed" | "requires_attention" | "unavailable"
   agreementDocumentId     String?
   agreementCompletedAt    DateTime?
 
