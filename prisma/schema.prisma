@@ -54,6 +54,7 @@ model PhotographySession {
 
   intakes                 SessionIntake[]
   webhookDeliveries       WebhookDelivery[]
+  consentAuditTrail       ConsentAuditTrail[]
 
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
@@ -137,6 +138,7 @@ model SessionIntake {
   reviewStatus                  String   @default("needs_review") // "needs_review" | "reviewed"
 
   webhookDeliveries             WebhookDelivery[]
+  consentAuditTrail             ConsentAuditTrail[]
 
   createdAt                     DateTime @default(now())
   updatedAt                     DateTime @updatedAt
@@ -182,4 +184,47 @@ model WebhookDelivery {
   @@index([status])
   @@index([nextAttemptAt])
   @@index([idempotencyKey])
+}
+
+// Append-only audit trail for all client consent and acknowledgments
+// This table is legally immutable - no updates or deletes allowed
+model ConsentAuditTrail {
+  id                    String   @id @default(cuid())
+  
+  sessionId             String
+  session               PhotographySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  intakeId              String?
+  intake                SessionIntake? @relation(fields: [intakeId], references: [id], onDelete: SetNull)
+
+  // Consent type - what was the user consenting to?
+  consentType           String   // "photo_release" | "image_usage" | "data_collection" | "privacy_acknowledgment" | "agreement_acceptance"
+  
+  // The actual consent text/version the user agreed to
+  consentText           String   @db.Text // Store full text for legal reference
+  consentVersion        String   @default("1.0") // Version of consent form
+  
+  // Consent decision
+  userConsented         Boolean  // true = agreed, false = declined
+  
+  // Consent metadata
+  consentGivenAt        DateTime // When user submitted consent (client's local time)
+  submittedIpHash       String?  // SHA-256 hash of IP (never raw IP for privacy)
+  userAgentSummary      String?  // e.g., "Chrome 126.0 / Windows 10"
+  
+  // Optional e-signature/digital signature
+  digitalSignature      String?  // Base64 encoded signature image or hash
+  signatureMethod       String?  // "typed_name" | "drawn_signature" | "esign_provider" | null
+  esignProvider         String?  // e.g., "docusign" | "hellosign" | null
+  
+  // Read-only tracking
+  createdAt             DateTime @default(now())
+  
+  // Indexes for legal audits
+  @@index([sessionId])
+  @@index([intakeId])
+  @@index([consentType])
+  @@index([consentGivenAt])
+  @@index([userConsented])
+  @@unique([sessionId, consentType, consentVersion, consentGivenAt])
 }

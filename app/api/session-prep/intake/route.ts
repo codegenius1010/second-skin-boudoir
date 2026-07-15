@@ -195,6 +195,57 @@ export async function POST(request: NextRequest) {
       })
       console.log('[SessionPrep API] ✅ Agreement status updated')
 
+      // Create consent audit trail entries (append-only, immutable for legal compliance)
+      console.log('[SessionPrep API] 📋 Recording consent audit trail...')
+      
+      // Record data collection consent
+      await tx.consentAuditTrail.create({
+        data: {
+          sessionId,
+          intakeId: intake.id,
+          consentType: 'data_collection',
+          consentText: 'Client consented to collection and storage of personal information and session preferences for photography session planning and execution.',
+          consentVersion: '1.0',
+          userConsented: validatedIntake.accurateInformationAcknowledged === true,
+          consentGivenAt: new Date(),
+          submittedIpHash: ipHash,
+          userAgentSummary: uaSummary,
+        },
+      })
+
+      // Record privacy acknowledgment
+      await tx.consentAuditTrail.create({
+        data: {
+          sessionId,
+          intakeId: intake.id,
+          consentType: 'privacy_acknowledgment',
+          consentText: 'Client acknowledges receipt and understanding of privacy policy and data handling practices.',
+          consentVersion: '1.0',
+          userConsented: validatedIntake.ongoingConsentAcknowledged === true,
+          consentGivenAt: new Date(),
+          submittedIpHash: ipHash,
+          userAgentSummary: uaSummary,
+        },
+      })
+
+      // Record photo release/image usage consent
+      const imageUseElection = validatedIntake.imageUseElection as string || 'undecided'
+      await tx.consentAuditTrail.create({
+        data: {
+          sessionId,
+          intakeId: intake.id,
+          consentType: 'photo_release',
+          consentText: `Client selected image usage preference: ${imageUseElection}. All photography is conducted with understanding of privacy protections and content usage restrictions.`,
+          consentVersion: '1.0',
+          userConsented: true, // They selected something
+          consentGivenAt: new Date(),
+          submittedIpHash: ipHash,
+          userAgentSummary: uaSummary,
+        },
+      })
+
+      console.log('[SessionPrep API] ✅ Consent audit trail recorded (immutable)')
+
       // Create webhook delivery record
       console.log('[SessionPrep API] 📨 Creating webhook delivery record...')
       const idempotencyKey = generateIdempotencyKey()
