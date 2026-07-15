@@ -217,12 +217,23 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
 
       // Submission Details
       if (intake) {
-        addSection('SUBMISSION DETAILS', [
+        const submissionContent: Array<[string, string]> = [
           ['Status', intake.status],
           ['Submitted At', formatDate(intake.submittedAt) !== '—' ? formatDate(intake.submittedAt) : 'Not submitted'],
           ['Ongoing Consent Acknowledged', intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'],
           ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
-        ])
+        ]
+        
+        // MVP Compliance Fields
+        submissionContent.push(
+          ['Agreement Accepted', intake.agreementAccepted ? 'Yes ✓' : 'No'],
+          ['Agreement Timestamp', intake.agreementAcceptedAt ? formatDate(intake.agreementAcceptedAt) : 'Not recorded'],
+          ['Device IP Hash', intake.submittedIpHash || 'Not recorded'],
+          ['Browser/Device', intake.userAgentSummary || 'Not recorded'],
+          ['Email Verified', intake.emailVerified ? 'Yes ✓' : 'No']
+        )
+        
+        addSection('SUBMISSION DETAILS', submissionContent)
 
         // Client Information from Form Submission
         const clientSubmissionContent: Array<[string, string]> = []
@@ -430,40 +441,44 @@ Privacy Default: Your images will not be shared online, in advertising, in print
       const finalPageCount = pdf.getNumberOfPages()
       pdf.setPage(finalPageCount)
       
-      // Add compliance footer with legal audit information
+      // Add compliance footer with legal audit information - positioned higher for visibility
       pdf.setFont('Helvetica', 'bold')
-      pdf.setFontSize(9)
+      pdf.setFontSize(10)
       pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
       
-      const complianceY = pageHeight - 20
+      // Position compliance section near bottom but with room to breathe
+      const complianceY = pageHeight - 55  // Moved up from pageHeight - 20 (now has more space above)
+      
+      // Add subtle background rectangle for the compliance section
+      pdf.setFillColor(240, 240, 240)  // Light gray background
+      pdf.rect(margin - 3, complianceY - 5, contentWidth + 6, 48, 'F')
+      
       pdf.text('DIGITALLY SIGNED CONTRACT', margin, complianceY)
       
       pdf.setFont('Helvetica', 'normal')
-      pdf.setFontSize(7)
+      pdf.setFontSize(8)
       pdf.setTextColor(smoke[0], smoke[1], smoke[2])
       
-      // Compliance details
+      // Compliance details with better spacing
       const submissionData = intake || data.intakes[0]
       const complianceDetails = [
-        `Session ID: ${data.session.id.substring(0, 12)}...`,
-        `Submitted: ${formatDate(submissionData?.submittedAt || new Date())}`,
-        submissionData?.submittedIpHash ? `IP Hash: ${submissionData.submittedIpHash.substring(0, 16)}...` : 'IP Hash: Not recorded',
-        submissionData?.userAgentSummary ? `Device: ${submissionData.userAgentSummary}` : 'Device: Not recorded',
-        `Agreement Accepted: ${submissionData?.agreementAccepted ? 'Yes ✓' : 'Not confirmed'}`,
-        `Acceptance Timestamp: ${submissionData?.agreementAcceptedAt ? formatDate(submissionData.agreementAcceptedAt) : 'Not recorded'}`,
+        `Session ID: ${data.session.id.substring(0, 12)}...  |  Submitted: ${formatDate(submissionData?.submittedAt || new Date())}`,
+        `IP Hash: ${submissionData?.submittedIpHash ? submissionData.submittedIpHash.substring(0, 16) + '...' : 'Not recorded'}`,
+        `Device: ${submissionData?.userAgentSummary || 'Not recorded'}`,
+        `Agreement: ${submissionData?.agreementAccepted ? 'Accepted ✓' : 'Not confirmed'} | Timestamp: ${submissionData?.agreementAcceptedAt ? formatDate(submissionData.agreementAcceptedAt) : 'Not recorded'}`,
       ]
       
-      let complianceLineY = complianceY + 5
+      let complianceLineY = complianceY + 6
       complianceDetails.forEach((detail) => {
-        pdf.text(detail, margin, complianceLineY)
-        complianceLineY += 3.5
+        pdf.text(detail, margin + 1, complianceLineY)
+        complianceLineY += 4
       })
       
-      // Watermark
+      // Bottom watermark
       pdf.setFont('Helvetica', 'italic')
       pdf.setFontSize(6)
       pdf.setTextColor(smoke[0], smoke[1], smoke[2])
-      pdf.text('Original Submission - Do Not Alter', margin, pageHeight - 2)
+      pdf.text('Original Submission - Do Not Alter - Immutable Audit Record', margin, pageHeight - 2)
 
       // Download the PDF
       const filename = `${data.client.firstName}-${data.client.lastName}-Session-Intake-${new Date().toISOString().split('T')[0]}.pdf`
@@ -805,6 +820,26 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                 {intake.additionalPrivateNotes && (
                   <Section title="Additional Private Notes">
                     <Detail label="Notes" value={intake.additionalPrivateNotes} isLong={true} />
+                  </Section>
+                )}
+
+                {/* Digital Signature & Compliance Audit */}
+                {(intake.agreementAccepted || intake.agreementAcceptedAt || intake.submittedIpHash || intake.userAgentSummary) && (
+                  <Section title="Digital Signature & Compliance Audit Trail">
+                    <div className="space-y-2 bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                      {intake.agreementAccepted && (
+                        <Detail label="Agreement Accepted" value="Yes ✓" />
+                      )}
+                      {intake.agreementAcceptedAt && (
+                        <Detail label="Accepted Timestamp" value={new Date(intake.agreementAcceptedAt).toLocaleString()} />
+                      )}
+                      {intake.submittedIpHash && (
+                        <Detail label="Device IP Hash" value={intake.submittedIpHash.substring(0, 32) + '...'} />
+                      )}
+                      {intake.userAgentSummary && (
+                        <Detail label="Browser/Device" value={intake.userAgentSummary} />
+                      )}
+                    </div>
                   </Section>
                 )}
 

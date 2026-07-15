@@ -117,6 +117,11 @@ export async function GET(
             additionalPrivateNotes: intake.additionalPrivateNotes,
             ongoingConsentAcknowledged: intake.ongoingConsentAcknowledged,
             accurateInformationAcknowledged: intake.accurateInformationAcknowledged,
+            agreementAccepted: intake.agreementAccepted,
+            agreementAcceptedAt: intake.agreementAcceptedAt?.toISOString(),
+            submittedIpHash: intake.submittedIpHash,
+            userAgentSummary: intake.userAgentSummary,
+            emailVerified: intake.emailVerified,
           }
         }),
           webhookDeliveries: session.webhookDeliveries.map((delivery) => ({
