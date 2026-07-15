@@ -281,6 +281,13 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         if (intake.collaboratorCreditPermission) socialContent.push(['Collaborator Credit Permission', intake.collaboratorCreditPermission])
         if (socialContent.length > 0) addSection('SOCIAL MEDIA & CREDITS', socialContent)
 
+        // Additional Image Comments
+        if (intake.additionalImageComments) {
+          addSection('ADDITIONAL IMAGE COMMENTS', [
+            ['Comments', intake.additionalImageComments]
+          ])
+        }
+
         // Additional Notes
         if (intake.additionalPrivateNotes) {
           addSection('ADDITIONAL NOTES', [
@@ -678,6 +685,13 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                     )}
                   </div>
                 </Section>
+
+                {/* Additional Image Comments */}
+                {intake.additionalImageComments && (
+                  <Section title="Additional Image Comments">
+                    <Detail label="Comments" value={intake.additionalImageComments} isLong={true} />
+                  </Section>
+                )}
 
                 {/* Additional Notes */}
                 {intake.additionalPrivateNotes && (
