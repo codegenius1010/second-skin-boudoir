@@ -456,14 +456,14 @@ Privacy Default: Your images will not be shared online, in advertising, in print
       pdf.text('DIGITALLY SIGNED CONTRACT', margin, complianceY)
       
       pdf.setFont('Helvetica', 'normal')
-      pdf.setFontSize(8)
+      pdf.setFontSize(6.5)
       pdf.setTextColor(smoke[0], smoke[1], smoke[2])
       
-      // Compliance details with better spacing
+      // Compliance details - split into separate lines for readability
       const submissionData = intake || data.intakes[0]
       const complianceDetails = [
-        `Session ID: ${data.session.id.substring(0, 12)}...  |  Submitted: ${formatDate(submissionData?.submittedAt || new Date())}`,
-        `IP Hash: ${submissionData?.submittedIpHash ? submissionData.submittedIpHash.substring(0, 16) + '...' : 'Not recorded'}`,
+        `Session ID: ${data.session.id}`,
+        `Submitted: ${formatDate(submissionData?.submittedAt || new Date())} | IP Hash: ${submissionData?.submittedIpHash ? submissionData.submittedIpHash : 'Not recorded'}`,
         `Device: ${submissionData?.userAgentSummary || 'Not recorded'}`,
         `Agreement: ${submissionData?.agreementAccepted ? 'Accepted ✓' : 'Not confirmed'} | Timestamp: ${submissionData?.agreementAcceptedAt ? formatDate(submissionData.agreementAcceptedAt) : 'Not recorded'}`,
       ]
@@ -834,7 +834,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                         <Detail label="Accepted Timestamp" value={new Date(intake.agreementAcceptedAt).toLocaleString()} />
                       )}
                       {intake.submittedIpHash && (
-                        <Detail label="Device IP Hash" value={intake.submittedIpHash.substring(0, 32) + '...'} />
+                        <Detail label="Device IP Hash" value={intake.submittedIpHash} />
                       )}
                       {intake.userAgentSummary && (
                         <Detail label="Browser/Device" value={intake.userAgentSummary} />
