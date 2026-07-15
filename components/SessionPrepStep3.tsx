@@ -62,6 +62,8 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
     imageUseElection: '',
     ongoingConsentAcknowledged: false,
     accurateInformationAcknowledged: false,
+    agreementAccepted: false,  // MVP Compliance: "I have read and agree" checkbox
+    agreementAcceptedAt: null as string | null,  // Timestamp when accepted
   })
 
   const [expandedSections, setExpandedSections] = useState({
@@ -95,7 +97,7 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.ongoingConsentAcknowledged && formData.accurateInformationAcknowledged && formData.imageUseElection) {
+    if (formData.ongoingConsentAcknowledged && formData.accurateInformationAcknowledged && formData.imageUseElection && formData.agreementAccepted) {
       // Filter out empty strings and empty arrays from formData before submitting
       const cleanedData = Object.entries(formData).reduce((acc, [key, value]) => {
         if (typeof value === 'string') {
@@ -639,17 +641,40 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
         </Section>
 
         {/* Submit button */}
-        <div className="pt-6">
+        <div className="pt-6 space-y-4">
+          {/* MVP Compliance: Agreement Acceptance Checkbox */}
+          <div className="flex items-start gap-4 p-4 bg-rose/5 rounded-lg border border-rose/20">
+            <input
+              type="checkbox"
+              id="agreement"
+              checked={formData.agreementAccepted}
+              onChange={(e) => {
+                const isChecked = e.target.checked
+                handleChange('agreementAccepted', isChecked)
+                // Capture timestamp when they accept
+                if (isChecked) {
+                  handleChange('agreementAcceptedAt', new Date().toISOString())
+                }
+              }}
+              className="mt-1 w-5 h-5 text-rose cursor-pointer flex-shrink-0"
+            />
+            <label htmlFor="agreement" className="flex-1 text-sm md:text-base text-charcoal cursor-pointer">
+              <span className="font-semibold">I have read and agree</span> to the terms and conditions of this contract. 
+              I understand this is a legal agreement for boudoir photography services and I consent to all terms outlined above.
+            </label>
+          </div>
+
           <button
             type="submit"
             disabled={
               isLoading ||
               !formData.ongoingConsentAcknowledged ||
               !formData.accurateInformationAcknowledged ||
-              !formData.imageUseElection
+              !formData.imageUseElection ||
+              !formData.agreementAccepted
             }
             className={`w-full py-4 px-6 rounded-lg font-body font-semibold transition-all duration-300 ${
-              !formData.ongoingConsentAcknowledged || !formData.accurateInformationAcknowledged || !formData.imageUseElection
+              !formData.ongoingConsentAcknowledged || !formData.accurateInformationAcknowledged || !formData.imageUseElection || !formData.agreementAccepted
                 ? 'bg-smoke/30 text-smoke/50 cursor-not-allowed'
                 : isLoading
                   ? 'bg-smoke/50 cursor-not-allowed text-charcoal'

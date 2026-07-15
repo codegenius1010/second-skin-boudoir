@@ -426,6 +426,45 @@ Privacy Default: Your images will not be shared online, in advertising, in print
         )
       }
 
+      // MVP Compliance Footer: Add audit trail information to final page
+      const finalPageCount = pdf.getNumberOfPages()
+      pdf.setPage(finalPageCount)
+      
+      // Add compliance footer with legal audit information
+      pdf.setFont('Helvetica', 'bold')
+      pdf.setFontSize(9)
+      pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+      
+      const complianceY = pageHeight - 20
+      pdf.text('DIGITALLY SIGNED CONTRACT', margin, complianceY)
+      
+      pdf.setFont('Helvetica', 'normal')
+      pdf.setFontSize(7)
+      pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+      
+      // Compliance details
+      const submissionData = intake || data.intakes[0]
+      const complianceDetails = [
+        `Session ID: ${data.session.id.substring(0, 12)}...`,
+        `Submitted: ${formatDate(submissionData?.submittedAt || new Date())}`,
+        submissionData?.submittedIpHash ? `IP Hash: ${submissionData.submittedIpHash.substring(0, 16)}...` : 'IP Hash: Not recorded',
+        submissionData?.userAgentSummary ? `Device: ${submissionData.userAgentSummary}` : 'Device: Not recorded',
+        `Agreement Accepted: ${submissionData?.agreementAccepted ? 'Yes ✓' : 'Not confirmed'}`,
+        `Acceptance Timestamp: ${submissionData?.agreementAcceptedAt ? formatDate(submissionData.agreementAcceptedAt) : 'Not recorded'}`,
+      ]
+      
+      let complianceLineY = complianceY + 5
+      complianceDetails.forEach((detail) => {
+        pdf.text(detail, margin, complianceLineY)
+        complianceLineY += 3.5
+      })
+      
+      // Watermark
+      pdf.setFont('Helvetica', 'italic')
+      pdf.setFontSize(6)
+      pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+      pdf.text('Original Submission - Do Not Alter', margin, pageHeight - 2)
+
       // Download the PDF
       const filename = `${data.client.firstName}-${data.client.lastName}-Session-Intake-${new Date().toISOString().split('T')[0]}.pdf`
       pdf.save(filename)

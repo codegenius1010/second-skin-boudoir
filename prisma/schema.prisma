@@ -128,8 +128,11 @@ model SessionIntake {
 
   // Acknowledgments
   ongoingConsentAcknowledged    Boolean  @default(false)
-  accurateInformationAcknowledged Boolean @default(false)
-
+  accurateInformationAcknowledged Boolean @default(false)  
+  // Legal Compliance - MVP
+  agreementAccepted             Boolean  @default(false)  // "I have read and agree" checkbox
+  agreementAcceptedAt           DateTime?  // Exact timestamp client clicked accept
+  emailVerified                 Boolean  @default(false)  // Email is confirmed as client's
   // Optional security info
   submittedIpHash               String?  // SHA-256 hash of IP, never raw IP
   userAgentSummary              String?  // e.g., "Chrome/MacOS"

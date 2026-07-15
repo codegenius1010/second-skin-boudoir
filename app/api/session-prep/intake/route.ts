@@ -174,6 +174,8 @@ export async function POST(request: NextRequest) {
           additionalImageComments: (validatedIntake.additionalImageComments as string) || null,
           ongoingConsentAcknowledged: Boolean(validatedIntake.ongoingConsentAcknowledged),
           accurateInformationAcknowledged: Boolean(validatedIntake.accurateInformationAcknowledged),
+          agreementAccepted: Boolean(validatedIntake.agreementAccepted),  // MVP Compliance: Explicit agreement checkbox
+          agreementAcceptedAt: validatedIntake.agreementAcceptedAt ? new Date(validatedIntake.agreementAcceptedAt as string) : null,  // Timestamp when accepted
           submittedIpHash: ipHash,
           userAgentSummary: uaSummary,
         },

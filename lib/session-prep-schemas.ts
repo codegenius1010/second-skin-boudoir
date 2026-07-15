@@ -145,6 +145,10 @@ export const SessionIntakeSchema = z.object({
   // Acknowledgments (required)
   ongoingConsentAcknowledged: z.boolean(),
   accurateInformationAcknowledged: z.boolean(),
+  
+  // MVP Legal Compliance
+  agreementAccepted: z.boolean().optional().default(false),  // "I have read and agree" checkbox
+  agreementAcceptedAt: z.string().datetime().optional(),  // ISO timestamp when accepted
 })
 
 export type SessionIntakeData = z.infer<typeof SessionIntakeSchema>
