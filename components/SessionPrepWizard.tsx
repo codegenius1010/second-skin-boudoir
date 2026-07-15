@@ -114,7 +114,7 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-ivory via-charcoal/2 to-ivory">
       {/* Container */}
-      <div className="w-full max-w-5xl mx-auto px-4 py-8 md:py-12 lg:py-16">
+      <div className="w-full max-w-5xl mx-auto px-4 pt-24 md:pt-32 lg:pt-40 pb-8 md:pb-12 lg:pb-16">
         {/* Only render after mount to prevent hydration mismatch */}
         {!isMounted ? (
           <div className="text-center py-20">
