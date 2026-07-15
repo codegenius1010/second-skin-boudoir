@@ -190,11 +190,12 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
       ])
 
       // Client Information
-      addSection('CLIENT INFORMATION', [
+      addSection('CLIENT INFORMATION (from Admin Session Setup)', [
         ['Name', `${data.client.firstName} ${data.client.lastName}`],
         ['Email', data.client.emailNormalized],
         ['Phone', data.client.phoneNormalized || '—'],
         ['Instagram', data.client.instagramHandle || '—'],
+        ['Note', 'This information was entered by the admin when creating the session'],
       ])
 
       // Submission Details
@@ -202,7 +203,6 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         addSection('SUBMISSION DETAILS', [
           ['Status', intake.status],
           ['Submitted At', formatDate(intake.submittedAt) !== '—' ? formatDate(intake.submittedAt) : 'Not submitted'],
-          ['Form Completed At', formatDate(intake.createdAt)],
           ['Ongoing Consent Acknowledged', intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'],
           ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
         ])
@@ -463,11 +463,14 @@ Privacy Default: Your images will not be shared online, in advertising, in print
             </Section>
 
             {/* Client Info */}
-            <Section title="Client Information">
+            <Section title="Client Information (from Admin Session Setup)">
               <div className="grid grid-cols-2 gap-4">
                 <Detail label="Email" value={data.client.emailNormalized} />
                 <Detail label="Phone" value={data.client.phoneNormalized || '—'} />
                 <Detail label="Instagram" value={data.client.instagramHandle || '—'} />
+              </div>
+              <div className="mt-4 p-3 bg-charcoal/5 rounded border border-smoke/20 text-xs text-smoke italic">
+                Note: This information was entered by the admin when creating the session
               </div>
             </Section>
 
@@ -478,7 +481,6 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                   <div className="space-y-4">
                     <Detail label="Status" value={intake.status} />
                     <Detail label="Submitted At" value={intake.submittedAt ? new Date(intake.submittedAt).toLocaleString() : 'Not submitted'} />
-                    <Detail label="Form Completed At" value={new Date(intake.createdAt).toLocaleString()} />
                     <div className="grid grid-cols-2 gap-4">
                       <Detail label="Ongoing Consent Acknowledged" value={intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'} />
                       <Detail label="Accurate Information Acknowledged" value={intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'} />
