@@ -87,6 +87,12 @@ const IMAGE_USE_ELECTION = ['no_public_sharing', 'anonymous_detail', 'full_model
 
 // Session Intake Validation Schema
 export const SessionIntakeSchema = z.object({
+  // Client contact info (from form submission)
+  clientFirstName: z.string().max(100).optional(),
+  clientLastName: z.string().max(100).optional(),
+  clientEmail: z.string().email().optional(),
+  clientPhone: z.string().max(20).optional(),
+
   // Session Vision
   desiredFeelings: z.array(z.enum(DESIRED_FEELINGS)).optional().default([]),
   visualStyles: z.array(z.enum(VISUAL_STYLES)).optional().default([]),

@@ -57,6 +57,15 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
     setError(null)
 
     try {
+      // Add client contact info from Step 1 to the intake data
+      const intakeWithClientInfo = {
+        ...intakeData,
+        clientFirstName: wizardData.firstName,
+        clientLastName: wizardData.lastName,
+        clientEmail: wizardData.email,
+        clientPhone: wizardData.phone,
+      }
+
       const response = await fetch('/api/session-prep/intake', {
         method: 'POST',
         headers: {
@@ -64,7 +73,7 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
         },
         body: JSON.stringify({
           sessionId,
-          intake: intakeData,
+          intake: intakeWithClientInfo,
         }),
       })
 

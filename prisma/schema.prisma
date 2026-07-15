@@ -70,6 +70,12 @@ model SessionIntake {
   status                        String   @default("draft") // "draft" | "submitted"
   submittedAt                   DateTime?
 
+  // Client contact info as entered in form (for comparison with admin setup)
+  clientFirstName               String?  // Client-entered first name
+  clientLastName                String?  // Client-entered last name
+  clientEmail                   String?  // Client-entered email
+  clientPhone                   String?  // Client-entered phone
+
   // Session Vision
   desiredFeelings               String  @default("[]") // JSON array: ["confident", "feminine", "powerful", etc]
   visualStyles                  String  @default("[]") // JSON array: ["soft_romantic", "elegant_timeless", etc]

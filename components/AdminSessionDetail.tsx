@@ -198,6 +198,16 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         ['Note', 'This information was entered by the admin when creating the session'],
       ])
 
+      // Client Information from Form Submission - Contact Details
+      if (intake && (intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone)) {
+        addSection('CLIENT INFORMATION (from Form Submission - Contact Details)', [
+          ['Name', (intake.clientFirstName && intake.clientLastName) ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName || '—')],
+          ['Email', intake.clientEmail || '—'],
+          ['Phone', intake.clientPhone || '—'],
+          ['Note', 'This information was entered by the client during form submission. Compare with admin setup above to verify consistency.'],
+        ])
+      }
+
       // Submission Details
       if (intake) {
         addSection('SUBMISSION DETAILS', [
@@ -486,6 +496,20 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                 Note: This information was entered by the admin when creating the session
               </div>
             </Section>
+
+            {/* Client Submitted Contact Info */}
+            {intake && (intake.clientFirstName || intake.clientLastName || intake.clientEmail || intake.clientPhone) && (
+              <Section title="Client Information (from Form Submission - Contact Details)">
+                <div className="grid grid-cols-2 gap-4">
+                  <Detail label="Name" value={intake.clientFirstName && intake.clientLastName ? `${intake.clientFirstName} ${intake.clientLastName}` : (intake.clientFirstName || intake.clientLastName || '—')} />
+                  <Detail label="Email" value={intake.clientEmail || '—'} />
+                  <Detail label="Phone" value={intake.clientPhone || '—'} />
+                </div>
+                <div className="mt-4 p-3 bg-charcoal/5 rounded border border-smoke/20 text-xs text-smoke italic">
+                  Note: This information was entered by the client during form submission. Compare with admin setup above to verify consistency.
+                </div>
+              </Section>
+            )}
 
             {/* Intake Submission Info */}
             {intake && (
