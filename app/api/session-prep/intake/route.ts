@@ -158,6 +158,7 @@ export async function POST(request: NextRequest) {
           instagramTagPermission: (validatedIntake.instagramTagPermission as string) || null,
           collaboratorCreditPermission: (validatedIntake.collaboratorCreditPermission as string) || null,
           additionalPrivateNotes: (validatedIntake.additionalPrivateNotes as string) || null,
+          additionalImageComments: (validatedIntake.additionalImageComments as string) || null,
           ongoingConsentAcknowledged: Boolean(validatedIntake.ongoingConsentAcknowledged),
           accurateInformationAcknowledged: Boolean(validatedIntake.accurateInformationAcknowledged),
           submittedIpHash: ipHash,

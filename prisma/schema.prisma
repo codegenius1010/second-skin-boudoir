@@ -120,6 +120,7 @@ model SessionIntake {
 
   // Additional notes
   additionalPrivateNotes        String?  // Free text: anything else to help Matthew
+  additionalImageComments       String?  // Free text: special requests for image editing
 
   // Acknowledgments
   ongoingConsentAcknowledged    Boolean  @default(false)
