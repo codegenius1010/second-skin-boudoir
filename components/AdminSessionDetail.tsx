@@ -207,6 +207,18 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
         ])
 
+        // Client Information from Form Submission
+        const clientSubmissionContent: Array<[string, string]> = []
+        clientSubmissionContent.push(['Note', 'This information was entered by the client in their form submission'])
+        if (intake.instagramHandle) clientSubmissionContent.push(['Instagram Handle', intake.instagramHandle])
+        if (intake.supportPersonAttending) {
+          clientSubmissionContent.push(['Support Person Attending', 'Yes ✓'])
+          if (intake.supportPersonName) clientSubmissionContent.push(['Support Person Name', intake.supportPersonName])
+        }
+        if (intake.instagramTagPermission) clientSubmissionContent.push(['Instagram Tag Permission', intake.instagramTagPermission])
+        if (intake.collaboratorCreditPermission) clientSubmissionContent.push(['Collaborator Credit Permission', intake.collaboratorCreditPermission])
+        if (clientSubmissionContent.length > 1) addSection('CLIENT INFORMATION (from Form Submission)', clientSubmissionContent)
+
         // Session Vision & Vibe
         const visionContent: Array<[string, string]> = []
         if (intake.desiredFeelings?.length > 0) visionContent.push(['Desired Feelings', intake.desiredFeelings.join(', ')])
@@ -485,6 +497,35 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                       <Detail label="Ongoing Consent Acknowledged" value={intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'} />
                       <Detail label="Accurate Information Acknowledged" value={intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'} />
                     </div>
+                  </div>
+                </Section>
+
+                {/* Client Information from Form Submission */}
+                <Section title="Client Information (from Form Submission)">
+                  <div className="space-y-4">
+                    {intake.instagramHandle && (
+                      <Detail label="Instagram Handle" value={intake.instagramHandle} />
+                    )}
+                    {intake.supportPersonAttending && (
+                      <div>
+                        <Detail label="Support Person Attending" value="Yes ✓" />
+                        {intake.supportPersonName && (
+                          <Detail label="Support Person Name" value={intake.supportPersonName} />
+                        )}
+                      </div>
+                    )}
+                    {intake.instagramTagPermission && (
+                      <Detail label="Instagram Tag Permission" value={intake.instagramTagPermission} />
+                    )}
+                    {intake.collaboratorCreditPermission && (
+                      <Detail label="Collaborator Credit Permission" value={intake.collaboratorCreditPermission} />
+                    )}
+                    {!intake.instagramHandle && !intake.supportPersonAttending && !intake.instagramTagPermission && !intake.collaboratorCreditPermission && (
+                      <Detail label="Client Info" value="No additional client information provided" />
+                    )}
+                  </div>
+                  <div className="mt-4 p-3 bg-charcoal/5 rounded border border-smoke/20 text-xs text-smoke italic">
+                    Note: This information was entered by the client in their form submission
                   </div>
                 </Section>
 
