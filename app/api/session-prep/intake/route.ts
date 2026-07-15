@@ -24,6 +24,7 @@ import { ZodError } from 'zod'
  * 5. Update delivery status based on webhook response
  */
 export async function POST(request: NextRequest) {
+  let sessionId: string | undefined
   try {
     // Parse request
     let body: Record<string, unknown>
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate required fields
-    const sessionId = body.sessionId as string
+    sessionId = body.sessionId as string
     const intakeData = body.intake as Record<string, unknown>
 
     if (!sessionId) {
@@ -219,7 +220,15 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('[SessionPrep] Intake submission error:', error instanceof Error ? error.message : String(error))
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    const errorStack = error instanceof Error ? error.stack : 'No stack trace'
+    
+    console.error('[SessionPrep] Intake submission error:', {
+      message: errorMessage,
+      stack: errorStack,
+      sessionId: sessionId,
+      timestamp: new Date().toISOString(),
+    })
 
     // Don't expose internal errors to client
     return NextResponse.json(

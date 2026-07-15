@@ -66,6 +66,14 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
         clientPhone: wizardData.phone,
       }
 
+      console.log('[SessionPrep] Client info being added:', {
+        firstName: wizardData.firstName,
+        lastName: wizardData.lastName,
+        email: wizardData.email,
+        phone: wizardData.phone,
+      })
+      console.log('[SessionPrep] Complete intake data with client info:', intakeWithClientInfo)
+
       const response = await fetch('/api/session-prep/intake', {
         method: 'POST',
         headers: {
