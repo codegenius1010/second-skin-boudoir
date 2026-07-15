@@ -126,6 +126,9 @@ model SessionIntake {
   additionalPrivateNotes        String?  // Free text: anything else to help Matthew
   additionalImageComments       String?  // Free text: special requests for image editing
 
+  // Image Privacy & Use Preferences
+  imageUseElection              String?  // "no_public_sharing" | "anonymous_detail" | "full_model_release"
+
   // Acknowledgments
   ongoingConsentAcknowledged    Boolean  @default(false)
   accurateInformationAcknowledged Boolean @default(false)  

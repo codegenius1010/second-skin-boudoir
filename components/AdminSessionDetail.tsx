@@ -87,6 +87,20 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         }
       }
 
+      // Format image use election to human-readable label
+      const formatImageUseElection = (election: string | null | undefined): string => {
+        switch (election) {
+          case 'no_public_sharing':
+            return 'No Public Sharing (Private Collection)'
+          case 'anonymous_detail':
+            return 'Anonymous/Detail Sharing'
+          case 'full_model_release':
+            return 'Full Model Release'
+          default:
+            return 'Not specified'
+        }
+      }
+
       const pageWidth = pdf.internal.pageSize.getWidth()
       const pageHeight = pdf.internal.pageSize.getHeight()
       const margin = 15
@@ -223,6 +237,11 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           ['Ongoing Consent Acknowledged', intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'],
           ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
         ]
+        
+        // Image Privacy Preference
+        if (intake.imageUseElection) {
+          submissionContent.push(['Image Privacy Preference', formatImageUseElection(intake.imageUseElection)])
+        }
         
         // MVP Compliance Fields
         submissionContent.push(
@@ -465,7 +484,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
         `Session ID: ${data.session.id}`,
         `Submitted: ${formatDate(submissionData?.submittedAt || new Date())} | IP Hash: ${submissionData?.submittedIpHash ? submissionData.submittedIpHash : 'Not recorded'}`,
         `Device: ${submissionData?.userAgentSummary || 'Not recorded'}`,
-        `Agreement: ${submissionData?.agreementAccepted ? 'Accepted ✓' : 'Not confirmed'} | Timestamp: ${submissionData?.agreementAcceptedAt ? formatDate(submissionData.agreementAcceptedAt) : 'Not recorded'}`,
+        `Agreement: ${submissionData?.agreementAccepted ? 'Accepted ✓' : 'Not confirmed'} | Privacy: ${submissionData?.imageUseElection ? formatImageUseElection(submissionData.imageUseElection) : 'Not specified'}`,
       ]
       
       let complianceLineY = complianceY + 6

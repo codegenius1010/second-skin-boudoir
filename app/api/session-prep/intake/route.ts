@@ -176,6 +176,7 @@ export async function POST(request: NextRequest) {
           accurateInformationAcknowledged: Boolean(validatedIntake.accurateInformationAcknowledged),
           agreementAccepted: Boolean(validatedIntake.agreementAccepted),  // MVP Compliance: Explicit agreement checkbox
           agreementAcceptedAt: validatedIntake.agreementAcceptedAt ? new Date(validatedIntake.agreementAcceptedAt as string) : null,  // Timestamp when accepted
+          imageUseElection: (validatedIntake.imageUseElection as string) || null,  // Image privacy preference
           submittedIpHash: ipHash,
           userAgentSummary: uaSummary,
         },
