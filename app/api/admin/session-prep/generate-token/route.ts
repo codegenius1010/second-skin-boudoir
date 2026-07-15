@@ -55,40 +55,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-    const { sessionId } = await params
-
-    const session = await prisma.photographySession.findUnique({
-      where: { id: sessionId },
-      select: { id: true, client: { select: { firstName: true, lastName: true } } },
-    })
-
-    if (!session) {
-      return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
-      )
-    }
-
-    // Reconstruct the token (sessionId)
-    const prepLink = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://secondskinboudoir.com'}/session-prep/${sessionId}`
-
-    return NextResponse.json({
-      success: true,
-      data: {
-        sessionId,
-        clientName: `${session.client.firstName} ${session.client.lastName}`,
-        prepLink,
-      },
-    })
-  } catch (error) {
-    console.error('Error fetching session prep link:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch session prep link' },
-      { status: 500 }
-    )
-  }
-}
-
 /**
  * POST /api/admin/session-prep/generate-token
  * Generate a new session prep link for a client

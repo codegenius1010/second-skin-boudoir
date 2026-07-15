@@ -133,6 +133,9 @@ model SessionIntake {
   submittedIpHash               String?  // SHA-256 hash of IP, never raw IP
   userAgentSummary              String?  // e.g., "Chrome/MacOS"
 
+  // Admin review tracking
+  reviewStatus                  String   @default("needs_review") // "needs_review" | "reviewed"
+
   webhookDeliveries             WebhookDelivery[]
 
   createdAt                     DateTime @default(now())
