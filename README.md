@@ -2,6 +2,12 @@
 
 A luxury, conversion-focused boudoir photography website built with Next.js App Router, TypeScript, and Tailwind CSS.
 
+## Latest Updates
+
+- **Consent Audit Trail**: Immutable append-only logging of all client consents for GDPR compliance
+- **Admin Features**: Review status management, delete submissions, copy session links
+- **Fixed Deployment**: Separated database migrations from build step for Vercel compatibility
+
 ## Pages
 
 - Home
