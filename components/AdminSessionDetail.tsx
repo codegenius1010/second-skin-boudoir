@@ -477,6 +477,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
             {/* Client Info */}
             <Section title="Client Information (from Admin Session Setup)">
               <div className="grid grid-cols-2 gap-4">
+                <Detail label="Name" value={`${data.client.firstName} ${data.client.lastName}`} />
                 <Detail label="Email" value={data.client.emailNormalized} />
                 <Detail label="Phone" value={data.client.phoneNormalized || '—'} />
                 <Detail label="Instagram" value={data.client.instagramHandle || '—'} />
