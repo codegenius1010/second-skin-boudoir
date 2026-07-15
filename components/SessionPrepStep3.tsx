@@ -231,10 +231,14 @@ export default function SessionPrepStep3({ onComplete, isLoading }: SessionPrepS
               </label>
               <div className="space-y-2">
                 {[
-                  { value: 'fully covered', label: 'Fully Covered', description: 'Lingerie, robes, or bodysuit with complete coverage throughout the session' },
-                  { value: 'implied nudity', label: 'Implied Nudity', description: 'Strategically draped sheets, fabric, or positioning that suggests nudity without explicit exposure' },
-                  { value: 'artistic topless', label: 'Artistic Topless', description: 'Artistic chest coverage or angles that create tasteful, editorial-style images' },
-                  { value: 'artistic fully nude', label: 'Artistic Fully Nude', description: 'Artistic positioning, angles, shadows, and composition that create tasteful, non-explicit nudity' },
+                  { value: 'fully_covered', label: 'Fully Covered', description: 'Lingerie, robes, or bodysuit with complete coverage throughout the session' },
+                  { value: 'robe_sweater', label: 'Robe or Sweater', description: 'Comfortable robe or sweater for easy coverage transitions' },
+                  { value: 'bodysuit_lingerie', label: 'Bodysuit or Lingerie', description: 'Fitted bodysuit or lingerie for flattering silhouette shots' },
+                  { value: 'sheer_covered', label: 'Sheer Covered', description: 'Sheer fabrics or overlays that suggest while still covering' },
+                  { value: 'implied_nudity', label: 'Implied Nudity', description: 'Strategically draped sheets, fabric, or positioning that suggests nudity without explicit exposure' },
+                  { value: 'artistic_topless', label: 'Artistic Topless', description: 'Artistic chest coverage or angles that create tasteful, editorial-style images' },
+                  { value: 'artistic_nude', label: 'Artistic Fully Nude', description: 'Artistic positioning, angles, shadows, and composition that create tasteful, non-explicit nudity' },
+                  { value: 'undecided', label: 'Undecided', description: 'Not sure yet - we can discuss options during the session' },
                 ].map(
                   (coverage) => (
                     <div key={coverage.value} className="flex items-start gap-3 p-3 bg-charcoal/2 rounded-lg hover:bg-charcoal/5 transition-colors">

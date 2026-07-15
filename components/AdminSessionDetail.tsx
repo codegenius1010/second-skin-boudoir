@@ -69,18 +69,44 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
     
     setIsExporting(true)
     try {
-      // Get the element to export (without buttons)
       const element = contentRef.current
+      const parentModal = element.closest('div')
       
-      // Create canvas from HTML
+      // Save original styles
+      const originalStyleHeight = element.style.height
+      const originalStyleMaxHeight = element.style.maxHeight
+      const originalStyleOverflow = element.style.overflow
+      const originalParentOverflow = parentModal?.style.overflow
+      
+      // Temporarily set element to show all content
+      element.style.height = 'auto'
+      element.style.maxHeight = 'none'
+      element.style.overflow = 'visible'
+      if (parentModal) {
+        parentModal.style.overflow = 'visible'
+      }
+      
+      // Wait for layout to update
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      // Create canvas from HTML - capture full height
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
+        allowTaint: true,
       })
       
-      // Create PDF
+      // Restore original styles
+      element.style.height = originalStyleHeight
+      element.style.maxHeight = originalStyleMaxHeight
+      element.style.overflow = originalStyleOverflow
+      if (parentModal) {
+        parentModal.style.overflow = originalParentOverflow || ''
+      }
+      
+      // Create PDF from canvas
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF({
         orientation: 'portrait',
