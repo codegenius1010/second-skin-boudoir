@@ -84,8 +84,9 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
         throw new Error(errorData.error || 'Failed to submit session preferences')
       }
 
-      // Success - move to final step
+      // Success - move to final step and scroll to top
       setCurrentStep(4)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred'
       setError(errorMsg)

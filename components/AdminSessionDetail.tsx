@@ -65,98 +65,216 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
   }, [sessionId, adminToken])
 
   const handleExportPDF = async () => {
-    if (!contentRef.current || !data) return
+    if (!data) return
     
     setIsExporting(true)
     try {
-      const element = contentRef.current
-      const parentModal = element.closest('div')
-      
-      // Save original styles
-      const originalStyleHeight = element.style.height
-      const originalStyleMaxHeight = element.style.maxHeight
-      const originalStyleOverflow = element.style.overflow
-      const originalParentOverflow = parentModal?.style.overflow
-      
-      // Temporarily set element to show all content
-      element.style.height = 'auto'
-      element.style.maxHeight = 'none'
-      element.style.overflow = 'visible'
-      if (parentModal) {
-        parentModal.style.overflow = 'visible'
-      }
-      
-      // Wait for layout to update
-      await new Promise(resolve => setTimeout(resolve, 100))
-      
-      // Create canvas from HTML - capture full height
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        allowTaint: true,
-      })
-      
-      // Restore original styles
-      element.style.height = originalStyleHeight
-      element.style.maxHeight = originalStyleMaxHeight
-      element.style.overflow = originalStyleOverflow
-      if (parentModal) {
-        parentModal.style.overflow = originalParentOverflow || ''
-      }
-      
-      // Create PDF from canvas
-      const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
         format: 'a4',
       })
-      
+
       const pageWidth = pdf.internal.pageSize.getWidth()
       const pageHeight = pdf.internal.pageSize.getHeight()
-      const imgWidth = pageWidth - 20 // 10mm margin on each side
-      const imgHeight = (canvas.height * imgWidth) / canvas.width
-      
-      let yPosition = 10
-      let remainingHeight = imgHeight
-      let pageNumber = 1
-      
-      while (remainingHeight > 0) {
-        const canvasHeight = Math.min(remainingHeight, pageHeight - 20)
-        const srcHeight = (canvasHeight * canvas.height) / imgHeight
-        
-        // Add page number and timestamp
-        if (pageNumber > 1) {
+      const margin = 15
+      const contentWidth = pageWidth - 2 * margin
+      let yPos = margin
+      const lineHeight = 6
+      const smallLineHeight = 4
+
+      // Define colors (matching brand)
+      const charcoal = [44, 44, 44]
+      const espresso = [33, 33, 33]
+      const smoke = [100, 100, 100]
+      const champagne = [224, 181, 134]
+      const lightGray = [240, 240, 240]
+
+      // Helper function to check and add new page
+      const checkNewPage = (requiredHeight: number) => {
+        if (yPos + requiredHeight > pageHeight - margin) {
           pdf.addPage()
+          yPos = margin
+          addPageHeader()
         }
-        
-        pdf.addImage(
-          imgData,
-          'PNG',
-          10,
-          10,
-          imgWidth,
-          canvasHeight,
-          `page${pageNumber}`,
-          'FAST'
-        )
-        
-        // Add footer with timestamp and page number
-        pdf.setFontSize(8)
-        pdf.setTextColor(128, 128, 128)
-        pdf.text(
-          `Generated: ${new Date().toLocaleString()} | Page ${pageNumber}`,
-          10,
-          pageHeight - 5
-        )
-        
-        remainingHeight -= canvasHeight
-        yPosition += canvasHeight
-        pageNumber++
       }
-      
+
+      // Add page header with branding
+      const addPageHeader = () => {
+        pdf.setFillColor(lightGray[0], lightGray[1], lightGray[2])
+        pdf.rect(margin - 5, yPos - 3, contentWidth + 10, 12, 'F')
+        pdf.setFont('Helvetica', 'bold')
+        pdf.setFontSize(9)
+        pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+        pdf.text('SECOND SKIN BOUDOIR', margin, yPos + 3)
+        pdf.setFont('Helvetica', 'normal')
+        pdf.setFontSize(7)
+        pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+        pdf.text('Session Intake Form', pageWidth - margin - 40, yPos + 3)
+        yPos += 15
+      }
+
+      // Add title and header
+      pdf.setFont('Helvetica', 'bold')
+      pdf.setFontSize(16)
+      pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+      pdf.text('SECOND SKIN BOUDOIR', margin, yPos)
+      yPos += 8
+
+      pdf.setFont('Helvetica', 'normal')
+      pdf.setFontSize(10)
+      pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+      pdf.text('Session Preparation Questionnaire - Complete Record', margin, yPos)
+      yPos += 12
+
+      // Function to add a section
+      const addSection = (title: string, content: Array<[string, string]>) => {
+        checkNewPage(8)
+        
+        pdf.setFont('Helvetica', 'bold')
+        pdf.setFontSize(11)
+        pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+        pdf.text(title, margin, yPos)
+        yPos += 7
+
+        pdf.setDrawColor(champagne[0], champagne[1], champagne[2])
+        pdf.setLineWidth(0.5)
+        pdf.line(margin, yPos - 1, margin + contentWidth, yPos - 1)
+        yPos += 4
+
+        content.forEach(([label, value]) => {
+          checkNewPage(6)
+          
+          pdf.setFont('Helvetica', 'bold')
+          pdf.setFontSize(9)
+          pdf.setTextColor(espresso[0], espresso[1], espresso[2])
+          pdf.text(label + ':', margin, yPos)
+          
+          pdf.setFont('Helvetica', 'normal')
+          pdf.setFontSize(9)
+          pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+          
+          const valueLines = pdf.splitTextToSize(value, contentWidth - 40)
+          pdf.text(valueLines, margin + 40, yPos)
+          
+          const textHeight = valueLines.length * lineHeight
+          yPos += textHeight + 2
+        })
+
+        yPos += 4
+      }
+
+      const intake = data.intakes[0]
+
+      // Session Information
+      addSection('SESSION INFORMATION', [
+        ['Type', data.session.sessionType],
+        ['Agreement Status', data.session.agreementStatus === 'completed' ? '✓ COMPLETED' : data.session.agreementStatus],
+        ['Session Date', data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'],
+        ['Location', data.session.sessionLocation || '—'],
+      ])
+
+      // Client Information
+      addSection('CLIENT INFORMATION', [
+        ['Name', `${data.client.firstName} ${data.client.lastName}`],
+        ['Email', data.client.emailNormalized],
+        ['Phone', data.client.phoneNormalized || '—'],
+        ['Instagram', data.client.instagramHandle || '—'],
+      ])
+
+      // Submission Details
+      if (intake) {
+        addSection('SUBMISSION DETAILS', [
+          ['Status', intake.status],
+          ['Submitted At', intake.submittedAt ? new Date(intake.submittedAt).toLocaleString() : 'Not submitted'],
+          ['Form Completed At', new Date(intake.createdAt).toLocaleString()],
+          ['Ongoing Consent Acknowledged', intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'],
+          ['Accurate Information Acknowledged', intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'],
+        ])
+
+        // Session Vision & Vibe
+        const visionContent: Array<[string, string]> = []
+        if (intake.desiredFeelings?.length > 0) visionContent.push(['Desired Feelings', intake.desiredFeelings.join(', ')])
+        if (intake.visualStyles?.length > 0) visionContent.push(['Visual Styles', intake.visualStyles.join(', ')])
+        if (intake.posingStyles?.length > 0) visionContent.push(['Posing Styles', intake.posingStyles.join(', ')])
+        if (intake.posingIntensity) visionContent.push(['Posing Intensity', intake.posingIntensity])
+        if (visionContent.length > 0) addSection('SESSION VISION & VIBE', visionContent)
+
+        // Coverage & Boundaries
+        const coverageContent: Array<[string, string]> = []
+        if (intake.coveragePreferences?.length > 0) coverageContent.push(['Coverage Preferences', intake.coveragePreferences.join(', ')])
+        if (intake.coverageDecision) coverageContent.push(['Coverage Decision', intake.coverageDecision])
+        if (intake.hardCoverageBoundaries) coverageContent.push(['Coverage Boundaries', intake.hardCoverageBoundaries])
+        if (intake.poseBoundaries) coverageContent.push(['Pose Boundaries', intake.poseBoundaries])
+        if (intake.cameraAngleBoundaries) coverageContent.push(['Camera Angle Boundaries', intake.cameraAngleBoundaries])
+        if (intake.wardrobeAdjustmentBoundaries) coverageContent.push(['Wardrobe Adjustment Boundaries', intake.wardrobeAdjustmentBoundaries])
+        if (intake.areasToEmphasize) coverageContent.push(['Areas to Emphasize', intake.areasToEmphasize])
+        if (intake.areasToPhotographDiscreetly) coverageContent.push(['Areas to Photograph Discreetly', intake.areasToPhotographDiscreetly])
+        if (coverageContent.length > 0) addSection('COVERAGE & BOUNDARIES', coverageContent)
+
+        // Music Preferences
+        const musicContent: Array<[string, string]> = []
+        if (intake.favoriteSong) musicContent.push(['Favorite Song', intake.favoriteSong])
+        if (intake.favoriteArtists) musicContent.push(['Favorite Artists', intake.favoriteArtists])
+        if (intake.musicGenres?.length > 0) musicContent.push(['Music Genres', intake.musicGenres.join(', ')])
+        if (intake.playlistUrl) musicContent.push(['Playlist URL', intake.playlistUrl])
+        if (intake.explicitLyricsAllowed) musicContent.push(['Explicit Lyrics Allowed', intake.explicitLyricsAllowed])
+        if (intake.musicToAvoid) musicContent.push(['Music to Avoid', intake.musicToAvoid])
+        if (musicContent.length > 0) addSection('MUSIC PREFERENCES', musicContent)
+
+        // Wardrobe Planning
+        const wardrobeContent: Array<[string, string]> = []
+        if (intake.wardrobePlans?.length > 0) wardrobeContent.push(['Wardrobe Plans', intake.wardrobePlans.join(', ')])
+        if (intake.clothingSizes) wardrobeContent.push(['Clothing Sizes', intake.clothingSizes])
+        if (intake.favoriteColorsStyles) wardrobeContent.push(['Favorite Colors & Styles', intake.favoriteColorsStyles])
+        if (intake.dislikedColorsStyles) wardrobeContent.push(['Disliked Colors & Styles', intake.dislikedColorsStyles])
+        if (wardrobeContent.length > 0) addSection('WARDROBE PLANNING', wardrobeContent)
+
+        // Comfort & Support
+        const comfortContent: Array<[string, string]> = []
+        if (intake.mobilityPositioningNotes) comfortContent.push(['Mobility & Positioning Notes', intake.mobilityPositioningNotes])
+        if (intake.supportPersonAttending) comfortContent.push(['Support Person Attending', 'Yes'])
+        if (intake.supportPersonName) comfortContent.push(['Support Person Name', intake.supportPersonName])
+        if (comfortContent.length > 0) addSection('COMFORT & SUPPORT', comfortContent)
+
+        // Social Media & Credits
+        const socialContent: Array<[string, string]> = []
+        if (intake.instagramHandle) socialContent.push(['Instagram Handle', intake.instagramHandle])
+        if (intake.instagramTagPermission) socialContent.push(['Instagram Tag Permission', intake.instagramTagPermission])
+        if (intake.collaboratorCreditPermission) socialContent.push(['Collaborator Credit Permission', intake.collaboratorCreditPermission])
+        if (socialContent.length > 0) addSection('SOCIAL MEDIA & CREDITS', socialContent)
+
+        // Additional Notes
+        if (intake.additionalPrivateNotes) {
+          addSection('ADDITIONAL NOTES', [
+            ['Private Notes', intake.additionalPrivateNotes]
+          ])
+        }
+      }
+
+      // Add footer to all pages
+      const pageCount = (pdf as any).internal.pages.length - 1
+      for (let i = 1; i <= pageCount; i++) {
+        pdf.setPage(i)
+        pdf.setDrawColor(lightGray[0], lightGray[1], lightGray[2])
+        pdf.setLineWidth(0.5)
+        pdf.line(margin, pageHeight - margin + 2, pageWidth - margin, pageHeight - margin + 2)
+        
+        pdf.setFont('Helvetica', 'normal')
+        pdf.setFontSize(8)
+        pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+        pdf.text(
+          `Generated: ${new Date().toLocaleString()}`,
+          margin,
+          pageHeight - margin + 6
+        )
+        pdf.text(
+          `Page ${i} of ${pageCount}`,
+          pageWidth - margin - 20,
+          pageHeight - margin + 6
+        )
+      }
+
       // Download the PDF
       const filename = `${data.client.firstName}-${data.client.lastName}-Session-Intake-${new Date().toISOString().split('T')[0]}.pdf`
       pdf.save(filename)

@@ -163,6 +163,15 @@ export async function POST(request: NextRequest) {
       // Create preferences summary for webhook and admin display
       const summary = createSessionPreferencesSummary(intake)
 
+      // Update session agreement status to completed
+      await tx.photographySession.update({
+        where: { id: sessionId },
+        data: { 
+          agreementStatus: 'completed',
+          agreementCompletedAt: new Date(),
+        },
+      })
+
       // Create webhook delivery record
       const idempotencyKey = generateIdempotencyKey()
       const payload = buildWebhookPayload(session.client, session, intake, summary)
