@@ -117,6 +117,7 @@ export async function GET(
             additionalPrivateNotes: intake.additionalPrivateNotes,
             ongoingConsentAcknowledged: intake.ongoingConsentAcknowledged,
             accurateInformationAcknowledged: intake.accurateInformationAcknowledged,
+            imageUseElection: intake.imageUseElection,
             agreementAccepted: intake.agreementAccepted,
             agreementAcceptedAt: intake.agreementAcceptedAt?.toISOString(),
             submittedIpHash: intake.submittedIpHash,
