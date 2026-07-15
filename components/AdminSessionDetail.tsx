@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 interface DetailData {
   session: {
@@ -34,6 +36,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
   const [data, setData] = useState<DetailData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isExporting, setIsExporting] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -59,6 +63,84 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
 
     fetchDetail()
   }, [sessionId, adminToken])
+
+  const handleExportPDF = async () => {
+    if (!contentRef.current || !data) return
+    
+    setIsExporting(true)
+    try {
+      // Get the element to export (without buttons)
+      const element = contentRef.current
+      
+      // Create canvas from HTML
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+      })
+      
+      // Create PDF
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      })
+      
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      const imgWidth = pageWidth - 20 // 10mm margin on each side
+      const imgHeight = (canvas.height * imgWidth) / canvas.width
+      
+      let yPosition = 10
+      let remainingHeight = imgHeight
+      let pageNumber = 1
+      
+      while (remainingHeight > 0) {
+        const canvasHeight = Math.min(remainingHeight, pageHeight - 20)
+        const srcHeight = (canvasHeight * canvas.height) / imgHeight
+        
+        // Add page number and timestamp
+        if (pageNumber > 1) {
+          pdf.addPage()
+        }
+        
+        pdf.addImage(
+          imgData,
+          'PNG',
+          10,
+          10,
+          imgWidth,
+          canvasHeight,
+          `page${pageNumber}`,
+          'FAST'
+        )
+        
+        // Add footer with timestamp and page number
+        pdf.setFontSize(8)
+        pdf.setTextColor(128, 128, 128)
+        pdf.text(
+          `Generated: ${new Date().toLocaleString()} | Page ${pageNumber}`,
+          10,
+          pageHeight - 5
+        )
+        
+        remainingHeight -= canvasHeight
+        yPosition += canvasHeight
+        pageNumber++
+      }
+      
+      // Download the PDF
+      const filename = `${data.client.firstName}-${data.client.lastName}-Session-Intake-${new Date().toISOString().split('T')[0]}.pdf`
+      pdf.save(filename)
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('Failed to generate PDF')
+    } finally {
+      setIsExporting(false)
+    }
+  }
 
   if (isLoading) {
     return (
@@ -90,7 +172,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-y-auto w-full">
+      <div className="bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-y-auto w-full flex flex-col">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-charcoal to-espresso p-6 border-b border-smoke/20 flex justify-between items-center">
           <div>
@@ -107,70 +189,195 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 space-y-8">
-          {/* Session Info */}
-          <Section title="Session Information">
-            <div className="grid grid-cols-2 gap-4">
-              <Detail label="Type" value={data.session.sessionType} />
-              <Detail label="Status" value={data.session.agreementStatus} />
-              <Detail label="Date" value={data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'} />
-              <Detail label="Location" value={data.session.sessionLocation || '—'} />
-            </div>
-          </Section>
+        {/* Content - this div will be captured for PDF */}
+        <div className="flex-1 overflow-y-auto p-6" ref={contentRef}>
+          <div className="space-y-8 max-w-4xl">
+            {/* Session Info */}
+            <Section title="Session Information">
+              <div className="grid grid-cols-2 gap-4">
+                <Detail label="Type" value={data.session.sessionType} />
+                <Detail label="Agreement Status" value={data.session.agreementStatus} />
+                <Detail label="Session Date" value={data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'} />
+                <Detail label="Location" value={data.session.sessionLocation || '—'} />
+              </div>
+            </Section>
 
-          {/* Client Info */}
-          <Section title="Client Information">
-            <div className="grid grid-cols-2 gap-4">
-              <Detail label="Email" value={data.client.emailNormalized} />
-              <Detail label="Phone" value={data.client.phoneNormalized || '—'} />
-              <Detail label="Instagram" value={data.client.instagramHandle || '—'} />
-            </div>
-          </Section>
+            {/* Client Info */}
+            <Section title="Client Information">
+              <div className="grid grid-cols-2 gap-4">
+                <Detail label="Email" value={data.client.emailNormalized} />
+                <Detail label="Phone" value={data.client.phoneNormalized || '—'} />
+                <Detail label="Instagram" value={data.client.instagramHandle || '—'} />
+              </div>
+            </Section>
 
-          {/* Intake Data */}
-          {intake && (
-            <Section title="Session Preferences">
-              <div className="space-y-4">
-                {intake.desiredFeelings?.length > 0 && (
-                  <Detail label="Desired Feelings" value={intake.desiredFeelings.join(', ')} />
-                )}
-                {intake.visualStyles?.length > 0 && (
-                  <Detail label="Visual Styles" value={intake.visualStyles.join(', ')} />
-                )}
-                {intake.coveragePreferences?.length > 0 && (
-                  <Detail label="Coverage Preferences" value={intake.coveragePreferences.join(', ')} />
-                )}
-                {intake.favoriteSong && (
-                  <Detail label="Favorite Song" value={intake.favoriteSong} />
-                )}
-                {intake.hardCoverageBoundaries && (
-                  <Detail label="Coverage Boundaries" value={intake.hardCoverageBoundaries} isLong={true} />
-                )}
+            {/* Intake Submission Info */}
+            {intake && (
+              <>
+                <Section title="Submission Details">
+                  <div className="space-y-4">
+                    <Detail label="Status" value={intake.status} />
+                    <Detail label="Submitted At" value={intake.submittedAt ? new Date(intake.submittedAt).toLocaleString() : 'Not submitted'} />
+                    <Detail label="Form Completed At" value={new Date(intake.createdAt).toLocaleString()} />
+                    <div className="grid grid-cols-2 gap-4">
+                      <Detail label="Ongoing Consent Acknowledged" value={intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'} />
+                      <Detail label="Accurate Information Acknowledged" value={intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'} />
+                    </div>
+                  </div>
+                </Section>
+
+                {/* Session Vision */}
+                <Section title="Session Vision & Vibe">
+                  <div className="space-y-4">
+                    {intake.desiredFeelings?.length > 0 && (
+                      <Detail label="Desired Feelings" value={intake.desiredFeelings.join(', ')} />
+                    )}
+                    {intake.visualStyles?.length > 0 && (
+                      <Detail label="Visual Styles" value={intake.visualStyles.join(', ')} />
+                    )}
+                    {intake.posingStyles?.length > 0 && (
+                      <Detail label="Posing Styles" value={intake.posingStyles.join(', ')} />
+                    )}
+                    {intake.posingIntensity && (
+                      <Detail label="Posing Intensity" value={intake.posingIntensity} />
+                    )}
+                  </div>
+                </Section>
+
+                {/* Coverage & Boundaries */}
+                <Section title="Coverage & Boundaries">
+                  <div className="space-y-4">
+                    {intake.coveragePreferences?.length > 0 && (
+                      <Detail label="Coverage Preferences" value={intake.coveragePreferences.join(', ')} />
+                    )}
+                    {intake.coverageDecision && (
+                      <Detail label="Coverage Decision" value={intake.coverageDecision} />
+                    )}
+                    {intake.hardCoverageBoundaries && (
+                      <Detail label="Coverage Boundaries" value={intake.hardCoverageBoundaries} isLong={true} />
+                    )}
+                    {intake.poseBoundaries && (
+                      <Detail label="Pose Boundaries" value={intake.poseBoundaries} isLong={true} />
+                    )}
+                    {intake.cameraAngleBoundaries && (
+                      <Detail label="Camera Angle Boundaries" value={intake.cameraAngleBoundaries} isLong={true} />
+                    )}
+                    {intake.wardrobeAdjustmentBoundaries && (
+                      <Detail label="Wardrobe Adjustment Boundaries" value={intake.wardrobeAdjustmentBoundaries} isLong={true} />
+                    )}
+                    {intake.areasToEmphasize && (
+                      <Detail label="Areas to Emphasize" value={intake.areasToEmphasize} isLong={true} />
+                    )}
+                    {intake.areasToPhotographDiscreetly && (
+                      <Detail label="Areas to Photograph Discreetly" value={intake.areasToPhotographDiscreetly} isLong={true} />
+                    )}
+                  </div>
+                </Section>
+
+                {/* Music Preferences */}
+                <Section title="Music Preferences">
+                  <div className="space-y-4">
+                    {intake.favoriteSong && (
+                      <Detail label="Favorite Song" value={intake.favoriteSong} />
+                    )}
+                    {intake.favoriteArtists && (
+                      <Detail label="Favorite Artists" value={intake.favoriteArtists} />
+                    )}
+                    {intake.musicGenres?.length > 0 && (
+                      <Detail label="Music Genres" value={intake.musicGenres.join(', ')} />
+                    )}
+                    {intake.playlistUrl && (
+                      <Detail label="Playlist URL" value={intake.playlistUrl} />
+                    )}
+                    {intake.explicitLyricsAllowed && (
+                      <Detail label="Explicit Lyrics" value={intake.explicitLyricsAllowed} />
+                    )}
+                    {intake.musicToAvoid && (
+                      <Detail label="Music to Avoid" value={intake.musicToAvoid} isLong={true} />
+                    )}
+                  </div>
+                </Section>
+
+                {/* Wardrobe Planning */}
+                <Section title="Wardrobe Planning">
+                  <div className="space-y-4">
+                    {intake.wardrobePlans?.length > 0 && (
+                      <Detail label="Wardrobe Plans" value={intake.wardrobePlans.join(', ')} />
+                    )}
+                    {intake.wardrobeGuidanceRequested && (
+                      <Detail label="Wardrobe Guidance Requested" value="Yes ✓" />
+                    )}
+                    {intake.clothingSizes && (
+                      <Detail label="Clothing Sizes" value={intake.clothingSizes} />
+                    )}
+                    {intake.favoriteColorsStyles && (
+                      <Detail label="Favorite Colors & Styles" value={intake.favoriteColorsStyles} isLong={true} />
+                    )}
+                    {intake.dislikedColorsStyles && (
+                      <Detail label="Disliked Colors & Styles" value={intake.dislikedColorsStyles} isLong={true} />
+                    )}
+                  </div>
+                </Section>
+
+                {/* Comfort & Support */}
+                <Section title="Comfort & Support">
+                  <div className="space-y-4">
+                    {intake.mobilityPositioningNotes && (
+                      <Detail label="Mobility & Positioning Notes" value={intake.mobilityPositioningNotes} isLong={true} />
+                    )}
+                    {intake.supportPersonAttending && (
+                      <div>
+                        <Detail label="Support Person Attending" value="Yes ✓" />
+                        {intake.supportPersonName && (
+                          <Detail label="Support Person Name" value={intake.supportPersonName} />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </Section>
+
+                {/* Social Media & Credits */}
+                <Section title="Social Media & Credits">
+                  <div className="space-y-4">
+                    {intake.instagramHandle && (
+                      <Detail label="Instagram Handle" value={intake.instagramHandle} />
+                    )}
+                    {intake.instagramTagPermission && (
+                      <Detail label="Instagram Tag Permission" value={intake.instagramTagPermission} />
+                    )}
+                    {intake.collaboratorCreditPermission && (
+                      <Detail label="Collaborator Credit Permission" value={intake.collaboratorCreditPermission} />
+                    )}
+                  </div>
+                </Section>
+
+                {/* Additional Notes */}
                 {intake.additionalPrivateNotes && (
-                  <Detail label="Additional Notes" value={intake.additionalPrivateNotes} isLong={true} />
+                  <Section title="Additional Private Notes">
+                    <Detail label="Notes" value={intake.additionalPrivateNotes} isLong={true} />
+                  </Section>
                 )}
-              </div>
-            </Section>
-          )}
+              </>
+            )}
 
-          {/* Webhook Status */}
-          {webhook && (
-            <Section title="Webhook Delivery">
-              <div className="space-y-4">
-                <Detail label="Status" value={webhook.status} />
-                <Detail label="Attempts" value={webhook.attemptCount.toString()} />
-                <Detail label="Last Attempt" value={webhook.lastAttemptAt ? new Date(webhook.lastAttemptAt).toLocaleString() : '—'} />
-                <Detail label="Delivered" value={webhook.deliveredAt ? new Date(webhook.deliveredAt).toLocaleString() : '—'} />
-                {webhook.lastHttpStatus && (
-                  <Detail label="HTTP Status" value={webhook.lastHttpStatus.toString()} />
-                )}
-                {webhook.lastErrorSafeMessage && (
-                  <Detail label="Last Error" value={webhook.lastErrorSafeMessage} isLong={true} />
-                )}
-              </div>
-            </Section>
-          )}
+            {/* Webhook Status */}
+            {webhook && (
+              <Section title="Webhook Delivery Status">
+                <div className="space-y-4">
+                  <Detail label="Status" value={webhook.status} />
+                  <Detail label="Attempts" value={webhook.attemptCount.toString()} />
+                  <Detail label="Last Attempt" value={webhook.lastAttemptAt ? new Date(webhook.lastAttemptAt).toLocaleString() : '—'} />
+                  <Detail label="Delivered At" value={webhook.deliveredAt ? new Date(webhook.deliveredAt).toLocaleString() : '—'} />
+                  {webhook.lastHttpStatus && (
+                    <Detail label="Last HTTP Status" value={webhook.lastHttpStatus.toString()} />
+                  )}
+                  {webhook.lastErrorSafeMessage && (
+                    <Detail label="Last Error" value={webhook.lastErrorSafeMessage} isLong={true} />
+                  )}
+                </div>
+              </Section>
+            )}
+          </div>
         </div>
 
         {/* Footer */}
@@ -183,7 +390,6 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           </button>
           <button
             onClick={() => {
-              // Copy JSON to clipboard
               const json = JSON.stringify({
                 session: data.session,
                 client: data.client,
@@ -195,6 +401,13 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
             className="px-6 py-2 bg-champagne/10 text-champagne rounded-lg hover:bg-champagne/20 transition-colors"
           >
             Export JSON
+          </button>
+          <button
+            onClick={handleExportPDF}
+            disabled={isExporting}
+            className="px-6 py-2 bg-rose/10 text-rose rounded-lg hover:bg-rose/20 transition-colors disabled:opacity-50"
+          >
+            {isExporting ? 'Generating PDF...' : 'Export PDF'}
           </button>
         </div>
       </div>
