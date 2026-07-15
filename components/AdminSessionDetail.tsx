@@ -266,7 +266,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
           ])
         }
 
-        // Session Agreement
+        // Session Agreement - Part 1 (Items 1-14)
         checkNewPage(15)
         pdf.setFont('Helvetica', 'bold')
         pdf.setFontSize(11)
@@ -283,7 +283,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
         pdf.setFontSize(7.5)
         pdf.setTextColor(smoke[0], smoke[1], smoke[2])
         
-        const agreementText = `SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE
+        const agreementPart1 = `SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE
 
 This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Client," "you," or "your") for a private boudoir photography session and related products.
 
@@ -315,9 +315,32 @@ Privacy Default: Your images will not be shared online, in advertising, in print
 
 13. Image Storage and Archive: Photographer is not required to retain images indefinitely. Unpurchased images may be deleted after thirty (30) days from the reveal. Purchased final images are typically archived for at least ninety (90) days after delivery, but you are responsible for downloading and backing up delivered files.
 
-14. Client Conduct, Safety, and Boundaries: This is a professional photography session. You agree to respectful communication and conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In that event, no refund is due.
-
-15. Professional Boudoir Context, Consent, and Boundaries: You understand that boudoir photography may include discussion of intimate wardrobe, covered or implied nudity, posing, facial expression, body positioning, sensual styling, and artistic direction. You consent to receive professional direction within this context and agree that ordinary, disclosed, consent-based posing direction, wardrobe guidance, and image creation inherent in a boudoir session do not, by themselves, constitute sexual harassment or misconduct. Photographer will avoid physical contact except minor pose, hair, or wardrobe adjustments after your consent, and you may decline, pause, modify, or stop any pose or adjustment at any time.
+14. Client Conduct, Safety, and Boundaries: This is a professional photography session. You agree to respectful communication and conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In that event, no refund is due.`
+        
+        const agreementLines1 = pdf.splitTextToSize(agreementPart1, contentWidth)
+        pdf.text(agreementLines1, margin, yPos)
+        
+        // Add new page for Agreement Part 2 (Items 15-26)
+        pdf.addPage()
+        yPos = margin + 10
+        
+        // Page header for agreement continuation
+        pdf.setFont('Helvetica', 'bold')
+        pdf.setFontSize(10)
+        pdf.setTextColor(charcoal[0], charcoal[1], charcoal[2])
+        pdf.text('AGREEMENT DETAILS (continued)', margin, yPos)
+        yPos += 7
+        
+        pdf.setDrawColor(champagne[0], champagne[1], champagne[2])
+        pdf.setLineWidth(0.5)
+        pdf.line(margin, yPos - 1, margin + contentWidth, yPos - 1)
+        yPos += 6
+        
+        pdf.setFont('Helvetica', 'normal')
+        pdf.setFontSize(7.5)
+        pdf.setTextColor(smoke[0], smoke[1], smoke[2])
+        
+        const agreementPart2 = `15. Professional Boudoir Context, Consent, and Boundaries: You understand that boudoir photography may include discussion of intimate wardrobe, covered or implied nudity, posing, facial expression, body positioning, sensual styling, and artistic direction. You consent to receive professional direction within this context and agree that ordinary, disclosed, consent-based posing direction, wardrobe guidance, and image creation inherent in a boudoir session do not, by themselves, constitute sexual harassment or misconduct. Photographer will avoid physical contact except minor pose, hair, or wardrobe adjustments after your consent, and you may decline, pause, modify, or stop any pose or adjustment at any time.
 
 16. Age, Capacity, and Consent: You represent that you are at least eighteen (18) years old, have the legal capacity to sign this Agreement, and are voluntarily choosing to participate. Second Skin Boudoir does not photograph minors for boudoir sessions.
 
@@ -341,8 +364,8 @@ Privacy Default: Your images will not be shared online, in advertising, in print
 
 26. Entire Agreement and Severability: This Agreement, any signed product order, and any written pricing or invoice terms form the entire agreement between the parties. If any provision is found unenforceable, the remaining provisions remain in effect. Changes must be in writing and signed or acknowledged by both parties.`
         
-        const agreementLines = pdf.splitTextToSize(agreementText, contentWidth)
-        pdf.text(agreementLines, margin, yPos)
+        const agreementLines2 = pdf.splitTextToSize(agreementPart2, contentWidth)
+        pdf.text(agreementLines2, margin, yPos)
       }
 
       // Add footer to all pages
