@@ -671,6 +671,9 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                       <Detail label="Ongoing Consent Acknowledged" value={intake.ongoingConsentAcknowledged ? 'Yes ✓' : 'No'} />
                       <Detail label="Accurate Information Acknowledged" value={intake.accurateInformationAcknowledged ? 'Yes ✓' : 'No'} />
                     </div>
+                    {intake.imageUseElection && (
+                      <Detail label="Image Privacy Preference" value={intake.imageUseElection === 'no_public_sharing' ? 'No Public Sharing (Private Collection)' : intake.imageUseElection === 'anonymous_detail' ? 'Anonymous/Detail Sharing' : 'Full Model Release'} />
+                    )}
                   </div>
                 </Section>
 
