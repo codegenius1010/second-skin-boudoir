@@ -82,6 +82,7 @@ export default function AdminSessionTable({
           <tr className="border-b border-smoke/30 bg-charcoal/5">
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Client</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Session Type</th>
+            <th className="px-4 py-3 text-left font-semibold text-charcoal">Session Date</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Intake Status</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Review Status</th>
             <th className="px-4 py-3 text-left font-semibold text-charcoal">Attempts</th>
@@ -92,13 +93,13 @@ export default function AdminSessionTable({
         <tbody>
           {isLoading ? (
             <tr>
-              <td colSpan={7} className="px-4 py-8 text-center text-smoke">
+              <td colSpan={8} className="px-4 py-8 text-center text-smoke">
                 Loading submissions...
               </td>
             </tr>
           ) : submissions.length === 0 ? (
             <tr>
-              <td colSpan={7} className="px-4 py-8 text-center text-smoke">
+              <td colSpan={8} className="px-4 py-8 text-center text-smoke">
                 No submissions found
               </td>
             </tr>
@@ -114,6 +115,11 @@ export default function AdminSessionTable({
                   </div>
                 </td>
                 <td className="px-4 py-3 text-charcoal">{submission.sessionType}</td>
+                <td className="px-4 py-3 text-sm text-charcoal">
+                  {submission.sessionDate
+                    ? new Date(submission.sessionDate).toLocaleDateString()
+                    : '—'}
+                </td>
                 <td className="px-4 py-3">
                   <span
                     className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(
