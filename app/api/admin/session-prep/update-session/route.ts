@@ -43,12 +43,12 @@ export async function PATCH(request: NextRequest) {
       )
     }
 
-    // Parse sessionDate if provided - use UTC midnight to ensure consistent date storage
+    // Parse sessionDate if provided - convert ISO date string to UTC midnight
     let parsedSessionDate: Date | undefined
     if (sessionDate) {
-      const [year, month, day] = sessionDate.split('-').map(Number)
-      // Use UTC midnight so the date is timezone-independent
-      parsedSessionDate = new Date(Date.UTC(year, month - 1, day))
+      // sessionDate comes as YYYY-MM-DD
+      // Create date at UTC midnight to keep it timezone-independent
+      parsedSessionDate = new Date(`${sessionDate}T00:00:00Z`)
     }
 
     // Update session with provided fields

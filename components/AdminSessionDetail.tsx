@@ -67,12 +67,9 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
         let sessionDateForInput = ''
         if (result.data.session.sessionDate) {
           const dateObj = new Date(result.data.session.sessionDate)
-          // Get the date in the format expected by date input (YYYY-MM-DD)
-          // Use UTC date to avoid timezone conversion issues
-          const year = dateObj.getUTCFullYear()
-          const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0')
-          const day = String(dateObj.getUTCDate()).padStart(2, '0')
-          sessionDateForInput = `${year}-${month}-${day}`
+          // Use toISOString and extract just the date part (YYYY-MM-DD)
+          const isoString = dateObj.toISOString()
+          sessionDateForInput = isoString.split('T')[0]
         }
         setEditData({
           sessionType: result.data.session.sessionType || '',
@@ -747,13 +744,15 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-2">Session Date 📅</label>
+                    <label htmlFor="session-date" className="block text-sm font-semibold text-charcoal mb-2">Session Date 📅</label>
                     <input
+                      id="session-date"
                       type="date"
                       value={editData.sessionDate}
                       onChange={(e) => setEditData({ ...editData, sessionDate: e.target.value })}
                       className="w-full px-4 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal focus:outline-none focus:border-rose focus:ring-2 focus:ring-rose/20 cursor-pointer font-medium"
                     />
+                    <p className="text-xs text-smoke mt-1">Current: {editData.sessionDate || 'Not set'}</p>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-charcoal mb-2">Location</label>
