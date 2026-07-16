@@ -67,7 +67,7 @@ export default function Page() {
           <div className="rounded-lg border border-champagne/20 bg-champagne/5 p-6">
             <h3 className="text-lg font-serif text-champagne mb-3">Complimentary Collaboration</h3>
             <p className="text-ivory/80 text-sm mb-4">
-              <strong>No session fees.</strong> This is a complimentary boudoir collaboration. You only pay for prints or digital images you choose to purchase. We offer flexible payment options and a 100% satisfaction guarantee.
+              <strong>No session fees.</strong> Your session includes 10 professionally edited photos—completely free. You only purchase additional prints, digital images, or albums if you want more. We offer flexible payment options and a 100% satisfaction guarantee.
             </p>
             <p className="text-ivory/70 text-xs">
               Learn more about <a href="/collaboration" className="text-champagne hover:text-ivory transition-colors">our collaboration process</a>. Questions? <a href="/contact" className="text-champagne hover:text-ivory transition-colors">Contact us</a> or call <strong className="text-champagne">+1 (850) 555-0123</strong>
