@@ -104,12 +104,19 @@ export async function POST(request: NextRequest) {
     const expiresAt = new Date()
     expiresAt.setDate(expiresAt.getDate() + 30)
 
+    // Parse sessionDate as local date (not UTC)
+    let parsedSessionDate: Date | undefined
+    if (sessionDate) {
+      const [year, month, day] = sessionDate.split('-').map(Number)
+      parsedSessionDate = new Date(year, month - 1, day)
+    }
+
     // Create photography session
     const session = await prisma.photographySession.create({
       data: {
         clientId: client.id,
         sessionType,
-        sessionDate: sessionDate ? new Date(sessionDate) : undefined,
+        sessionDate: parsedSessionDate,
         sessionLocation,
         agreementStatus: 'pending',
         securePrepTokenHash: tokenHash,
