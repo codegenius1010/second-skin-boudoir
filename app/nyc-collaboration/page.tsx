@@ -62,7 +62,7 @@ export default function NYCCollaborationPage() {
 
       {/* WHAT'S INCLUDED */}
       <Section className="bg-smoke">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto">
           <Eyebrow>Collaboration Experience</Eyebrow>
           <Heading>What's Included in Your Session</Heading>
 
