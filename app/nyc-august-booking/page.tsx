@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
+import CalendlyEmbed from './calendly-embed'
 
 export const metadata: Metadata = {
   title: 'Book Your NYC Boudoir Session | August 10-15 | Second Skin Boudoir',
@@ -23,14 +24,13 @@ export default function Page() {
           <Eyebrow>Schedule Your Session</Eyebrow>
           <Heading>Let&apos;s create something beautiful together</Heading>
           <p className="mt-4 text-ivory/80">
-            Select your preferred date and time below. Each session includes consultation, styling guidance, a private shoot, and the reveal appointment to select your images.
+            Select your preferred date and time below. Your complete experience takes 1.5–2 hours and includes consultation, styling guidance, and a private photoshoot.
           </p>
         </div>
 
         {/* Calendly Embed */}
         <div className="mt-8 rounded-2xl border border-champagne/20 bg-smoke/30 p-6 overflow-hidden">
-          <div className="calendly-inline-widget" data-url="https://calendly.com/matthew-ssb/nyc-second-skin-boudoir-session?background_color=f7f2ed&text_color=2a2526&primary_color=8b4f5c" style={{ minWidth: '320px', height: '700px' }}></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <CalendlyEmbed />
         </div>
 
         {/* Info Section */}
@@ -48,7 +48,7 @@ export default function Page() {
               </li>
               <li className="flex gap-3">
                 <span className="text-champagne">✓</span>
-                <span><strong>Intimate Session:</strong> 2-3 hours in a private NYC studio with expert posing direction</span>
+                <span><strong>Intimate Session:</strong> 1.5–2 hours in a private NYC studio with expert posing direction</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-champagne">✓</span>
