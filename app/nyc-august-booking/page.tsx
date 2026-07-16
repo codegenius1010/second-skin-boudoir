@@ -4,17 +4,17 @@ import { Section, Eyebrow, Heading } from '@/components/Section'
 import CalendlyEmbed from './calendly-embed'
 
 export const metadata: Metadata = {
-  title: 'Book Your NYC Boudoir Session | August 10-15 | Second Skin Boudoir',
-  description: 'Schedule your intimate boudoir photography session in New York City. Matthew is in NYC August 10-15. Limited availability. Book your private session now.',
+  title: 'Complimentary NYC Boudoir Collaboration | August 10-15 | Second Skin Boudoir',
+  description: 'Join a complimentary boudoir photography collaboration in New York City. Matthew is in NYC August 10-15. No fees. Limited availability. Book your private session now.',
 }
 
 export default function Page() {
   return (
     <main>
       <Hero
-        eyebrow="NYC August 10-15"
+        eyebrow="NYC August 10-15 • Complimentary Collaboration"
         title="Your Private Boudoir Session in New York"
-        subtitle="An intimate, professional photography experience designed to celebrate your beauty, confidence, and sensuality. Limited availability in NYC."
+        subtitle="Join an exclusive, complimentary boudoir photography collaboration. An intimate, professional experience designed to celebrate your beauty, confidence, and sensuality. No session fees. Limited availability in NYC."
         primary="Book Your Session"
         primaryHref="#booking"
       />
@@ -65,20 +65,23 @@ export default function Page() {
           </div>
 
           <div className="rounded-lg border border-champagne/20 bg-champagne/5 p-6">
-            <h3 className="text-lg font-serif text-champagne mb-3">Investment & Details</h3>
+            <h3 className="text-lg font-serif text-champagne mb-3">Complimentary Collaboration</h3>
             <p className="text-ivory/80 text-sm mb-4">
-              Session fees and product pricing available upon booking. We offer flexible payment plans and a 100% satisfaction guarantee.
+              <strong>No session fees.</strong> This is a complimentary boudoir collaboration. You only pay for prints or digital images you choose to purchase. We offer flexible payment options and a 100% satisfaction guarantee.
             </p>
             <p className="text-ivory/70 text-xs">
-              Questions before booking? <a href="/contact" className="text-champagne hover:text-ivory transition-colors">Contact us</a> or call <strong className="text-champagne">+1 (850) 555-0123</strong>
+              Learn more about <a href="/collaboration" className="text-champagne hover:text-ivory transition-colors">our collaboration process</a>. Questions? <a href="/contact" className="text-champagne hover:text-ivory transition-colors">Contact us</a> or call <strong className="text-champagne">+1 (850) 555-0123</strong>
             </p>
           </div>
         </div>
 
         {/* Footer Note */}
         <div className="mt-12 pt-8 border-t border-ivory/10">
-          <p className="text-ivory/60 text-sm">
+          <p className="text-ivory/60 text-sm mb-3">
             🗽 <strong>NYC Sessions:</strong> August 10-15, 2026. Limited availability. Book early to secure your preferred date and time.
+          </p>
+          <p className="text-ivory/60 text-sm">
+            This is a complimentary collaboration. Learn more about what makes our <a href="/collaboration" className="text-champagne hover:text-ivory transition-colors">collaboration program</a> special.
           </p>
         </div>
       </Section>
