@@ -275,7 +275,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
       addSection('SESSION INFORMATION', [
         ['Type', data.session.sessionType],
         ['Agreement Status', data.session.agreementStatus === 'completed' ? '✓ COMPLETED' : data.session.agreementStatus],
-        ['Session Date', data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'],
+        ['Session Date', data.session.sessionDate ? data.session.sessionDate.split('T')[0] : '—'],
         ['Location', data.session.sessionLocation || '—'],
       ])
 
@@ -772,7 +772,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                 <div className="grid grid-cols-2 gap-4">
                   <Detail label="Type" value={data.session.sessionType} />
                   <Detail label="Agreement Status" value={data.session.agreementStatus} />
-                  <Detail label="Session Date" value={data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'} />
+                  <Detail label="Session Date" value={data.session.sessionDate ? data.session.sessionDate.split('T')[0] : '—'} />
                   <Detail label="Location" value={data.session.sessionLocation || '—'} />
                 </div>
               )}

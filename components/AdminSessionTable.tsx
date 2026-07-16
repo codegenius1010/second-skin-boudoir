@@ -119,7 +119,7 @@ export default function AdminSessionTable({
                 <td className="px-4 py-3 text-charcoal">{submission.sessionType}</td>
                 <td className="px-4 py-3 text-sm text-charcoal">
                   {submission.sessionDate
-                    ? new Date(submission.sessionDate).toLocaleDateString()
+                    ? submission.sessionDate.split('T')[0]
                     : '—'}
                 </td>
                 <td className="px-4 py-3">
