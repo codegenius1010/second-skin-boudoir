@@ -30,14 +30,15 @@ interface AdminSessionDetailProps {
   sessionId: string
   adminToken: string
   onClose: () => void
+  editModeDefault?: boolean
 }
 
-export default function AdminSessionDetail({ sessionId, adminToken, onClose }: AdminSessionDetailProps) {
+export default function AdminSessionDetail({ sessionId, adminToken, onClose, editModeDefault = false }: AdminSessionDetailProps) {
   const [data, setData] = useState<DetailData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isExporting, setIsExporting] = useState(false)
-  const [isEditMode, setIsEditMode] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(editModeDefault)
   const [editData, setEditData] = useState({
     sessionType: '',
     sessionDate: '',
@@ -78,7 +79,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
     }
 
     fetchDetail()
-  }, [sessionId, adminToken])
+  }, [sessionId, adminToken, editModeDefault])
 
   const handleSaveSessionChanges = async () => {
     if (!data) return

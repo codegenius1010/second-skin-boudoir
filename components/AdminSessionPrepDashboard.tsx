@@ -58,6 +58,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
   })
 
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null)
+  const [selectedSessionEditMode, setSelectedSessionEditMode] = useState(false)
   const [retryLoading, setRetryLoading] = useState(false)
   const [showGenerateModal, setShowGenerateModal] = useState(false)
   const [successNotification, setSuccessNotification] = useState<{ link: string; clientName: string } | null>(null)
@@ -318,6 +319,10 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             submissions={submissions}
             isLoading={isLoading || retryLoading}
             onViewDetail={setSelectedSessionId}
+            onEdit={(sessionId) => {
+              setSelectedSessionId(sessionId)
+              setSelectedSessionEditMode(true)
+            }}
             onRetry={handleRetry}
             onStatusChange={(status) => setFilters({ ...filters, status, page: 1 })}
             onUpdateReviewStatus={handleUpdateStatus}
@@ -331,7 +336,11 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
           <AdminSessionDetail
             sessionId={selectedSessionId}
             adminToken={adminToken}
-            onClose={() => setSelectedSessionId(null)}
+            editModeDefault={selectedSessionEditMode}
+            onClose={() => {
+              setSelectedSessionId(null)
+              setSelectedSessionEditMode(false)
+            }}
           />
         )}
 

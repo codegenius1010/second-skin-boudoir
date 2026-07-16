@@ -37,6 +37,7 @@ interface AdminSessionTableProps {
   onUpdateReviewStatus: (sessionId: string, newStatus: string) => Promise<void>
   onDelete: (sessionId: string, clientName: string) => Promise<void>
   onRegenerateLink: (sessionId: string, clientName: string) => Promise<void>
+  onEdit?: (sessionId: string) => void
 }
 
 export default function AdminSessionTable({
@@ -48,6 +49,7 @@ export default function AdminSessionTable({
   onUpdateReviewStatus,
   onDelete,
   onRegenerateLink,
+  onEdit,
 }: AdminSessionTableProps) {
   const [retryingId, setRetryingId] = useState<string | null>(null)
 
@@ -149,6 +151,15 @@ export default function AdminSessionTable({
                 </td>
                 <td className="px-4 py-3 text-center">
                   <div className="flex flex-wrap gap-2 justify-center">
+                    {!submission.intake?.status || submission.intake?.status === 'draft' ? (
+                      <button
+                        onClick={() => onEdit?.(submission.id)}
+                        className="text-xs px-2 py-1 rounded bg-rose/10 text-rose hover:bg-rose/20 transition-colors"
+                        title="Edit session details (draft mode only)"
+                      >
+                        Edit
+                      </button>
+                    ) : null}
                     <button
                       onClick={() => onViewDetail(submission.id)}
                       className="text-xs px-2 py-1 rounded bg-champagne/10 text-champagne hover:bg-champagne/20 transition-colors"
