@@ -16,7 +16,7 @@ export default function CalendlyEmbed() {
   return (
     <div
       className="calendly-inline-widget"
-      data-url="https://calendly.com/matthew-ssb/nyc-second-skin-boudoir-session?background_color=f7f2ed&text_color=2a2526&primary_color=8b4f5c"
+      data-url="https://calendly.com/matthew-ssb/nyc-second-skin-boudoir-session?background_color=f7f2ed&text_color=2a2526&primary_color=d17896"
       style={{ minWidth: '320px', height: '700px' }}
     ></div>
   )
