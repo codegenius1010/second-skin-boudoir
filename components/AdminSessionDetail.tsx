@@ -37,6 +37,14 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isExporting, setIsExporting] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [editData, setEditData] = useState({
+    sessionType: '',
+    sessionDate: '',
+    sessionLocation: '',
+  })
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -54,6 +62,14 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
 
         const result = await response.json()
         setData(result.data)
+        // Initialize edit data
+        setEditData({
+          sessionType: result.data.session.sessionType || '',
+          sessionDate: result.data.session.sessionDate 
+            ? new Date(result.data.session.sessionDate).toISOString().split('T')[0]
+            : '',
+          sessionLocation: result.data.session.sessionLocation || '',
+        })
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load details')
       } finally {
@@ -63,6 +79,60 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose }: A
 
     fetchDetail()
   }, [sessionId, adminToken])
+
+  const handleSaveSessionChanges = async () => {
+    if (!data) return
+
+    try {
+      setIsSaving(true)
+      setSaveMessage(null)
+
+      const response = await fetch(`/api/admin/session-prep/update-session`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': adminToken,
+        },
+        body: JSON.stringify({
+          sessionId: data.session.id,
+          sessionType: editData.sessionType,
+          sessionDate: editData.sessionDate,
+          sessionLocation: editData.sessionLocation,
+        }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to save session')
+      }
+
+      const result = await response.json()
+      setSaveMessage({ type: 'success', text: 'Session details saved successfully!' })
+      
+      // Update local data
+      setData({
+        ...data,
+        session: {
+          ...data.session,
+          sessionType: result.data.sessionType,
+          sessionDate: result.data.sessionDate,
+          sessionLocation: result.data.sessionLocation,
+        },
+      })
+      
+      setIsEditMode(false)
+      
+      // Clear message after 2 seconds
+      setTimeout(() => setSaveMessage(null), 2000)
+    } catch (err) {
+      setSaveMessage({
+        type: 'error',
+        text: err instanceof Error ? err.message : 'Failed to save session',
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   const handleExportPDF = async () => {
     if (!data) return
@@ -547,60 +617,99 @@ Privacy Default: Your images will not be shared online, in advertising, in print
             <h2 className="font-serif text-2xl text-ivory mb-1">
               {data.client.firstName} {data.client.lastName}
             </h2>
-            <p className="text-ivory/70">{data.session.sessionType}</p>
+            <p className="text-ivory/70">{isEditMode ? 'Editing Session...' : data.session.sessionType}</p>
+            {saveMessage && (
+              <p className={`text-xs mt-2 ${saveMessage.type === 'success' ? 'text-champagne' : 'text-rose'}`}>
+                {saveMessage.text}
+              </p>
+            )}
           </div>
           <div className="flex gap-3 items-center">
-            {intake && (
+            {isEditMode ? (
+              // Edit mode buttons
               <div className="flex flex-col gap-2">
-                <select 
-                  value={intake.reviewStatus || 'needs_review'}
-                  onChange={(e) => {
-                    fetch(`/api/admin/session-prep/submissions`, {
-                      method: 'PATCH',
-                      headers: {
-                        'Content-Type': 'application/json',
-                        'x-admin-token': adminToken,
-                      },
-                      body: JSON.stringify({
-                        intakeId: intake.id,
-                        reviewStatus: e.target.value,
-                      }),
-                    }).then(() => window.location.reload())
-                  }}
-                  className="px-3 py-1 border border-ivory/30 rounded-lg bg-charcoal/80 text-ivory text-xs"
-                >
-                  <option value="needs_review">Needs Review</option>
-                  <option value="reviewed">Reviewed</option>
-                </select>
                 <button
-                  onClick={() => {
-                    fetch(`/api/admin/session-prep/generate-token?sessionId=${data.session.id}`, {
-                      headers: { 'x-admin-token': adminToken },
-                    })
-                    .then(r => r.json())
-                    .then(d => {
-                      navigator.clipboard.writeText(d.data.prepLink)
-                      alert('Session link copied!')
-                    })
-                  }}
-                  className="px-3 py-1 bg-champagne/20 text-champagne text-xs rounded hover:bg-champagne/30 transition-colors"
+                  onClick={handleSaveSessionChanges}
+                  disabled={isSaving}
+                  className="px-3 py-1 bg-champagne/20 text-champagne text-xs rounded hover:bg-champagne/30 transition-colors disabled:opacity-50"
                 >
-                  Copy Link
+                  {isSaving ? 'Saving...' : 'Save'}
                 </button>
                 <button
                   onClick={() => {
-                    if(confirm('Delete this submission?')) {
-                      fetch(`/api/admin/session-prep/submissions?intakeId=${intake.id}`, {
-                        method: 'DELETE',
-                        headers: { 'x-admin-token': adminToken },
-                      }).then(() => onClose())
-                    }
+                    setIsEditMode(false)
+                    setSaveMessage(null)
                   }}
-                  className="px-3 py-1 bg-rose/10 text-rose text-xs rounded hover:bg-rose/20 transition-colors"
+                  disabled={isSaving}
+                  className="px-3 py-1 bg-rose/10 text-rose text-xs rounded hover:bg-rose/20 transition-colors disabled:opacity-50"
                 >
-                  Delete
+                  Cancel
                 </button>
               </div>
+            ) : (
+              // View mode buttons
+              <>
+                {data.session.agreementStatus === 'pending' && (
+                  <button
+                    onClick={() => setIsEditMode(true)}
+                    className="px-3 py-1 bg-rose/10 text-rose text-xs rounded hover:bg-rose/20 transition-colors"
+                  >
+                    Edit Session
+                  </button>
+                )}
+                {intake && (
+                  <div className="flex flex-col gap-2">
+                    <select 
+                      value={intake.reviewStatus || 'needs_review'}
+                      onChange={(e) => {
+                        fetch(`/api/admin/session-prep/submissions`, {
+                          method: 'PATCH',
+                          headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-token': adminToken,
+                          },
+                          body: JSON.stringify({
+                            intakeId: intake.id,
+                            reviewStatus: e.target.value,
+                          }),
+                        }).then(() => window.location.reload())
+                      }}
+                      className="px-3 py-1 border border-ivory/30 rounded-lg bg-charcoal/80 text-ivory text-xs"
+                    >
+                      <option value="needs_review">Needs Review</option>
+                      <option value="reviewed">Reviewed</option>
+                    </select>
+                    <button
+                      onClick={() => {
+                        fetch(`/api/admin/session-prep/generate-token?sessionId=${data.session.id}`, {
+                          headers: { 'x-admin-token': adminToken },
+                        })
+                        .then(r => r.json())
+                        .then(d => {
+                          navigator.clipboard.writeText(d.data.prepLink)
+                          alert('Session link copied!')
+                        })
+                      }}
+                      className="px-3 py-1 bg-champagne/20 text-champagne text-xs rounded hover:bg-champagne/30 transition-colors"
+                    >
+                      Copy Link
+                    </button>
+                    <button
+                      onClick={() => {
+                        if(confirm('Delete this submission?')) {
+                          fetch(`/api/admin/session-prep/submissions?intakeId=${intake.id}`, {
+                            method: 'DELETE',
+                            headers: { 'x-admin-token': adminToken },
+                          }).then(() => onClose())
+                        }
+                      }}
+                      className="px-3 py-1 bg-rose/10 text-rose text-xs rounded hover:bg-rose/20 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </>
             )}
             <button
               onClick={onClose}
@@ -616,12 +725,49 @@ Privacy Default: Your images will not be shared online, in advertising, in print
           <div className="space-y-8 max-w-4xl">
             {/* Session Info */}
             <Section title="Session Information">
-              <div className="grid grid-cols-2 gap-4">
-                <Detail label="Type" value={data.session.sessionType} />
-                <Detail label="Agreement Status" value={data.session.agreementStatus} />
-                <Detail label="Session Date" value={data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'} />
-                <Detail label="Location" value={data.session.sessionLocation || '—'} />
-              </div>
+              {isEditMode ? (
+                <div className="space-y-4 p-4 bg-charcoal/5 rounded-lg border border-smoke/20">
+                  <div>
+                    <label className="block text-sm font-semibold text-charcoal mb-2">Session Type</label>
+                    <input
+                      type="text"
+                      value={editData.sessionType}
+                      onChange={(e) => setEditData({ ...editData, sessionType: e.target.value })}
+                      className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal placeholder-smoke/50 focus:outline-none focus:border-rose"
+                      placeholder="e.g., Boudoir, Bridal, etc."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-charcoal mb-2">Session Date</label>
+                    <input
+                      type="date"
+                      value={editData.sessionDate}
+                      onChange={(e) => setEditData({ ...editData, sessionDate: e.target.value })}
+                      className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal focus:outline-none focus:border-rose"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-charcoal mb-2">Location</label>
+                    <input
+                      type="text"
+                      value={editData.sessionLocation}
+                      onChange={(e) => setEditData({ ...editData, sessionLocation: e.target.value })}
+                      className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal placeholder-smoke/50 focus:outline-none focus:border-rose"
+                      placeholder="e.g., Studio, Client Home, Destination"
+                    />
+                  </div>
+                  <div className="p-2 bg-rose/5 border border-rose/20 rounded text-xs text-smoke italic">
+                    Note: These changes will update the session details. Agreement Status cannot be changed from draft mode here.
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  <Detail label="Type" value={data.session.sessionType} />
+                  <Detail label="Agreement Status" value={data.session.agreementStatus} />
+                  <Detail label="Session Date" value={data.session.sessionDate ? new Date(data.session.sessionDate).toLocaleDateString() : '—'} />
+                  <Detail label="Location" value={data.session.sessionLocation || '—'} />
+                </div>
+              )}
             </Section>
 
             {/* Client Info */}
