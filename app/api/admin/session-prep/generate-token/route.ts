@@ -108,7 +108,8 @@ export async function POST(request: NextRequest) {
     let parsedSessionDate: Date | undefined
     if (sessionDate) {
       const [year, month, day] = sessionDate.split('-').map(Number)
-      parsedSessionDate = new Date(year, month - 1, day)
+      // Use UTC midnight so the date is timezone-independent
+      parsedSessionDate = new Date(Date.UTC(year, month - 1, day))
     }
 
     // Create photography session

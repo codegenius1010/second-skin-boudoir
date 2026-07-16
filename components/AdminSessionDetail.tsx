@@ -63,12 +63,20 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
 
         const result = await response.json()
         setData(result.data)
-        // Initialize edit data
+        // Initialize edit data with proper date formatting
+        let sessionDateForInput = ''
+        if (result.data.session.sessionDate) {
+          const dateObj = new Date(result.data.session.sessionDate)
+          // Get the date in the format expected by date input (YYYY-MM-DD)
+          // Use UTC date to avoid timezone conversion issues
+          const year = dateObj.getUTCFullYear()
+          const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0')
+          const day = String(dateObj.getUTCDate()).padStart(2, '0')
+          sessionDateForInput = `${year}-${month}-${day}`
+        }
         setEditData({
           sessionType: result.data.session.sessionType || '',
-          sessionDate: result.data.session.sessionDate 
-            ? new Date(result.data.session.sessionDate).toISOString().split('T')[0]
-            : '',
+          sessionDate: sessionDateForInput,
           sessionLocation: result.data.session.sessionLocation || '',
         })
       } catch (err) {
@@ -740,12 +748,16 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-charcoal mb-2">Session Date</label>
-                    <input
-                      type="date"
-                      value={editData.sessionDate}
-                      onChange={(e) => setEditData({ ...editData, sessionDate: e.target.value })}
-                      className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal focus:outline-none focus:border-rose"
-                    />
+                    <div className="relative">
+                      <input
+                        type="date"
+                        value={editData.sessionDate}
+                        onChange={(e) => setEditData({ ...editData, sessionDate: e.target.value })}
+                        className="w-full px-3 py-2 pr-10 border border-smoke/30 rounded-lg bg-white text-charcoal focus:outline-none focus:border-rose focus:ring-2 focus:ring-rose/20 cursor-pointer"
+                      />
+                      <span className="absolute right-3 top-2.5 text-charcoal/50 pointer-events-none text-lg">📅</span>
+                    </div>
+                    <p className="text-xs text-smoke mt-1">Click to open calendar</p>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-charcoal mb-2">Location</label>
