@@ -187,19 +187,6 @@ export default function NYCCollaborationPage() {
         </div>
       </Section>
 
-      {/* APPLICATION FORM */}
-      <Section id="apply" className="bg-smoke">
-        <div className="max-w-2xl mx-auto">
-          <Eyebrow>Express Your Interest</Eyebrow>
-          <Heading>Apply for an NYC Collaboration Session</Heading>
-          <p className="text-ivory/70 mt-4 mb-8">
-            Let us know a bit about yourself. Applying doesn't commit you to anything—it's just the first step of a
-            private conversation.
-          </p>
-          <ContactForm formType="nyc-collaboration" source="collaboration-nyc" hidePricingCheckbox={true} timeframePlaceholder="When are you hoping to do this? (e.g., August 10th-15th)" />
-        </div>
-      </Section>
-
       {/* MEET YOUR PHOTOGRAPHER */}
       <Section className="bg-smoke">
         <div className="max-w-3xl mx-auto">
@@ -213,6 +200,19 @@ export default function NYCCollaborationPage() {
               Learn more about who you'll be working with on the <a href="/about" className="text-champagne hover:text-ivory transition-colors font-semibold">about page</a>.
             </p>
           </div>
+        </div>
+      </Section>
+
+      {/* APPLICATION FORM */}
+      <Section id="apply" className="bg-smoke">
+        <div className="max-w-2xl mx-auto">
+          <Eyebrow>Express Your Interest</Eyebrow>
+          <Heading>Apply for an NYC Collaboration Session</Heading>
+          <p className="text-ivory/70 mt-4 mb-8">
+            Let us know a bit about yourself. Applying doesn't commit you to anything—it's just the first step of a
+            private conversation.
+          </p>
+          <ContactForm formType="nyc-collaboration" source="collaboration-nyc" hidePricingCheckbox={true} timeframePlaceholder="When are you hoping to do this? (e.g., August 10th-15th)" />
         </div>
       </Section>
 
