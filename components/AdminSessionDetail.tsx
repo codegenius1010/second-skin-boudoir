@@ -70,6 +70,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           // Use toISOString and extract just the date part (YYYY-MM-DD)
           const isoString = dateObj.toISOString()
           sessionDateForInput = isoString.split('T')[0]
+          console.log(`[Load Session] Raw date: ${result.data.session.sessionDate}, ISO: ${isoString}, Input: ${sessionDateForInput}`)
         }
         setEditData({
           sessionType: result.data.session.sessionType || '',

@@ -49,6 +49,7 @@ export async function PATCH(request: NextRequest) {
       // sessionDate comes as YYYY-MM-DD
       // Create date at UTC midnight to keep it timezone-independent
       parsedSessionDate = new Date(`${sessionDate}T00:00:00Z`)
+      console.log(`[Update Session] Input date: ${sessionDate}, Parsed to: ${parsedSessionDate.toISOString()}`)
     }
 
     // Update session with provided fields
