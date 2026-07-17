@@ -212,7 +212,7 @@ export default function NYCCollaborationPage() {
             Let us know a bit about yourself. Applying doesn't commit you to anything—it's just the first step of a
             private conversation.
           </p>
-          <ContactForm formType="nyc-collaboration" source="collaboration-nyc" hidePricingCheckbox={true} timeframePlaceholder="When are you hoping to do this? (e.g., August 10th-15th)" />
+          <ContactForm formType="nyc-collaboration" source="nyc-collaboration" hidePricingCheckbox={true} timeframePlaceholder="When are you hoping to do this? (e.g., August 10th-15th)" />
         </div>
       </Section>
 
