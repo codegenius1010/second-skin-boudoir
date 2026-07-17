@@ -200,6 +200,22 @@ export default function NYCCollaborationPage() {
         </div>
       </Section>
 
+      {/* MEET YOUR PHOTOGRAPHER */}
+      <Section className="bg-smoke">
+        <div className="max-w-3xl mx-auto">
+          <Eyebrow>Meet Your Photographer</Eyebrow>
+          <Heading>You're In Good Hands</Heading>
+          <div className="mt-8">
+            <p className="text-champagne text-lg mb-6">
+              Your NYC collaboration session will be led by Matthew, Second Skin Boudoir's founder and photographer. He specializes in creating comfortable, professional experiences where you feel confident and supported. Your entire session will be fully guided, with professional direction every step of the way.
+            </p>
+            <p className="text-champagne text-lg">
+              Learn more about who you'll be working with on the <a href="/about" className="text-champagne hover:text-ivory transition-colors font-semibold">about page</a>.
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* FINAL CTA */}
       <Section>
         <div className="max-w-2xl mx-auto text-center">
