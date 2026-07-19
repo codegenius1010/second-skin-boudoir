@@ -103,15 +103,6 @@ export default function OpportunitiesPage() {
         primaryHref="#opportunities"
       />
 
-      <Section>
-        <div className="text-center mb-8">
-          <p className="text-champagne text-lg font-semibold">Private. Guided. Tasteful.</p>
-          <p className="text-ivory/60 text-sm mt-2">
-            Professional models, aspiring models, creators, moms, and first-timers are welcome.
-          </p>
-        </div>
-      </Section>
-
       {/* OPPORTUNITY CARDS */}
       <Section id="opportunities">
         <div className="grid md:grid-cols-2 gap-8">
