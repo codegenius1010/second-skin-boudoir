@@ -5,8 +5,8 @@ import { Button } from '@/components/Button'
 import { ContactForm } from '@/components/ContactForm'
 
 export const metadata: Metadata = {
-  title: 'NYC Collaboration Sessions | August 2026 | Second Skin Boudoir',
-  description: 'Limited complimentary boudoir collaboration sessions while Second Skin Boudoir is in Manhattan, August 10–15, 2026. Apply to be selected.',
+  title: 'Limited Complimentary Boudoir Sessions in NYC | August 2026 | Second Skin Boudoir',
+  description: 'Receive a complimentary luxury boudoir session valued at over $1,000 while Second Skin Boudoir is in Manhattan, August 10–15, 2026. Limited availability. Apply today.',
   keywords: 'NYC boudoir, New York boudoir photography, collaboration, Manhattan boudoir, boudoir photography',
 }
 
@@ -16,8 +16,8 @@ export default function NYCCollaborationPage() {
       {/* HERO */}
       <Hero
         eyebrow="NEW YORK CITY"
-        title="Limited Collaboration Sessions"
-        subtitle="Second Skin Boudoir is coming to Manhattan August 10–15, 2026. Apply for a limited complimentary boudoir collaboration session."
+        title="Limited Complimentary Boudoir Sessions"
+        subtitle="Second Skin Boudoir is coming to Manhattan August 10–15, 2026. Apply for a luxury boudoir experience valued at over $1,000—completely complimentary for selected participants."
         primary="Express Your Interest"
         primaryHref="#apply"
         secondary={{ label: 'Back to Opportunities', href: '/opportunities' }}
@@ -27,14 +27,14 @@ export default function NYCCollaborationPage() {
       {/* OVERVIEW */}
       <Section>
         <div className="max-w-3xl mx-auto">
-          <Eyebrow>New York City Collaboration</Eyebrow>
+          <Eyebrow>New York City Limited Offer</Eyebrow>
           <Heading>A Luxury Boudoir Experience in Manhattan</Heading>
 
           <div className="mt-8 space-y-6 text-ivory/75">
             <p>
               Second Skin Boudoir is bringing luxury, tasteful boudoir photography to Manhattan for a limited
-              engagement in August 2026. We are selecting a small number of women for complimentary collaboration
-              sessions—a full luxury boudoir experience in exchange for approved portfolio image use.
+              engagement in August 2026. We are selecting a small number of women to receive a complimentary luxury
+              boudoir session valued at over $1,000. In exchange, approved images may be used in our portfolio.
             </p>
 
             <p>
@@ -63,7 +63,7 @@ export default function NYCCollaborationPage() {
       {/* WHAT'S INCLUDED */}
       <Section className="bg-smoke">
         <div className="max-w-3xl mx-auto">
-          <Eyebrow>Collaboration Experience</Eyebrow>
+          <Eyebrow>Your Complimentary Session</Eyebrow>
           <Heading>What's Included in Your Session</Heading>
 
           <div className="mt-12 space-y-6">
@@ -194,7 +194,7 @@ export default function NYCCollaborationPage() {
           <Heading>You're In Good Hands</Heading>
           <div className="mt-8">
             <p className="text-champagne text-lg mb-6">
-              Your NYC collaboration session will be led by Matthew, Second Skin Boudoir's founder and photographer. He specializes in creating comfortable, professional experiences where you feel confident and supported. Your entire session will be fully guided, with professional direction every step of the way.
+              Your complimentary NYC boudoir session will be led by Matthew, Second Skin Boudoir's founder and photographer. He specializes in creating comfortable, professional experiences where you feel confident and supported. Your entire session will be fully guided, with professional direction every step of the way.
             </p>
             <p className="text-champagne text-lg">
               Learn more about who you'll be working with on the <a href="/about" className="text-champagne hover:text-ivory transition-colors font-semibold">about page</a>.
@@ -207,7 +207,7 @@ export default function NYCCollaborationPage() {
       <Section id="apply" className="bg-smoke">
         <div className="max-w-2xl mx-auto">
           <Eyebrow>Express Your Interest</Eyebrow>
-          <Heading>Apply for an NYC Collaboration Session</Heading>
+          <Heading>Apply for Your Complimentary NYC Boudoir Session</Heading>
           <p className="text-ivory/70 mt-4 mb-8">
             Let us know a bit about yourself. Applying doesn't commit you to anything—it's just the first step of a
             private conversation.

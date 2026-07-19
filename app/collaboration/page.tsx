@@ -7,8 +7,8 @@ import { FAQAccordion } from '@/components/FAQAccordion'
 import { ContactForm } from '@/components/ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Limited Boudoir Collaboration Sessions in Destin & 30A | Second Skin Boudoir',
-  description: 'Apply for a limited private boudoir collaboration session with Second Skin Boudoir in Destin, 30A, and the Florida Gulf Coast. Fully guided, tasteful, privacy-first sessions for selected participants.',
+  title: 'Limited Complimentary Boudoir Sessions in Destin & 30A | Second Skin Boudoir',
+  description: 'Receive a complimentary luxury boudoir session valued at over $1,000 with Second Skin Boudoir in Destin, 30A, and the Florida Gulf Coast. Limited availability. Apply today.',
   keywords: 'boudoir collaboration, Destin boudoir, 30A boudoir, luxury boudoir photography, private boudoir sessions, Florida Gulf Coast'
 }
 
@@ -17,9 +17,9 @@ export default function Page() {
     <main>
       {/* HERO SECTION */}
       <Hero 
-        title="Limited Collaboration Sessions" 
-        subtitle="Second Skin Boudoir is selecting a small number of women for private, fully guided boudoir portrait collaborations in Destin, 30A, and along the Florida Gulf Coast." 
-        eyebrow="Collaboration" 
+        title="Limited Complimentary Boudoir Sessions" 
+        subtitle="Second Skin Boudoir is selecting a small number of women to receive luxury boudoir experiences valued at over $1,000 in Destin, 30A, and along the Florida Gulf Coast." 
+        eyebrow="Special Offer" 
         primary="Apply for a Private Consultation" 
         primaryHref="#apply"
         secondary={{ label: "Learn How It Works", href: "#how-it-works" }}
@@ -28,28 +28,28 @@ export default function Page() {
       
       <Section>
         <div className="text-center mb-12">
-          <p className="text-champagne text-lg">Complimentary collaboration experience valued at over $1,000 for selected applicants.</p>
-          <p className="text-ivory/60 text-sm mt-2">Private. Guided. Tasteful. Application required.</p>
+          <p className="text-champagne text-lg">A luxury boudoir experience valued at over $1,000—completely complimentary for selected applicants.</p>
+          <p className="text-ivory/60 text-sm mt-2">Private. Guided. Tasteful. Full value included.</p>
         </div>
       </Section>
 
       {/* OFFER OVERVIEW */}
       <Section id="how-it-works" className="bg-smoke">
         <div className="max-w-3xl">
-          <Eyebrow>How This Works</Eyebrow>
-          <Heading>A Premium Collaboration Opportunity</Heading>
+          <Eyebrow>Your Opportunity</Eyebrow>
+          <Heading>A Valuable Complimentary Experience</Heading>
           <div className="mt-8 space-y-6">
             <div className="border-l-2 border-champagne pl-6">
               <h3 className="text-xl font-semibold text-ivory mb-2">Limited Availability</h3>
-              <p className="text-champagne">Only a limited number of collaboration sessions are available. This opportunity is application-based and designed for women who are comfortable helping build the Second Skin Boudoir portfolio in a tasteful, privacy-first way.</p>
+              <p className="text-champagne">Only a limited number of complimentary sessions are available each month. Applications are reviewed for fit, comfort level, and availability. This is a genuine opportunity for selected women to receive a luxury boudoir experience at no cost.</p>
             </div>
             <div className="border-l-2 border-champagne pl-6">
-              <h3 className="text-xl font-semibold text-ivory mb-2">Application-Based Selection</h3>
-              <p className="text-champagne">Because this collaboration experience is valued at over $1,000, applications are reviewed for fit, comfort level, image-use preferences, and availability. Selected participants must complete a private consultation before being accepted.</p>
+              <h3 className="text-xl font-semibold text-ivory mb-2">Application & Selection</h3>
+              <p className="text-champagne">Applications are reviewed to ensure a great fit for everyone involved. Selected participants receive a full private consultation before being finalized. We want to make sure you're comfortable and excited about your session.</p>
             </div>
             <div className="border-l-2 border-champagne pl-6">
-              <h3 className="text-xl font-semibold text-ivory mb-2">What You Receive</h3>
-              <p className="text-champagne">Selected participants receive a complimentary collaboration experience valued at over $1,000 in exchange for approved portfolio image use. Every session is private, tasteful, fully guided, and designed around comfort, consent, and confidence.</p>
+              <h3 className="text-xl font-semibold text-ivory mb-2">What You Get</h3>
+              <p className="text-champagne">A complete luxury boudoir experience valued at over $1,000—fully guided, with professional direction, styling, and editing. You receive 10 edited images and retain all personal rights to them. Approved images may be used in our portfolio.</p>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function Page() {
 
       {/* WHAT'S INCLUDED */}
       <Section>
-        <Eyebrow>Collaboration Experience</Eyebrow>
+        <Eyebrow>Your Complimentary Session</Eyebrow>
         <Heading>What's Included</Heading>
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           <div className="rounded-[2rem] border border-ivory/10 bg-smoke p-8">

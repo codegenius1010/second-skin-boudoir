@@ -5,8 +5,8 @@ import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Button } from '@/components/Button'
 
 export const metadata: Metadata = {
-  title: 'Opportunities | Collaborations, Paid Model Shoots & Boudoir Sessions',
-  description: 'Explore Second Skin Boudoir collaboration sessions, paid model shoots, and private boudoir experiences in Destin and New York City.',
+  title: 'Opportunities | Complimentary & Paid Boudoir Sessions',
+  description: 'Receive complimentary luxury boudoir sessions valued at $1,000+, paid model shoots, or book a private session with Second Skin Boudoir in Destin, NYC, and the Florida Gulf Coast.',
   openGraph: {
     title: 'Work With Second Skin Boudoir',
     description: 'Explore collaboration opportunities, paid model shoots, and private boudoir experiences.',
@@ -28,9 +28,9 @@ const opportunities: OpportunityCard[] = [
   {
     id: 'nyc-collaboration',
     eyebrow: 'NEW YORK CITY · AUGUST 10–15, 2026',
-    title: 'NYC Collaboration Sessions',
+    title: 'Complimentary NYC Boudoir Sessions',
     description:
-      'Apply for a limited complimentary boudoir collaboration session while Second Skin Boudoir is in Manhattan.',
+      'Receive a luxury boudoir experience valued at over $1,000—completely complimentary while Second Skin Boudoir is in Manhattan. Limited availability.',
     details: [
       'Complimentary private session',
       '10 professionally edited images',
@@ -45,8 +45,8 @@ const opportunities: OpportunityCard[] = [
   {
     id: 'destin-collaboration',
     eyebrow: 'DESTIN + EMERALD COAST',
-    title: 'Destin Collaboration Sessions',
-    description: 'A luxury boudoir experience created in exchange for approved portfolio use.',
+    title: 'Complimentary Destin Boudoir Sessions',
+    description: 'A luxury boudoir experience valued at over $1,000—completely complimentary for selected participants.',
     details: [
       'Complimentary guided session',
       '10 professionally edited images',
