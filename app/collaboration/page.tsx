@@ -151,7 +151,7 @@ export default function Page() {
             <div className="space-y-4">
               <div className="flex gap-3">
                 <span className="text-champagne text-lg flex-shrink-0">•</span>
-                <p className="text-champagne">Reserve your date with a $99 refundable booking retainer</p>
+                <p className="text-champagne">Reserve your date on our limited calendar</p>
               </div>
               <div className="flex gap-3">
                 <span className="text-champagne text-lg flex-shrink-0">•</span>
@@ -162,19 +162,7 @@ export default function Page() {
                 <p className="text-champagne">Complete your collaboration agreement and release before booking</p>
               </div>
             </div>
-
-            <div className="rounded-[2rem] border border-champagne/20 bg-champagne/5 p-6 mt-8">
-              <h4 className="font-semibold text-ivory mb-3">About the $99 Refundable Retainer</h4>
-              <p className="text-champagne text-sm leading-relaxed mb-3">A $99 refundable booking retainer is required to reserve your date. This helps protect the limited collaboration calendar and reduce no-shows.</p>
-              <p className="text-champagne text-sm leading-relaxed"><strong className="text-ivory">After your completed session</strong>, the retainer may either be refunded or applied as credit toward additional images, albums, or artwork.</p>
-            </div>
           </div>
-        </div>
-
-        <div className="mt-10 rounded-[2rem] border border-champagne/30 bg-champagne/10 p-8">
-          <h3 className="text-lg font-semibold text-ivory mb-4">Cancellation & No-Show Policy</h3>
-          <p className="text-champagne mb-4">The retainer is not an additional session fee. The collaboration experience itself is complimentary for selected applicants and valued at over $1,000. The retainer simply reserves your date and helps ensure selected applicants are serious about attending.</p>
-          <p className="text-champagne"><strong className="text-ivory">Important:</strong> If you cancel late, reschedule outside the allowed window, or do not show up for your session, the $99 retainer may be forfeited. If you complete your scheduled collaboration session, it may either be refunded or applied as credit toward additional images, albums, or artwork.</p>
         </div>
       </Section>
 
@@ -296,7 +284,7 @@ export default function Page() {
             </div>
             <div>
               <h3 className="text-xl font-semibold text-ivory mb-2">Reserve Your Date</h3>
-              <p className="text-champagne">If selected, you will sign the collaboration agreement and place the $99 refundable booking retainer to reserve your date on our limited calendar.</p>
+              <p className="text-champagne">If selected, you will sign the collaboration agreement to reserve your date on our limited calendar.</p>
             </div>
           </div>
           <div className="flex gap-6 md:gap-8">
@@ -314,7 +302,7 @@ export default function Page() {
             </div>
             <div>
               <h3 className="text-xl font-semibold text-ivory mb-2">Review Your Images</h3>
-              <p className="text-champagne">You will view your finished images privately, choose your 10 included edited images, and confirm which images may be used according to your release. After your completed session, your retainer may be refunded or applied as credit toward additional images, albums, or artwork.</p>
+              <p className="text-champagne">You will view your finished images privately, choose your 10 included edited images, and confirm which images may be used according to your release. You may also purchase additional images, albums, or artwork if desired.</p>
             </div>
           </div>
         </div>
@@ -410,9 +398,8 @@ export default function Page() {
         <h2 className="text-4xl font-bold text-ivory mb-12">Collaboration FAQ</h2>
         <div className="max-w-3xl">
           <FAQAccordion items={[
-            ['Is this really complimentary?', 'Yes. Selected collaboration clients receive a complimentary session experience valued at over $1,000. A $99 refundable booking retainer is required to reserve your date and reduce no-shows. After your completed session, the retainer may either be refunded or applied as credit toward additional images, albums, or artwork.'],
+            ['Is this really complimentary?', 'Yes. Selected collaboration clients receive a complimentary session experience valued at over $1,000 with no booking fees or retainers. The only optional cost is if you choose to purchase additional images, albums, or artwork after your session.'],
             ['How many images are included?', 'Selected collaboration clients receive 10 edited digital images with personal-use rights. You may save, print, and share these images for personal use. Additional images, albums, or artwork may be purchased separately if desired.'],
-            ['Why is there a $99 retainer?', 'The $99 refundable booking retainer reserves your date and helps protect the limited collaboration calendar. It ensures selected applicants are serious about attending. If you complete your scheduled session, it may either be refunded or applied as credit toward additional images, albums, or artwork. If you cancel late or do not show up, the retainer may be forfeited.'],
             ['Do I have to share my images publicly?', 'Because this is a portfolio collaboration, approved image use is required. However, you have three options: Full Portfolio Release, Anonymous Release (no face/identifying features), or Private Review First. Final image use follows your signed release.'],
             ['Can my face stay private?', 'Yes, absolutely. If you choose the Anonymous Release option, approved images may be used without showing your face or identifying features. This may include cropped images, detail shots, silhouettes, or images where your face is not visible.'],
             ['Do I need to know how to pose?', 'No. Every pose, expression, hand placement, and transition is fully guided. You do not need any experience. I will direct you through every step, and by the end of your session you will feel confident and look amazing.'],
