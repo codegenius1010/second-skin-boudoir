@@ -229,12 +229,22 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             </h1>
             <p className="text-lg text-smoke">Monitor intake submissions and webhook deliveries</p>
           </div>
-          <button
-            onClick={() => setShowGenerateModal(true)}
-            className="mt-2 px-6 py-3 bg-gradient-to-r from-champagne to-rose text-ivory rounded-lg hover:shadow-glow transition-all font-semibold whitespace-nowrap"
-          >
-            + New Session
-          </button>
+          <div className="mt-2 flex gap-3">
+            <a
+              href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQD26AAdIiAaQ533904DRuMYARqxUiqAZDCSbLaafAJCajs?e=Kzz3bx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-slate-600 hover:bg-slate-700 text-ivory rounded-lg transition-all font-semibold whitespace-nowrap"
+            >
+              📖 Posing Guide
+            </a>
+            <button
+              onClick={() => setShowGenerateModal(true)}
+              className="px-6 py-3 bg-gradient-to-r from-champagne to-rose text-ivory rounded-lg hover:shadow-glow transition-all font-semibold whitespace-nowrap"
+            >
+              + New Session
+            </button>
+          </div>
         </div>
 
         {/* Stats */}
