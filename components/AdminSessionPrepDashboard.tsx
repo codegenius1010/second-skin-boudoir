@@ -231,12 +231,20 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
           </div>
           <div className="mt-2 flex gap-3">
             <a
-              href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQD26AAdIiAaQ533904DRuMYARqxUiqAZDCSbLaafAJCajs?e=Kzz3bx"
+              href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQCQpOBaf0NhQYUCyy41CStgAcJ5fZfC2YKdwY0eRs1qLv4?e=IeFNV7"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-slate-600 hover:bg-slate-700 text-ivory rounded-lg transition-all font-semibold whitespace-nowrap"
             >
               📖 Posing Guide
+            </a>
+            <a
+              href="https://1drv.ms/b/c/ee65977ff6f3a4db/IQDg0jT0T0O9TrdzC0ksTCMRATpInYbwgivrbk5pCYFgeqg?e=At5oWc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-slate-600 hover:bg-slate-700 text-ivory rounded-lg transition-all font-semibold whitespace-nowrap"
+            >
+              📖 Full Posing Guide
             </a>
             <button
               onClick={() => setShowGenerateModal(true)}
