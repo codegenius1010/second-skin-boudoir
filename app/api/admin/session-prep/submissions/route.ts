@@ -93,6 +93,11 @@ export async function DELETE(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const adminToken = request.headers.get('x-admin-token')
+    if (!adminToken || adminToken !== process.env.SESSION_PREP_ADMIN_TOKEN) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
     const clientEmail = searchParams.get('clientEmail')
