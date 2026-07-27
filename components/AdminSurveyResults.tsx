@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 interface Survey {
   id: string
@@ -38,11 +38,7 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all')
   const [selectedSurvey, setSelectedSurvey] = useState<Survey | null>(null)
 
-  useEffect(() => {
-    fetchSurveys()
-  }, [filter])
-
-  const fetchSurveys = async () => {
+  const fetchSurveys = useCallback(async () => {
     setIsLoading(true)
     try {
       const params = new URLSearchParams()
@@ -66,9 +62,13 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [filter, adminToken])
 
-  const handleStatusChange = async (surveyId: string, newStatus: string) => {
+  useEffect(() => {
+    fetchSurveys()
+  }, [fetchSurveys])
+
+  const handleStatusChange = useCallback(async (surveyId: string, newStatus: string) => {
     try {
       const response = await fetch('/api/admin/post-shoot-surveys', {
         method: 'PATCH',
@@ -85,12 +85,12 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
       if (!response.ok) throw new Error('Failed to update survey')
 
       // Refresh the list
-      fetchSurveys()
+      await fetchSurveys()
       setSelectedSurvey(null)
     } catch (error) {
       console.error('Error updating survey:', error)
     }
-  }
+  }, [fetchSurveys])
 
   const getStarRating = (rating: number) => {
     return '⭐'.repeat(Math.floor(rating))

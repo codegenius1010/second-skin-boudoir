@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import AdminSessionTable from './AdminSessionTable'
 import AdminSessionDetail from './AdminSessionDetail'
 import GenerateTokenModal from './GenerateTokenModal'
@@ -69,7 +69,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
   const [activeTab, setActiveTab] = useState<'sessions' | 'surveys'>('sessions')
 
   // Fetch submissions
-  const fetchSubmissions = async () => {
+  const fetchSubmissions = useCallback(async () => {
     setIsLoading(true)
     setError(null)
 
@@ -107,11 +107,11 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [filters, adminToken])
 
   useEffect(() => {
     fetchSubmissions()
-  }, [filters])
+  }, [fetchSubmissions])
 
   const handleRetry = async (deliveryId: string) => {
     setRetryLoading(true)
