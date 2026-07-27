@@ -90,7 +90,7 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
     } catch (error) {
       console.error('Error updating survey:', error)
     }
-  }, [fetchSurveys])
+  }, [fetchSurveys, adminToken])
 
   const getStarRating = (rating: number) => {
     return '⭐'.repeat(Math.floor(rating))
