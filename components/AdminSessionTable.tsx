@@ -37,6 +37,7 @@ interface AdminSessionTableProps {
   onUpdateReviewStatus: (sessionId: string, newStatus: string) => Promise<void>
   onDelete: (sessionId: string, clientName: string) => Promise<void>
   onRegenerateLink: (sessionId: string, clientName: string) => Promise<void>
+  onGenerateSurveyLink?: (sessionId: string, clientName: string) => void
   onEdit?: (sessionId: string) => void
 }
 
@@ -49,6 +50,7 @@ export default function AdminSessionTable({
   onUpdateReviewStatus,
   onDelete,
   onRegenerateLink,
+  onGenerateSurveyLink,
   onEdit,
 }: AdminSessionTableProps) {
   const [retryingId, setRetryingId] = useState<string | null>(null)
@@ -172,6 +174,13 @@ export default function AdminSessionTable({
                       title="Copy session prep link"
                     >
                       Copy Link
+                    </button>
+                    <button
+                      onClick={() => onGenerateSurveyLink?.(submission.id, `${submission.client.firstName} ${submission.client.lastName}`)}
+                      className="text-xs px-2 py-1 rounded bg-rose/10 text-rose hover:bg-rose/20 transition-colors"
+                      title="Generate post-shoot survey link"
+                    >
+                      Survey
                     </button>
                     {submission.webhook?.status === 'requires_review' ||
                     submission.webhook?.status === 'pending' ? (

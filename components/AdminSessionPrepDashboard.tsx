@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import AdminSessionTable from './AdminSessionTable'
 import AdminSessionDetail from './AdminSessionDetail'
 import GenerateTokenModal from './GenerateTokenModal'
+import GenerateSurveyLinkModal from './GenerateSurveyLinkModal'
 
 interface Submission {
   id: string
@@ -61,6 +62,8 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
   const [selectedSessionEditMode, setSelectedSessionEditMode] = useState(false)
   const [retryLoading, setRetryLoading] = useState(false)
   const [showGenerateModal, setShowGenerateModal] = useState(false)
+  const [showSurveyLinkModal, setShowSurveyLinkModal] = useState(false)
+  const [surveyLinkData, setSurveyLinkData] = useState<{ sessionId: string; clientName: string } | null>(null)
   const [successNotification, setSuccessNotification] = useState<{ link: string; clientName: string } | null>(null)
 
   // Fetch submissions
@@ -218,6 +221,11 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
     }
   }
 
+  const handleGenerateSurveyLink = (sessionId: string, clientName: string) => {
+    setSurveyLinkData({ sessionId, clientName })
+    setShowSurveyLinkModal(true)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-ivory via-charcoal/2 to-ivory">
       <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
@@ -346,6 +354,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             onUpdateReviewStatus={handleUpdateStatus}
             onDelete={handleDelete}
             onRegenerateLink={handleRegenerateLink}
+            onGenerateSurveyLink={handleGenerateSurveyLink}
           />
         </div>
 
@@ -373,6 +382,18 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             onSuccess={(link, clientName) => {
               setSuccessNotification({ link, clientName })
               setTimeout(() => setSuccessNotification(null), 8000)
+            }}
+          />
+        )}
+
+        {/* Generate Survey Link Modal */}
+        {showSurveyLinkModal && surveyLinkData && (
+          <GenerateSurveyLinkModal
+            sessionId={surveyLinkData.sessionId}
+            clientName={surveyLinkData.clientName}
+            onClose={() => {
+              setShowSurveyLinkModal(false)
+              setSurveyLinkData(null)
             }}
           />
         )}

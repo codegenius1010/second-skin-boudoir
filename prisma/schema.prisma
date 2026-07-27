@@ -55,6 +55,7 @@ model PhotographySession {
   intakes                 SessionIntake[]
   webhookDeliveries       WebhookDelivery[]
   consentAuditTrail       ConsentAuditTrail[]
+  postShootSurvey         PostShootSurvey?
 
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
@@ -233,4 +234,34 @@ model ConsentAuditTrail {
   @@index([consentGivenAt])
   @@index([userConsented])
   @@unique([sessionId, consentType, consentVersion, consentGivenAt])
+}
+
+// Post-shoot survey for client feedback and testimonials
+model PostShootSurvey {
+  id                        String   @id @default(cuid())
+  sessionId                 String   @unique
+  session                   PhotographySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  // Survey responses
+  overallRating             Int      // 1-5 star rating
+  overallReview             String?  // Review text for overall experience
+  favoritePart              String?  // What was your favorite part? (Text)
+  comfortConfidenceRating   Int?     // 1-5 star rating for comfort/confidence
+  improvementSuggestions    String?  // What could improve? (Optional text)
+  wouldRecommend            Boolean? // Yes/No
+  recommendationNotes       String?  // Optional text for why/why not
+
+  // Review moderation
+  reviewStatus              String   @default("pending") // "pending" | "approved" | "rejected"
+  publishToWebsite          Boolean  @default(false) // Show this review on site?
+  
+  // Metadata
+  submittedAt               DateTime @default(now())
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  @@index([sessionId])
+  @@index([reviewStatus])
+  @@index([publishToWebsite])
+  @@index([submittedAt])
 }
