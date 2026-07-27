@@ -5,6 +5,7 @@ import AdminSessionTable from './AdminSessionTable'
 import AdminSessionDetail from './AdminSessionDetail'
 import GenerateTokenModal from './GenerateTokenModal'
 import GenerateSurveyLinkModal from './GenerateSurveyLinkModal'
+import AdminSurveyResults from './AdminSurveyResults'
 
 interface Submission {
   id: string
@@ -65,6 +66,7 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
   const [showSurveyLinkModal, setShowSurveyLinkModal] = useState(false)
   const [surveyLinkData, setSurveyLinkData] = useState<{ sessionId: string; clientName: string } | null>(null)
   const [successNotification, setSuccessNotification] = useState<{ link: string; clientName: string } | null>(null)
+  const [activeTab, setActiveTab] = useState<'sessions' | 'surveys'>('sessions')
 
   // Fetch submissions
   const fetchSubmissions = async () => {
@@ -271,6 +273,33 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
           <StatCard label="Failed" value={stats.webhookFailed} color="rose/20" />
         </div>
 
+        {/* Tab Navigation */}
+        <div className="flex gap-4 mb-8 border-b border-ivory/20">
+          <button
+            onClick={() => setActiveTab('sessions')}
+            className={`px-6 py-3 font-semibold transition-colors ${
+              activeTab === 'sessions'
+                ? 'text-rose border-b-2 border-rose'
+                : 'text-smoke hover:text-ivory'
+            }`}
+          >
+            Session Prep
+          </button>
+          <button
+            onClick={() => setActiveTab('surveys')}
+            className={`px-6 py-3 font-semibold transition-colors ${
+              activeTab === 'surveys'
+                ? 'text-rose border-b-2 border-rose'
+                : 'text-smoke hover:text-ivory'
+            }`}
+          >
+            Survey Results
+          </button>
+        </div>
+
+        {/* Session Prep Tab */}
+        {activeTab === 'sessions' && (
+          <>
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="font-serif text-xl text-charcoal mb-4">Filters</h2>
@@ -357,6 +386,15 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             onGenerateSurveyLink={handleGenerateSurveyLink}
           />
         </div>
+        </>
+        )}
+
+        {/* Survey Results Tab */}
+        {activeTab === 'surveys' && (
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <AdminSurveyResults adminToken={adminToken} />
+          </div>
+        )}
 
         {/* Detail Modal */}
         {selectedSessionId && (
