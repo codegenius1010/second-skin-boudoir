@@ -66,10 +66,7 @@ export async function GET(request: NextRequest) {
       published: surveys.filter(s => s.publishToWebsite).length,
       averageRating:
         surveys.length > 0
-          ? (
-              surveys.reduce((sum, s) => sum + s.overallRating, 0) /
-              surveys.length
-            ).toFixed(2)
+          ? surveys.reduce((sum, s) => sum + s.overallRating, 0) / surveys.length
           : 0,
     }
 
