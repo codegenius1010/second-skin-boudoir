@@ -9,6 +9,7 @@ export const site = {
 
 export const nav = [
   { label: 'Experience', href: '/experience' },
+  { label: 'Portfolio', href: '/boudoir-portfolio' },
   { label: 'Opportunities', href: '/opportunities' },
   { label: 'Pricing', href: '/boudoir-pricing' },
   { label: 'FAQ', href: '/faq' },
@@ -16,12 +17,29 @@ export const nav = [
 ]
 
 export const galleryImages = [
-  { title: 'Soft window light portrait', category: 'Soft & Romantic', image: 'https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1400&auto=format&fit=crop', alt: 'Luxury boudoir photography portrait with soft natural window light - elegant intimate portrait example' },
-  { title: 'Anonymous lace detail', category: 'Anonymous Details', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1400&auto=format&fit=crop', alt: 'Private boudoir portrait showing tasteful lace lingerie detail with soft romantic shadows' },
-  { title: 'Editorial silhouette', category: 'Dark & Moody', image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1400&auto=format&fit=crop', alt: 'Artistic boudoir photography silhouette portrait with moody dramatic lighting' },
-  { title: 'Bridal robe moment', category: 'Bridal', image: 'https://images.unsplash.com/photo-1523264766116-1e09b3145b84?q=80&w=1400&auto=format&fit=crop', alt: 'Bridal boudoir photography - elegant silk robe detail for wedding gift inspiration' },
-  { title: 'Luxury hotel mood', category: 'Editorial', image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=1400&auto=format&fit=crop', alt: 'High-end luxury boudoir photography portrait in editorial style with professional lighting' },
-  { title: 'Quiet confidence', category: 'Confidence Sessions', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1400&auto=format&fit=crop', alt: 'Empowerment boudoir photography portrait showcasing confidence with warm golden light' },
+  { image: '/images/boudoir/LauraWilson-263.jpg', alt: 'Luxury intimate boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-260.jpg', alt: 'Timeless boudoir photography portrait' },
+  { image: '/images/boudoir/LauraWilson-256.jpg', alt: 'Beautiful boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-242.jpg', alt: 'Artistic boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-228.jpg', alt: 'Elegant intimate boudoir' },
+  { image: '/images/boudoir/LauraWilson-211.jpg', alt: 'Confident playful boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-207.jpg', alt: 'Contemporary boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-206.jpg', alt: 'Serene boudoir portrait' },
+  { image: '/images/boudoir/LauraWilson-184.jpg', alt: 'Sensual boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-176.jpg', alt: 'Artistic boudoir composition' },
+  { image: '/images/boudoir/LauraWilson-161.jpg', alt: 'Artistic boudoir photography silhouette' },
+  { image: '/images/boudoir/LauraWilson-160.jpg', alt: 'Romantic intimate boudoir' },
+  { image: '/images/boudoir/LauraWilson-156.jpg', alt: 'Romantic boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-153.jpg', alt: 'Tasteful boudoir photography detail' },
+  { image: '/images/boudoir/LauraWilson-147.jpg', alt: 'Empowering boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-146.jpg', alt: 'Intimate boudoir portrait' },
+  { image: '/images/boudoir/LauraWilson-142.jpg', alt: 'High-fashion editorial boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-133.jpg', alt: 'Graceful boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-060.jpg', alt: 'Elegant boudoir photography portrait' },
+  { image: '/images/boudoir/LauraWilson-055.jpg', alt: 'Empowerment boudoir photography' },
+  { image: '/images/boudoir/LauraWilson-047.jpg', alt: 'Artistic boudoir photography detail' },
+  { image: '/images/boudoir/LauraWilson-008.jpg', alt: 'Boudoir photography showing confidence and elegance' },
+  { image: '/images/boudoir/LauraWilson-006.jpg', alt: 'Luxury boudoir photography portrait' },
 ]
 
 export const faqs = [

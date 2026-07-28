@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
+import { GalleryGrid } from '@/components/GalleryGrid'
 
 export const metadata: Metadata = {
   title: 'Boudoir Photography Gallery | Privacy-First Portfolio',
@@ -107,11 +108,22 @@ export default function BoudoirPortfolio() {
       </Section>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <Eyebrow>Our Gallery</Eyebrow>
+        <Heading>Portfolio Images from Recent Sessions</Heading>
+        <p className="mt-5 max-w-2xl text-ivory/68">
+          Every image displayed here has been shared by our clients. Discover the range of styles, moods, and artistic directions we create. From soft and romantic to bold and empowering — this is what we do.
+        </p>
+        <div className="mt-12">
+          <GalleryGrid />
+        </div>
+      </Section>
+
+      <Section className="bg-smoke">
+        <Eyebrow>What You'll Experience</Eyebrow>
+        <Heading>Professional Direction Leads to Beautiful Results</Heading>
+        <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <Eyebrow>What You'll Experience</Eyebrow>
-            <Heading>Professional Direction Leads to Beautiful Results</Heading>
-            <p className="mt-5 text-ivory/68">
+            <p className="text-ivory/68">
               These images exist because every woman was guided through every pose, expression, and moment. There's no guessing, performing, or self-consciousness. Just you, the light, and a photographer who knows exactly how to make you look stunning.
             </p>
             <p className="mt-5 text-ivory/68">
