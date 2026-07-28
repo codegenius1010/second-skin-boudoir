@@ -37,6 +37,7 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all')
   const [selectedSurvey, setSelectedSurvey] = useState<Survey | null>(null)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const fetchSurveys = useCallback(async () => {
     setIsLoading(true)
@@ -105,6 +106,16 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
         return `${baseClasses} bg-red-100 text-red-800`
       default:
         return `${baseClasses} bg-amber-100 text-amber-800`
+    }
+  }
+
+  const handleCopyToClipboard = async (text: string, fieldId: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedField(fieldId)
+      setTimeout(() => setCopiedField(null), 2000)
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error)
     }
   }
 
@@ -191,14 +202,30 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
                 <div className="mt-4 pt-4 border-t border-charcoal/60 space-y-4">
                   {survey.overallReview && (
                     <div>
-                      <p className="text-sm font-medium text-champagne mb-1">Overall Review</p>
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-sm font-medium text-champagne">Overall Review</p>
+                        <button
+                          onClick={() => handleCopyToClipboard(survey.overallReview || '', `review-${survey.id}`)}
+                          className="text-xs bg-charcoal/60 hover:bg-charcoal/80 text-ivory px-2 py-1 rounded transition-colors"
+                        >
+                          {copiedField === `review-${survey.id}` ? '✓ Copied' : 'Copy'}
+                        </button>
+                      </div>
                       <p className="text-ivory text-sm">{survey.overallReview}</p>
                     </div>
                   )}
 
                   {survey.favoritePart && (
                     <div>
-                      <p className="text-sm font-medium text-champagne mb-1">Favorite Part</p>
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-sm font-medium text-champagne">Favorite Part</p>
+                        <button
+                          onClick={() => handleCopyToClipboard(survey.favoritePart || '', `favorite-${survey.id}`)}
+                          className="text-xs bg-charcoal/60 hover:bg-charcoal/80 text-ivory px-2 py-1 rounded transition-colors"
+                        >
+                          {copiedField === `favorite-${survey.id}` ? '✓ Copied' : 'Copy'}
+                        </button>
+                      </div>
                       <p className="text-ivory text-sm">{survey.favoritePart}</p>
                     </div>
                   )}
@@ -212,7 +239,15 @@ export default function AdminSurveyResults({ adminToken }: { adminToken: string 
 
                   {survey.improvementSuggestions && (
                     <div>
-                      <p className="text-sm font-medium text-champagne mb-1">Improvement Suggestions</p>
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-sm font-medium text-champagne">Improvement Suggestions</p>
+                        <button
+                          onClick={() => handleCopyToClipboard(survey.improvementSuggestions || '', `suggestions-${survey.id}`)}
+                          className="text-xs bg-charcoal/60 hover:bg-charcoal/80 text-ivory px-2 py-1 rounded transition-colors"
+                        >
+                          {copiedField === `suggestions-${survey.id}` ? '✓ Copied' : 'Copy'}
+                        </button>
+                      </div>
                       <p className="text-ivory text-sm">{survey.improvementSuggestions}</p>
                     </div>
                   )}
