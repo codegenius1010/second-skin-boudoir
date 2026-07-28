@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Button } from '@/components/Button'
 import { Card, Timeline } from '@/components/Cards'
+import { Testimonial } from '@/components/Testimonial'
 import { FAQAccordion } from '@/components/FAQAccordion'
 
 export const metadata: Metadata = {
@@ -95,6 +96,20 @@ export default function Home() {
           <Button href="/panama-city-beach-boudoir-photographer" variant="secondary">Learn More</Button>
         </div>
       </div>
+    </Section>
+
+    {/* Testimonial Section */}
+    <Section className="bg-smoke">
+      <div className="mb-10 text-center">
+        <Eyebrow>What clients are saying</Eyebrow>
+        <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
+      </div>
+      <Testimonial
+        quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again."
+        author="Laura W."
+        image="/images/boudoir/LW-260.jpg"
+        imageAlt="Laura W. testimonial from her boudoir session"
+      />
     </Section>
 
     <Section><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><Eyebrow>Questions are normal</Eyebrow><Heading>Still feeling nervous? Good. That means this matters.</Heading><p className="mt-5 text-ivory/65">The experience is built for first-time clients, privacy, and comfort.</p></div><FAQAccordion items={[['I\'m not photogenic.', 'That is not your job. Lighting, posing, angles, expression, and direction are our job.'], ['I need to lose weight first.', 'You are allowed to feel beautiful before the next version of your body arrives.'], ['I do not know what to wear.', 'We help you choose pieces that flatter your body and match your comfort level.'], ['I do not want my photos online.', 'They will never be shared without written permission.']]}/><div className="mt-8"><Button href="/faq">See All Questions</Button></div></div></Section>
