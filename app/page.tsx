@@ -55,6 +55,20 @@ export default function Home() {
 
     <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
 
+    {/* Testimonial Section */}
+    <Section className="bg-smoke">
+      <div className="mb-10 text-center">
+        <Eyebrow>What clients are saying</Eyebrow>
+        <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
+      </div>
+      <Testimonial
+        quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again."
+        author="Laura W."
+        image="/images/boudoir/LW-260.jpg"
+        imageAlt="Laura W. testimonial from her boudoir session"
+      />
+    </Section>
+
     <Section className="bg-smoke"><Eyebrow>Investment</Eyebrow><Heading>A luxury boudoir experience with flexible options and no pressure to buy what you do not love.</Heading><p className="mt-5 max-w-3xl text-ivory/68">Second Skin Boudoir uses a Session Fee + Products model. Your session fee covers the experience. Your artwork, albums, and digital collections are chosen separately after you see your images.</p><div className="mt-10 grid gap-5 md:grid-cols-2"><Card title="Essential Session — $300">Consultation, wardrobe guidance, private boudoir session, fully guided posing, and private image reveal.</Card><Card title="Signature Session — $549">Everything in Essential plus professional hair and makeup for a more polished, relaxed experience.</Card></div><p className="mt-7 text-ivory/68">Products and image collections begin at <span className="text-champagne">$995</span>. Payment plans are available.</p><div className="mt-8"><Button href="/boudoir-pricing">View Pricing & Collections</Button></div></Section>
 
     {/* Local Boudoir Photographer Section */}
@@ -96,20 +110,6 @@ export default function Home() {
           <Button href="/panama-city-beach-boudoir-photographer" variant="secondary">Learn More</Button>
         </div>
       </div>
-    </Section>
-
-    {/* Testimonial Section */}
-    <Section className="bg-smoke">
-      <div className="mb-10 text-center">
-        <Eyebrow>What clients are saying</Eyebrow>
-        <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
-      </div>
-      <Testimonial
-        quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again."
-        author="Laura W."
-        image="/images/boudoir/LW-260.jpg"
-        imageAlt="Laura W. testimonial from her boudoir session"
-      />
     </Section>
 
     <Section><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><Eyebrow>Questions are normal</Eyebrow><Heading>Still feeling nervous? Good. That means this matters.</Heading><p className="mt-5 text-ivory/65">The experience is built for first-time clients, privacy, and comfort.</p></div><FAQAccordion items={[['I\'m not photogenic.', 'That is not your job. Lighting, posing, angles, expression, and direction are our job.'], ['I need to lose weight first.', 'You are allowed to feel beautiful before the next version of your body arrives.'], ['I do not know what to wear.', 'We help you choose pieces that flatter your body and match your comfort level.'], ['I do not want my photos online.', 'They will never be shared without written permission.']]}/><div className="mt-8"><Button href="/faq">See All Questions</Button></div></div></Section>
