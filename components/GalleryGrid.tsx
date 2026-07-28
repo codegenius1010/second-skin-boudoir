@@ -1,17 +1,29 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import { galleryImages } from '@/lib/site'
 
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
 export function GalleryGrid({ limit }: { limit?: number }) {
-  const images = limit ? galleryImages.slice(0, limit) : galleryImages
+  const shuffledImages = useMemo(() => {
+    const images = limit ? galleryImages.slice(0, limit) : galleryImages
+    return shuffleArray(images)
+  }, [limit])
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   return (
     <>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {images.map((item) => (
+        {shuffledImages.map((item) => (
           <button
             key={item.image}
             onClick={() => setSelectedImage(item.image)}
