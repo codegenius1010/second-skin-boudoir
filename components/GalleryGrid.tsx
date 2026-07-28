@@ -45,13 +45,13 @@ export function GalleryGrid({ limit }: { limit?: number }) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-h-[90vh] max-w-4xl w-full">
+          <div className="relative max-h-[90vh] max-w-[90vw]">
             <Image
               src={selectedImage}
               alt="Full size gallery image"
               width={1200}
               height={1600}
-              className="h-full w-full object-contain"
+              className="h-auto w-auto max-h-[90vh] max-w-[90vw] object-contain"
               priority
             />
             <button
