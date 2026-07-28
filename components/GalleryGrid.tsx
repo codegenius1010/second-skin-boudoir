@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { galleryImages } from '@/lib/site'
 
@@ -14,11 +14,15 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function GalleryGrid({ limit }: { limit?: number }) {
-  const shuffledImages = useMemo(() => {
-    const images = limit ? galleryImages.slice(0, limit) : galleryImages
-    return shuffleArray(images)
-  }, [limit])
+  const [shuffledImages, setShuffledImages] = useState<typeof galleryImages>([])
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    const images = limit ? galleryImages.slice(0, limit) : galleryImages
+    setShuffledImages(shuffleArray(images))
+  }, [limit])
 
   return (
     <>
