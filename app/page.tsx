@@ -65,7 +65,9 @@ export default function Home() {
         <Testimonial
           quote={`I loved that I was shown the shots through the experience. It really helped me feel like I was part of the outcome and could help me tweak any poses to make sure I got the perfect shot!
 
-Favorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!`}
+Favorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!
+
+Thank you again so much, it was such a great exerience`}
           author="Lindsey M."
           image="/images/boudoir/LM1.jpg"
           imageAlt="Lindsey M. testimonial from her boudoir session"
