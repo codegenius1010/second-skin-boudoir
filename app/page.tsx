@@ -61,12 +61,20 @@ export default function Home() {
         <Eyebrow>What clients are saying</Eyebrow>
         <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
       </div>
-      <Testimonial
-        quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again."
-        author="Laura W."
-        image="/images/boudoir/LW-260.jpg"
-        imageAlt="Laura W. testimonial from her boudoir session"
-      />
+      <div className="space-y-8">
+        <Testimonial
+          quote="I loved that I was shown the shots through the experience. It really helped me feel like I was part of the outcome and could help me tweak any poses to make sure I got the perfect shot!\n\nFavorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!"
+          author="Lindsey M."
+          image="/images/boudoir/LM1.jpg"
+          imageAlt="Lindsey M. testimonial from her boudoir session"
+        />
+        <Testimonial
+          quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again.\n\nFavorite Part: Getting to dress up and feel confident and beautiful"
+          author="Laura W."
+          image="/images/boudoir/LW-260.jpg"
+          imageAlt="Laura W. testimonial from her boudoir session"
+        />
+      </div>
     </Section>
 
     <Section className="bg-smoke"><Eyebrow>Investment</Eyebrow><Heading>A luxury boudoir experience with flexible options and no pressure to buy what you do not love.</Heading><p className="mt-5 max-w-3xl text-ivory/68">Second Skin Boudoir uses a Session Fee + Products model. Your session fee covers the experience. Your artwork, albums, and digital collections are chosen separately after you see your images.</p><div className="mt-10 grid gap-5 md:grid-cols-2"><Card title="Essential Session — $300">Consultation, wardrobe guidance, private boudoir session, fully guided posing, and private image reveal.</Card><Card title="Signature Session — $549">Everything in Essential plus professional hair and makeup for a more polished, relaxed experience.</Card></div><p className="mt-7 text-ivory/68">Products and image collections begin at <span className="text-champagne">$995</span>. Payment plans are available.</p><div className="mt-8"><Button href="/boudoir-pricing">View Pricing & Collections</Button></div></Section>

@@ -22,7 +22,6 @@ export const galleryImages = [
   { image: '/images/boudoir/LW-256.jpg', alt: 'Beautiful boudoir photography' },
   { image: '/images/boudoir/LW-242.jpg', alt: 'Artistic boudoir photography' },
   { image: '/images/boudoir/LW-228.jpg', alt: 'Elegant intimate boudoir' },
-  { image: '/images/boudoir/LW-211.jpg', alt: 'Confident playful boudoir photography' },
   { image: '/images/boudoir/LW-207.jpg', alt: 'Contemporary boudoir photography' },
   { image: '/images/boudoir/LW-206.jpg', alt: 'Serene boudoir portrait' },
   { image: '/images/boudoir/LW-184.jpg', alt: 'Sensual boudoir photography' },
@@ -46,6 +45,11 @@ export const galleryImages = [
   { image: '/images/boudoir/LW-024.jpg', alt: 'Artistic intimate portrait' },
   { image: '/images/boudoir/LW-008.jpg', alt: 'Boudoir photography showing confidence and elegance' },
   { image: '/images/boudoir/LW-006.jpg', alt: 'Luxury boudoir photography portrait' },
+  { image: '/images/boudoir/LM1.jpg', alt: 'Luxury boudoir photography portrait' },
+  { image: '/images/boudoir/LM2.jpg', alt: 'Intimate boudoir portrait' },
+  { image: '/images/boudoir/LM3.jpg', alt: 'Artistic boudoir photography' },
+  { image: '/images/boudoir/LM4.jpg', alt: 'Elegant boudoir photography' },
+  { image: '/images/boudoir/LM6.jpg', alt: 'Beautiful boudoir composition' },
 ]
 
 export const faqs = [
