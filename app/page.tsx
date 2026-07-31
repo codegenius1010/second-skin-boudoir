@@ -63,13 +63,17 @@ export default function Home() {
       </div>
       <div className="space-y-8">
         <Testimonial
-          quote="I loved that I was shown the shots through the experience. It really helped me feel like I was part of the outcome and could help me tweak any poses to make sure I got the perfect shot!\n\nFavorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!"
+          quote={`I loved that I was shown the shots through the experience. It really helped me feel like I was part of the outcome and could help me tweak any poses to make sure I got the perfect shot!
+
+Favorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!`}
           author="Lindsey M."
           image="/images/boudoir/LM1.jpg"
           imageAlt="Lindsey M. testimonial from her boudoir session"
         />
         <Testimonial
-          quote="Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again.\n\nFavorite Part: Getting to dress up and feel confident and beautiful"
+          quote={`Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again.
+
+Favorite Part: Getting to dress up and feel confident and beautiful`}
           author="Laura W."
           image="/images/boudoir/LW-260.jpg"
           imageAlt="Laura W. testimonial from her boudoir session"
