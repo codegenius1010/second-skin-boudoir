@@ -8,6 +8,9 @@ interface TestimonialProps {
 }
 
 export function Testimonial({ quote, author, image, imageAlt = 'Client testimonial' }: TestimonialProps) {
+  // Split the quote by double line breaks to handle paragraphs
+  const paragraphs = quote.split('\n\n').filter(p => p.trim())
+  
   return (
     <div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/15 to-champagne/10 p-8 md:p-12">
       <div className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center">
@@ -26,9 +29,21 @@ export function Testimonial({ quote, author, image, imageAlt = 'Client testimoni
               <span key={i} className="text-champagne text-lg">★</span>
             ))}
           </div>
-          <blockquote className="font-serif text-xl leading-8 text-ivory mb-6">
-            "{quote}"
-          </blockquote>
+          <div className="mb-6 space-y-4">
+            {paragraphs.map((paragraph, idx) => (
+              <div key={idx}>
+                {paragraph.startsWith('Favorite Part:') ? (
+                  <div>
+                    <p className="font-semibold text-champagne mb-2">{paragraph}</p>
+                  </div>
+                ) : (
+                  <blockquote className="font-serif text-xl leading-8 text-ivory">
+                    "{paragraph}"
+                  </blockquote>
+                )}
+              </div>
+            ))}
+          </div>
           <p className="text-lg font-semibold text-champagne">— {author}</p>
         </div>
       </div>
