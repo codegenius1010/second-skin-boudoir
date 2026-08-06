@@ -111,6 +111,16 @@ Favorite Part: My favorite part of the shoot was more personal to me — doing s
           image="/images/boudoir/KK-19.jpg"
           imageAlt="Kaylin K. testimonial from her boudoir session"
         />
+        <Testimonial
+          quote={`Everything was so relaxed and fun, and the images have turned out so elegant!
+
+Favorite Part: The posing guidance was so helpful 
+
+Thank you so much! It was a great experience and your eye for lighting and posing is such a gift. I've loved the images so far! Five stars☺️`}
+          author="Emily G."
+          image="/images/boudoir/EG-38.jpg"
+          imageAlt="Emily G. testimonial from her boudoir session"
+        />
       </div>
     </Section>
 
