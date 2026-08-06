@@ -4,6 +4,7 @@ import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Button } from '@/components/Button'
 import { Card, Timeline } from '@/components/Cards'
 import { Testimonial } from '@/components/Testimonial'
+import { PortfolioPreview } from '@/components/PortfolioPreview'
 import { FAQAccordion } from '@/components/FAQAccordion'
 
 export const metadata: Metadata = {
@@ -54,6 +55,28 @@ export default function Home() {
     <Section><Eyebrow>The Second Skin Experience</Eyebrow><Heading>From first conversation to final reveal, everything is designed to make you feel cared for.</Heading><div className="mt-12"><Timeline items={steps} /></div><p className="mt-8 max-w-3xl text-ivory/68">During your consultation, we'll discuss <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">what to wear</a> and answer all your questions. We'll show you examples from our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">portfolio</a> and create a session tailored entirely to you.</p><div className="mt-10"><Button href="/experience">See the Full Experience</Button></div></Section>
 
     <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
+
+    {/* Portfolio Preview Section */}
+    <Section>
+      <div className="mb-12 text-center">
+        <Eyebrow>Our Work</Eyebrow>
+        <Heading className="mx-auto max-w-3xl">Every image tells a story of confidence.</Heading>
+        <p className="mx-auto mt-5 max-w-2xl text-ivory/68">These are real sessions with real women. Each one unique. Each one powerful.</p>
+      </div>
+      <PortfolioPreview images={[
+        '/images/boudoir/EG-53.jpg',
+        '/images/boudoir/EG-38.jpg',
+        '/images/boudoir/EG-47.jpg',
+        '/images/boudoir/KK-19.jpg',
+        '/images/boudoir/LM1.jpg',
+        '/images/boudoir/LM2.jpg',
+        '/images/boudoir/LW-89.jpg',
+        '/images/boudoir/LW-104.jpg',
+        '/images/boudoir/LW-147.jpg',
+        '/images/boudoir/LW-156.jpg',
+        '/images/boudoir/LW-161.jpg',
+      ]} />
+    </Section>
 
     {/* Testimonial Section */}
     <Section className="bg-smoke">
