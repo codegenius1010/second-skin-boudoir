@@ -80,6 +80,14 @@ Favorite Part: Getting to dress up and feel confident and beautiful`}
           image="/images/boudoir/LW-260.jpg"
           imageAlt="Laura W. testimonial from her boudoir session"
         />
+        <Testimonial
+          quote={`It was a great experience and I felt great and amazing while doing it and even after leaving.
+
+Favorite Part: My favorite part of the shoot was more personal to me — doing something for me that I wanted for once. I felt beautiful and confident. It was also eye opening to realize I'm my toughest critic, but I too need to give myself grace.`}
+          author="Kaylin K."
+          image="/images/boudoir/KK-19.jpg"
+          imageAlt="Kaylin K. testimonial from her boudoir session"
+        />
       </div>
     </Section>
 
