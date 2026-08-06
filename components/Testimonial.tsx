@@ -14,7 +14,7 @@ export function Testimonial({ quote, author, image, imageAlt = 'Client testimoni
   return (
     <div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/15 to-champagne/10 p-8 md:p-12">
       <div className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center">
-        <div className="relative h-64 w-64 mx-auto md:mx-0 rounded-2xl overflow-hidden border border-ivory/20">
+        <div className="relative h-64 w-64 mx-auto rounded-2xl overflow-hidden border border-ivory/20">
           <Image
             src={image}
             alt={imageAlt}
