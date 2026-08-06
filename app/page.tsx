@@ -70,7 +70,7 @@ export default function Home() {
         '/images/boudoir/KK-19.jpg',
         '/images/boudoir/LM1.jpg',
         '/images/boudoir/LM2.jpg',
-        '/images/boudoir/LW-89.jpg',
+        '/images/boudoir/LW-089.jpg',
         '/images/boudoir/LW-104.jpg',
         '/images/boudoir/LW-147.jpg',
         '/images/boudoir/LW-156.jpg',
