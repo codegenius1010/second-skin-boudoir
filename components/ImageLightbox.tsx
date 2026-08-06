@@ -36,16 +36,15 @@ export function ImageLightbox({ isOpen, image, alt, onClose }: ImageLightboxProp
       onClick={onClose}
     >
       <div
-        className="relative max-h-[90vh] max-w-[90vw] flex items-center justify-center"
+        className="relative h-[85vh] w-[85vw] flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <Image
           src={image}
           alt={alt}
-          width={1200}
-          height={1200}
+          fill
           className="object-contain rounded-lg"
-          sizes="90vw"
+          sizes="85vw"
         />
         <button
           onClick={onClose}
