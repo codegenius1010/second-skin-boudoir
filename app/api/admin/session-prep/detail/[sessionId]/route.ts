@@ -49,6 +49,7 @@ export async function GET(
             sessionDate: session.sessionDate?.toISOString(),
             sessionLocation: session.sessionLocation,
             agreementStatus: session.agreementStatus,
+            isPaidModel: session.isPaidModel,
             createdAt: session.createdAt.toISOString(),
             updatedAt: session.updatedAt.toISOString(),
           },
