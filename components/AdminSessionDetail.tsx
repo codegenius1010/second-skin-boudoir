@@ -11,6 +11,7 @@ interface DetailData {
     sessionDate?: string
     sessionLocation?: string
     agreementStatus: string
+    isPaidModel: boolean
     createdAt: string
     updatedAt: string
   }
