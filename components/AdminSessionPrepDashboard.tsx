@@ -50,6 +50,12 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
     webhookSuccess: 0,
     webhookFailed: 0,
   })
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 20,
+    total: 0,
+    totalPages: 0,
+  })
 
   const [filters, setFilters] = useState({
     status: '',
@@ -94,13 +100,19 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
 
       const result = await response.json()
       setSubmissions(result.data)
+      setPagination(result.pagination)
 
-      // Calculate stats
+      // Calculate stats - use total from API, not just current page count
+      const currentPageSubmitted = result.data.filter((s: any) => s.intake?.status === 'submitted').length
+      const currentPageSuccess = result.data.filter((s: any) => s.webhook?.status === 'completed').length
+      const currentPageFailed = result.data.filter((s: any) => s.webhook?.status === 'requires_review').length
+      
+      // When filtering by status, use current page count; otherwise use totals
       setStats({
         totalSessions: result.pagination.total,
-        submittedIntakes: result.data.filter((s: any) => s.intake?.status === 'submitted').length,
-        webhookSuccess: result.data.filter((s: any) => s.webhook?.status === 'completed').length,
-        webhookFailed: result.data.filter((s: any) => s.webhook?.status === 'requires_review').length,
+        submittedIntakes: filters.status === 'submitted' ? currentPageSubmitted : result.pagination.total,
+        webhookSuccess: currentPageSuccess,
+        webhookFailed: currentPageFailed,
       })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch submissions')
@@ -385,6 +397,32 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
             onRegenerateLink={handleRegenerateLink}
             onGenerateSurveyLink={handleGenerateSurveyLink}
           />
+          
+          {/* Pagination Controls */}
+          {pagination.totalPages > 1 && (
+            <div className="flex items-center justify-between px-6 py-4 border-t border-ivory/20 bg-ivory/5">
+              <div className="text-sm text-smoke">
+                Page <span className="font-semibold text-charcoal">{pagination.page}</span> of{' '}
+                <span className="font-semibold text-charcoal">{pagination.totalPages}</span> ({pagination.total} total)
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setFilters({ ...filters, page: Math.max(1, filters.page - 1) })}
+                  disabled={filters.page === 1 || isLoading}
+                  className="px-4 py-2 bg-ivory border border-smoke/30 text-charcoal rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-champagne/10 transition-colors font-medium"
+                >
+                  ← Previous
+                </button>
+                <button
+                  onClick={() => setFilters({ ...filters, page: Math.min(pagination.totalPages, filters.page + 1) })}
+                  disabled={filters.page === pagination.totalPages || isLoading}
+                  className="px-4 py-2 bg-ivory border border-smoke/30 text-charcoal rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-champagne/10 transition-colors font-medium"
+                >
+                  Next →
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         </>
         )}
