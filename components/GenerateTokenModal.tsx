@@ -21,11 +21,18 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
     sessionType: 'Boudoir',
     sessionDate: '',
     sessionLocation: 'Destin Studio',
+    isPaidModel: false,
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    const { name, type } = e.target
+    if (type === 'checkbox') {
+      const target = e.target as HTMLInputElement
+      setFormData((prev) => ({ ...prev, [name]: target.checked }))
+    } else {
+      const value = e.target.value
+      setFormData((prev) => ({ ...prev, [name]: value }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,6 +55,7 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
           sessionType: formData.sessionType,
           sessionDate: formData.sessionDate || undefined,
           sessionLocation: formData.sessionLocation,
+          isPaidModel: formData.isPaidModel,
         }),
       })
 
@@ -87,6 +95,9 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
             </p>
             <p className="text-xs text-smoke">
               <strong>📧 Email:</strong> {formData.email}
+            </p>
+            <p className="text-xs text-smoke">
+              <strong>💰 Type:</strong> {formData.isPaidModel ? 'Paid Model' : 'Client Session'}
             </p>
             <p className="text-xs text-smoke">
               <strong>⏰ Expires:</strong> 30 days from now
@@ -214,6 +225,23 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
               placeholder="Destin Studio"
               className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
             />
+          </div>
+
+          <div className="flex items-center gap-3 p-3 bg-champagne/10 rounded-lg border border-champagne/30">
+            <input
+              type="checkbox"
+              id="isPaidModel"
+              name="isPaidModel"
+              checked={formData.isPaidModel}
+              onChange={handleInputChange}
+              className="w-4 h-4 cursor-pointer"
+            />
+            <label htmlFor="isPaidModel" className="text-xs font-semibold text-charcoal cursor-pointer flex-1">
+              💰 Paid Model Session
+            </label>
+            <span className="text-xs text-smoke">
+              {formData.isPaidModel ? 'Model gets paid' : 'Client pays'}
+            </span>
           </div>
 
           {error && <div className="p-3 bg-rose/10 border border-rose text-rose rounded-lg text-sm">{error}</div>}
