@@ -15,6 +15,8 @@ interface SessionData {
   agreementStatus: string
   agreementCompletedAt?: string
   isPaidModel?: boolean
+  hourlyRate?: string | number
+  hoursScheduled?: number
 }
 
 export interface SessionPrepWizardProps {
@@ -191,6 +193,8 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
               agreementStatus={sessionData.agreementStatus}
               agreementCompletedAt={sessionData.agreementCompletedAt}
               isPaidModel={sessionData.isPaidModel || false}
+              hourlyRate={sessionData.hourlyRate}
+              hoursScheduled={sessionData.hoursScheduled}
               onComplete={handleStep2Complete}
               isLoading={isLoading}
             />

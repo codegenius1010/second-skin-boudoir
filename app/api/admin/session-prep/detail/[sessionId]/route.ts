@@ -50,6 +50,8 @@ export async function GET(
             sessionLocation: session.sessionLocation,
             agreementStatus: session.agreementStatus,
             isPaidModel: session.isPaidModel,
+            hourlyRate: session.hourlyRate?.toString(),
+            hoursScheduled: session.hoursScheduled,
             createdAt: session.createdAt.toISOString(),
             updatedAt: session.updatedAt.toISOString(),
           },

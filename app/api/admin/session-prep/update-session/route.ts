@@ -14,7 +14,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { sessionId, sessionType, sessionDate, sessionLocation, isPaidModel } = body
+    const { sessionId, sessionType, sessionDate, sessionLocation, isPaidModel, hourlyRate, hoursScheduled } = body
 
     if (!sessionId) {
       return NextResponse.json(
@@ -60,6 +60,8 @@ export async function PATCH(request: NextRequest) {
         ...(sessionDate && { sessionDate: parsedSessionDate }),
         ...(sessionLocation && { sessionLocation }),
         ...(isPaidModel !== undefined && { isPaidModel }),
+        ...(hourlyRate !== undefined && { hourlyRate: hourlyRate === null ? null : parseFloat(hourlyRate) }),
+        ...(hoursScheduled !== undefined && { hoursScheduled: hoursScheduled === null ? null : parseFloat(hoursScheduled) }),
       },
     })
 
@@ -73,6 +75,8 @@ export async function PATCH(request: NextRequest) {
           sessionDate: updatedSession.sessionDate,
           sessionLocation: updatedSession.sessionLocation,
           isPaidModel: updatedSession.isPaidModel,
+          hourlyRate: updatedSession.hourlyRate?.toString(),
+          hoursScheduled: updatedSession.hoursScheduled,
         },
       },
       { status: 200 }

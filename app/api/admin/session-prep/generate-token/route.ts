@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { firstName, lastName, email, phone, sessionType = 'Boudoir', sessionDate, sessionLocation = 'Destin Studio', isPaidModel = false } = body
+    const { firstName, lastName, email, phone, sessionType = 'Boudoir', sessionDate, sessionLocation = 'Destin Studio', isPaidModel = false, hourlyRate, hoursScheduled } = body
 
     // Validation
     if (!firstName || !lastName || !email) {
@@ -120,6 +120,8 @@ export async function POST(request: NextRequest) {
         sessionDate: parsedSessionDate,
         sessionLocation,
         isPaidModel,
+        hourlyRate: hourlyRate ? parseFloat(hourlyRate) : undefined,
+        hoursScheduled: hoursScheduled ? parseFloat(hoursScheduled) : undefined,
         agreementStatus: 'pending',
         securePrepTokenHash: tokenHash,
         securePrepTokenExpiresAt: expiresAt,

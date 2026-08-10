@@ -22,6 +22,8 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
     sessionDate: '',
     sessionLocation: 'Destin Studio',
     isPaidModel: false,
+    hourlyRate: '',
+    hoursScheduled: '',
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -56,6 +58,8 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
           sessionDate: formData.sessionDate || undefined,
           sessionLocation: formData.sessionLocation,
           isPaidModel: formData.isPaidModel,
+          hourlyRate: formData.isPaidModel && formData.hourlyRate ? parseFloat(formData.hourlyRate) : undefined,
+          hoursScheduled: formData.isPaidModel && formData.hoursScheduled ? parseFloat(formData.hoursScheduled) : undefined,
         }),
       })
 
@@ -99,6 +103,23 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
             <p className="text-xs text-smoke">
               <strong>💰 Type:</strong> {formData.isPaidModel ? 'Paid Model' : 'Client Session'}
             </p>
+            {formData.isPaidModel && formData.hourlyRate && (
+              <>
+                <p className="text-xs text-smoke">
+                  <strong>💵 Hourly Rate:</strong> ${parseFloat(formData.hourlyRate).toFixed(2)}/hr
+                </p>
+                {formData.hoursScheduled && (
+                  <>
+                    <p className="text-xs text-smoke">
+                      <strong>⏱️ Duration:</strong> {formData.hoursScheduled} hours
+                    </p>
+                    <p className="text-xs text-smoke font-semibold border-t border-champagne/30 pt-2 mt-2">
+                      <strong>💰 Total Compensation:</strong> ${(parseFloat(formData.hourlyRate) * parseFloat(formData.hoursScheduled)).toFixed(2)}
+                    </p>
+                  </>
+                )}
+              </>
+            )}
             <p className="text-xs text-smoke">
               <strong>⏰ Expires:</strong> 30 days from now
             </p>
@@ -243,6 +264,44 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
               {formData.isPaidModel ? 'Model gets paid' : 'Client pays'}
             </span>
           </div>
+
+          {formData.isPaidModel && (
+            <div className="space-y-3 p-4 bg-champagne/5 rounded-lg border border-champagne/20">
+              <h4 className="font-semibold text-xs text-charcoal">Compensation Details</h4>
+              <div>
+                <label className="block text-xs font-semibold text-charcoal mb-1">Hourly Rate ($)</label>
+                <input
+                  type="number"
+                  name="hourlyRate"
+                  step="0.01"
+                  min="0"
+                  value={formData.hourlyRate}
+                  onChange={handleInputChange}
+                  placeholder="150.00"
+                  className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-charcoal mb-1">Hours Scheduled</label>
+                <input
+                  type="number"
+                  name="hoursScheduled"
+                  step="0.5"
+                  min="0"
+                  value={formData.hoursScheduled}
+                  onChange={handleInputChange}
+                  placeholder="2.5"
+                  className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-ivory text-charcoal focus:border-champagne focus:ring-4 focus:ring-champagne/20 focus:outline-none"
+                />
+              </div>
+              {formData.hourlyRate && formData.hoursScheduled && (
+                <div className="p-2 bg-charcoal/5 rounded border border-smoke/20">
+                  <p className="text-xs text-smoke font-semibold mb-1">Estimated Total:</p>
+                  <p className="text-sm font-bold text-charcoal">${(parseFloat(formData.hourlyRate) * parseFloat(formData.hoursScheduled)).toFixed(2)}</p>
+                </div>
+              )}
+            </div>
+          )}
 
           {error && <div className="p-3 bg-rose/10 border border-rose text-rose rounded-lg text-sm">{error}</div>}
 

@@ -12,6 +12,8 @@ interface DetailData {
     sessionLocation?: string
     agreementStatus: string
     isPaidModel: boolean
+    hourlyRate?: string
+    hoursScheduled?: number
     createdAt: string
     updatedAt: string
   }
@@ -45,6 +47,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
     sessionDate: '',
     sessionLocation: '',
     isPaidModel: false,
+    hourlyRate: '',
+    hoursScheduled: '',
   })
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
@@ -79,6 +83,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionDate: sessionDateForInput,
           sessionLocation: result.data.session.sessionLocation || '',
           isPaidModel: result.data.session.isPaidModel || false,
+          hourlyRate: result.data.session.hourlyRate || '',
+          hoursScheduled: result.data.session.hoursScheduled ? result.data.session.hoursScheduled.toString() : '',
         })
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load details')
@@ -109,6 +115,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionDate: editData.sessionDate,
           sessionLocation: editData.sessionLocation,
           isPaidModel: editData.isPaidModel,
+          hourlyRate: editData.hourlyRate ? parseFloat(editData.hourlyRate) : undefined,
+          hoursScheduled: editData.hoursScheduled ? parseFloat(editData.hoursScheduled) : undefined,
         }),
       })
 
@@ -129,6 +137,8 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionDate: result.data.sessionDate,
           sessionLocation: result.data.sessionLocation,
           isPaidModel: result.data.isPaidModel,
+          hourlyRate: result.data.hourlyRate,
+          hoursScheduled: result.data.hoursScheduled,
         },
       })
       
@@ -785,6 +795,41 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                       {editData.isPaidModel ? 'Model receives payment' : 'Client pays for session'}
                     </span>
                   </div>
+                  {editData.isPaidModel && (
+                    <div className="space-y-4 p-4 bg-champagne/5 rounded-lg border border-champagne/20">
+                      <h4 className="font-semibold text-sm text-charcoal mb-3">Compensation Details</h4>
+                      <div>
+                        <label className="block text-sm font-semibold text-charcoal mb-2">Hourly Rate ($)</label>
+                        <input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          value={editData.hourlyRate}
+                          onChange={(e) => setEditData({ ...editData, hourlyRate: e.target.value })}
+                          className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal placeholder-smoke/50 focus:outline-none focus:border-champagne"
+                          placeholder="e.g., 150.00"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-charcoal mb-2">Hours Scheduled</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          min="0"
+                          value={editData.hoursScheduled}
+                          onChange={(e) => setEditData({ ...editData, hoursScheduled: e.target.value })}
+                          className="w-full px-3 py-2 border border-smoke/30 rounded-lg bg-white text-charcoal placeholder-smoke/50 focus:outline-none focus:border-champagne"
+                          placeholder="e.g., 2, 2.5, 3"
+                        />
+                      </div>
+                      {editData.hourlyRate && editData.hoursScheduled && (
+                        <div className="p-3 bg-charcoal/5 rounded border border-smoke/20">
+                          <p className="text-xs text-smoke font-semibold mb-1">Estimated Total:</p>
+                          <p className="text-lg font-bold text-charcoal">${(parseFloat(editData.hourlyRate) * parseFloat(editData.hoursScheduled)).toFixed(2)}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="p-2 bg-rose/5 border border-rose/20 rounded text-xs text-smoke italic">
                     Note: These changes will update the session details. Agreement Status cannot be changed from draft mode here.
                   </div>
@@ -796,6 +841,15 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                   <Detail label="Session Date" value={data.session.sessionDate ? data.session.sessionDate.split('T')[0] : '—'} />
                   <Detail label="Location" value={data.session.sessionLocation || '—'} />
                   <Detail label="Model Payment" value={data.session.isPaidModel ? '💰 Yes - Model receives payment' : '✓ No - Client pays for session'} />
+                  {data.session.isPaidModel && (
+                    <>
+                      <Detail label="Hourly Rate" value={data.session.hourlyRate ? `$${parseFloat(data.session.hourlyRate.toString()).toFixed(2)}/hr` : '—'} />
+                      <Detail label="Hours Scheduled" value={data.session.hoursScheduled ? `${data.session.hoursScheduled} hours` : '—'} />
+                      {data.session.hourlyRate && data.session.hoursScheduled && (
+                        <Detail label="Estimated Total Compensation" value={`$${(parseFloat(data.session.hourlyRate.toString()) * data.session.hoursScheduled).toFixed(2)}`} />
+                      )}
+                    </>
+                  )}
                 </div>
               )}
             </Section>

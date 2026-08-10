@@ -7,6 +7,8 @@ interface SessionPrepStep2Props {
   agreementStatus: string
   agreementCompletedAt?: string | null
   isPaidModel?: boolean
+  hourlyRate?: number | string
+  hoursScheduled?: number
   onComplete: () => void
   isLoading?: boolean
 }
@@ -16,6 +18,8 @@ export default function SessionPrepStep2({
   agreementStatus,
   agreementCompletedAt,
   isPaidModel = false,
+  hourlyRate,
+  hoursScheduled,
   onComplete,
   isLoading,
 }: SessionPrepStep2Props) {
@@ -61,7 +65,15 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">1. Compensation and Payment Terms</p>
-                  <p className="text-xs text-charcoal">You agree to participate in this paid professional model session in exchange for compensation as outlined in a separate compensation agreement or proposal. Payment terms, including amount, timing, and method, are subject to the written compensation agreement provided by Photographer.</p>
+                  <p className="text-xs text-charcoal">You agree to participate in this paid professional model session in exchange for compensation as follows{hourlyRate || hoursScheduled ? ':' : '. Payment terms, including amount, timing, and method, are subject to the written compensation agreement provided by Photographer.'}
+                  {hourlyRate || hoursScheduled ? (
+                    <>
+                      {hourlyRate && <> - Hourly Rate: ${Number(hourlyRate).toFixed(2)}</>}
+                      {hoursScheduled && <> - Duration: {hoursScheduled} hour{hoursScheduled !== 1 ? 's' : ''}</>}
+                      {hourlyRate && hoursScheduled && <> - Total Estimated Compensation: ${(Number(hourlyRate) * hoursScheduled).toFixed(2)}</>}
+                      . Payment terms, including timing and method, are subject to the written compensation agreement provided by Photographer.
+                    </>
+                  ) : null}</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
@@ -80,8 +92,8 @@ export default function SessionPrepStep2({
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
-                  <p className="font-semibold text-charcoal/70 mb-1">5. Image Use Restrictions</p>
-                  <p className="text-xs text-charcoal">You agree not to publicly post, edit, filter, modify, or alter images from this session without written permission from Photographer. Use of images for commercial purposes, resale, licensing, or any use beyond personal non-commercial use is strictly prohibited unless expressly authorized in writing.</p>
+                  <p className="font-semibold text-charcoal/70 mb-1">5. Image Use and Attribution</p>
+                  <p className="text-xs text-charcoal">You are welcome to use, share, and enjoy images from this session for any personal purpose. If you post images on social media or publicly, we ask that you provide credit to Second Skin Boudoir and tag @secondskinboudoir so we may celebrate your work and share your beautiful images with our community. You may edit, filter, or modify images as you wish. Photographer retains the right to use images for portfolio, editorial, advertising, and promotional purposes as outlined in Section 3.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">

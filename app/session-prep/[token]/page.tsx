@@ -63,6 +63,8 @@ export default async function SessionPrepPage({ params }: SessionPrepPageProps) 
           agreementStatus: sessionData.agreementStatus,
           agreementCompletedAt: sessionData.agreementCompletedAt?.toISOString(),
           isPaidModel: sessionData.isPaidModel,
+          hourlyRate: sessionData.hourlyRate?.toString(),
+          hoursScheduled: sessionData.hoursScheduled || undefined,
         }}
       />
     )

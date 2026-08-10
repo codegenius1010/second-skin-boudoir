@@ -39,6 +39,8 @@ model PhotographySession {
   sessionDate             DateTime?
   sessionLocation         String?
   isPaidModel             Boolean  @default(false) // true = model is being paid; false = paying client
+  hourlyRate              Decimal? // For paid model sessions (e.g., 150.00)
+  hoursScheduled          Float? // For paid model sessions (e.g., 2, 2.5, 3)
   ghlOpportunityId        String?
 
   agreementTemplateType   String?  // "standard-boudoir" | "bridal" | "collaboration" | etc
