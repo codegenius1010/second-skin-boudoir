@@ -149,11 +149,13 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-8">
-        <h2 className="font-serif text-2xl text-charcoal mb-1">New Session Prep</h2>
-        <p className="text-smoke mb-6">Generate a link for a new client</p>
+      <div className="bg-white rounded-lg max-w-md w-full flex flex-col max-h-[90vh]">
+        <div className="px-8 pt-8 pb-4 border-b border-ivory/20">
+          <h2 className="font-serif text-2xl text-charcoal mb-1">New Session Prep</h2>
+          <p className="text-smoke">Generate a link for a new client</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-8 py-4 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-charcoal mb-1">
@@ -304,12 +306,12 @@ export default function GenerateTokenModal({ adminToken, onClose, onSuccess }: G
           )}
 
           {error && <div className="p-3 bg-rose/10 border border-rose text-rose rounded-lg text-sm">{error}</div>}
-
-          <div className="flex gap-3 pt-4">
+          
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 bg-charcoal/10 text-charcoal rounded-lg hover:bg-ivory0 transition-colors font-medium"
+              className="flex-1 px-4 py-2 bg-charcoal/10 text-charcoal rounded-lg hover:bg-ivory/50 transition-colors font-medium"
             >
               Cancel
             </button>
