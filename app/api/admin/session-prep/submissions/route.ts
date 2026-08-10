@@ -180,7 +180,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch sessions with intakes and webhook deliveries
-    const [sessions, total] = await Promise.all([
+    const [sessions, total, totalSubmitted] = await Promise.all([
       prisma.photographySession.findMany({
         where,
         include: {
@@ -219,6 +219,16 @@ export async function GET(request: NextRequest) {
         take: limit,
       }),
       prisma.photographySession.count({ where }),
+      // Always count total submitted sessions regardless of filters
+      prisma.photographySession.count({
+        where: {
+          intakes: {
+            some: {
+              status: 'submitted',
+            },
+          },
+        },
+      }),
     ])
 
     const totalPages = Math.ceil(total / limit)
@@ -241,6 +251,7 @@ export async function GET(request: NextRequest) {
           limit,
           total,
           totalPages,
+          totalSubmitted,
         },
       },
       { status: 200 }

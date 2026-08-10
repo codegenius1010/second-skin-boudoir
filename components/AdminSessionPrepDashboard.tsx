@@ -102,15 +102,13 @@ export default function AdminSessionPrepDashboard({ adminToken }: { adminToken: 
       setSubmissions(result.data)
       setPagination(result.pagination)
 
-      // Calculate stats - use total from API, not just current page count
-      const currentPageSubmitted = result.data.filter((s: any) => s.intake?.status === 'submitted').length
+      // Use totalSubmitted from API (counts submitted across all sessions, regardless of filters)
       const currentPageSuccess = result.data.filter((s: any) => s.webhook?.status === 'completed').length
       const currentPageFailed = result.data.filter((s: any) => s.webhook?.status === 'requires_review').length
       
-      // When filtering by status, use current page count; otherwise use totals
       setStats({
         totalSessions: result.pagination.total,
-        submittedIntakes: filters.status === 'submitted' ? currentPageSubmitted : result.pagination.total,
+        submittedIntakes: result.pagination.totalSubmitted || 0,
         webhookSuccess: currentPageSuccess,
         webhookFailed: currentPageFailed,
       })
