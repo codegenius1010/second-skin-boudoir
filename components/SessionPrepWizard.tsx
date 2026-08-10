@@ -14,6 +14,7 @@ interface SessionData {
   sessionLocation?: string
   agreementStatus: string
   agreementCompletedAt?: string
+  isPaidModel?: boolean
 }
 
 export interface SessionPrepWizardProps {
@@ -189,6 +190,7 @@ export default function SessionPrepWizard({ sessionId, token, sessionData }: Ses
               sessionType={sessionData.sessionType}
               agreementStatus={sessionData.agreementStatus}
               agreementCompletedAt={sessionData.agreementCompletedAt}
+              isPaidModel={sessionData.isPaidModel || false}
               onComplete={handleStep2Complete}
               isLoading={isLoading}
             />

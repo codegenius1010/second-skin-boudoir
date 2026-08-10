@@ -43,6 +43,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
     sessionType: '',
     sessionDate: '',
     sessionLocation: '',
+    isPaidModel: false,
   })
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
@@ -76,6 +77,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionType: result.data.session.sessionType || '',
           sessionDate: sessionDateForInput,
           sessionLocation: result.data.session.sessionLocation || '',
+          isPaidModel: result.data.session.isPaidModel || false,
         })
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load details')
@@ -105,6 +107,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionType: editData.sessionType,
           sessionDate: editData.sessionDate,
           sessionLocation: editData.sessionLocation,
+          isPaidModel: editData.isPaidModel,
         }),
       })
 
@@ -124,6 +127,7 @@ export default function AdminSessionDetail({ sessionId, adminToken, onClose, edi
           sessionType: result.data.sessionType,
           sessionDate: result.data.sessionDate,
           sessionLocation: result.data.sessionLocation,
+          isPaidModel: result.data.isPaidModel,
         },
       })
       
@@ -765,6 +769,21 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                       placeholder="e.g., Studio, Client Home, Destination"
                     />
                   </div>
+                  <div className="flex items-center gap-3 p-3 bg-champagne/10 rounded-lg border border-champagne/30">
+                    <input
+                      id="paid-model"
+                      type="checkbox"
+                      checked={editData.isPaidModel}
+                      onChange={(e) => setEditData({ ...editData, isPaidModel: e.target.checked })}
+                      className="w-4 h-4 cursor-pointer"
+                    />
+                    <label htmlFor="paid-model" className="text-sm font-semibold text-charcoal cursor-pointer flex-1">
+                      💰 Paid Model Session
+                    </label>
+                    <span className="text-xs text-smoke">
+                      {editData.isPaidModel ? 'Model receives payment' : 'Client pays for session'}
+                    </span>
+                  </div>
                   <div className="p-2 bg-rose/5 border border-rose/20 rounded text-xs text-smoke italic">
                     Note: These changes will update the session details. Agreement Status cannot be changed from draft mode here.
                   </div>
@@ -775,6 +794,7 @@ Privacy Default: Your images will not be shared online, in advertising, in print
                   <Detail label="Agreement Status" value={data.session.agreementStatus} />
                   <Detail label="Session Date" value={data.session.sessionDate ? data.session.sessionDate.split('T')[0] : '—'} />
                   <Detail label="Location" value={data.session.sessionLocation || '—'} />
+                  <Detail label="Model Payment" value={data.session.isPaidModel ? '💰 Yes - Model receives payment' : '✓ No - Client pays for session'} />
                 </div>
               )}
             </Section>

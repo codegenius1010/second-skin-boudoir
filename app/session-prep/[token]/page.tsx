@@ -62,6 +62,7 @@ export default async function SessionPrepPage({ params }: SessionPrepPageProps) 
           sessionLocation: sessionData.sessionLocation || undefined,
           agreementStatus: sessionData.agreementStatus,
           agreementCompletedAt: sessionData.agreementCompletedAt?.toISOString(),
+          isPaidModel: sessionData.isPaidModel,
         }}
       />
     )

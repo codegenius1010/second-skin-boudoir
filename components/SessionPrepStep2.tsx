@@ -6,6 +6,7 @@ interface SessionPrepStep2Props {
   sessionType: string
   agreementStatus: string
   agreementCompletedAt?: string | null
+  isPaidModel?: boolean
   onComplete: () => void
   isLoading?: boolean
 }
@@ -14,6 +15,7 @@ export default function SessionPrepStep2({
   sessionType,
   agreementStatus,
   agreementCompletedAt,
+  isPaidModel = false,
   onComplete,
   isLoading,
 }: SessionPrepStep2Props) {
@@ -44,15 +46,102 @@ export default function SessionPrepStep2({
       {!isAgreed && (
         <div className="bg-gradient-to-br from-charcoal/5 to-espresso/5 border border-smoke/20 rounded-lg p-6 md:p-8 mb-8">
           <div className="max-h-96 overflow-y-auto pr-4 space-y-4 text-xs md:text-sm text-charcoal leading-relaxed">
-            <div>
-              <h3 className="font-serif text-lg text-charcoal/70 mb-2 font-semibold">SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE</h3>
-              <p className="text-charcoal text-xs mb-3">
-                This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Client," "you," or "your") for a private boudoir photography session and related products.
-              </p>
-              <p className="text-charcoal text-xs font-semibold mb-3 p-2 bg-charcoal/5 rounded border border-champagne/30">
-                Privacy Default: Your images will not be shared online, in advertising, in print, or publicly unless you give written permission in the Image Privacy section of this questionnaire or in a later signed release.
-              </p>
-            </div>
+            {isPaidModel ? (
+              // PAID MODEL AGREEMENT
+              <>
+                <div>
+                  <h3 className="font-serif text-lg text-charcoal/70 mb-2 font-semibold">SECOND SKIN BOUDOIR - PAID MODEL SESSION AGREEMENT</h3>
+                  <p className="text-charcoal text-xs mb-3">
+                    This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Model," "you," or "your") for a paid professional model photography session.
+                  </p>
+                  <p className="text-charcoal text-xs font-semibold mb-3 p-2 bg-charcoal/5 rounded border border-champagne/30">
+                    Privacy & Confidentiality: All session details, compensation, and communications are confidential. Images from this session may be used for portfolio, educational, and promotional purposes unless you have a separate written agreement restricting image use.
+                  </p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">1. Compensation and Payment Terms</p>
+                  <p className="text-xs text-charcoal">You agree to participate in this paid professional model session in exchange for compensation as outlined in a separate compensation agreement or proposal. Payment terms, including amount, timing, and method, are subject to the written compensation agreement provided by Photographer.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">2. Professional Context and Consent</p>
+                  <p className="text-xs text-charcoal">You understand that this is a professional photography session and you consent to receive professional direction within the context of the agreed-upon session. You agree that ordinary, disclosed, consent-based posing direction, wardrobe guidance, and artistic direction inherent in a professional model session do not, by themselves, constitute inappropriate conduct. You may decline, pause, modify, or stop any pose or direction at any time, and the session will adjust accordingly.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">3. Copyright and Image Ownership</p>
+                  <p className="text-xs text-charcoal">Photographer owns the copyright to all images created during the session. You grant Photographer the right to use, edit, reproduce, distribute, and display images from this session for portfolio, editorial, advertising, promotional, educational, and commercial purposes. Images may be used online, in print, in advertising, and in exhibitions without additional compensation or approval beyond what is specified in the written compensation agreement.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">4. Model Release</p>
+                  <p className="text-xs text-charcoal">By signing this agreement, you grant Second Skin Boudoir a full model release and hereby authorize Photographer to use images from this session for all purposes described above. You agree that you will not receive additional compensation, credit, or approval rights for the use of these images.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">5. Image Use Restrictions</p>
+                  <p className="text-xs text-charcoal">You agree not to publicly post, edit, filter, modify, or alter images from this session without written permission from Photographer. Use of images for commercial purposes, resale, licensing, or any use beyond personal non-commercial use is strictly prohibited unless expressly authorized in writing.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">6. Confidentiality and Non-Disclosure</p>
+                  <p className="text-xs text-charcoal">You agree to maintain confidentiality regarding session details, compensation, location, creative direction, and Photographer communications. You may not disclose compensation amounts, session details, or behind-the-scenes information without written permission.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">7. Recording and Photography</p>
+                  <p className="text-xs text-charcoal">You may not record, photograph, or film the session, location, or Photographer without written permission. This protects the professional nature and creative integrity of the work.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">8. Conduct and Safety</p>
+                  <p className="text-xs text-charcoal">This is a professional photography session. You agree to respectful communication and professional conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In that event, compensation may be forfeited according to the written compensation agreement.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">9. Physical Limitations and Health</p>
+                  <p className="text-xs text-charcoal">You agree to notify Photographer before the session of any physical limitations, injuries, allergies, pregnancy considerations, mobility issues, or posing restrictions. You are responsible for communicating discomfort during posing. Photographer will make reasonable posing adjustments when notified.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">10. Rescheduling and Cancellation</p>
+                  <p className="text-xs text-charcoal">Session dates and times are subject to mutual agreement. Cancellations or reschedules must follow the terms outlined in the written compensation agreement. Failure to appear at the scheduled session may result in forfeiture of compensation unless otherwise agreed in writing.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">11. Age and Legal Capacity</p>
+                  <p className="text-xs text-charcoal">You represent that you are at least eighteen (18) years old, have the legal capacity to sign this Agreement, and are voluntarily agreeing to participate in this professional model session.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">12. Indemnification</p>
+                  <p className="text-xs text-charcoal">You agree to indemnify and hold Photographer harmless from claims, damages, losses, or expenses arising from your breach of this Agreement, misuse of images, or your conduct during the session.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-3">
+                  <p className="font-semibold text-charcoal/70 mb-1">13. Entire Agreement</p>
+                  <p className="text-xs text-charcoal">This Agreement, together with the written compensation agreement, constitutes the entire agreement between the parties. Changes must be in writing and signed by both parties.</p>
+                </div>
+
+                <div className="border-t border-smoke/20 pt-4 bg-charcoal/2 p-3 rounded border-l-4 border-l-champagne">
+                  <p className="text-xs text-charcoal">
+                    <strong>By checking the boxes below, you confirm that you have read and fully understand this professional model agreement, and you consent to participate in this paid photography session under all terms listed above.</strong>
+                  </p>
+                </div>
+              </>
+            ) : (
+              // STANDARD CLIENT AGREEMENT (Original)
+              <>
+                <div>
+                  <h3 className="font-serif text-lg text-charcoal/70 mb-2 font-semibold">SECOND SKIN BOUDOIR - PHOTOGRAPHY SESSION AGREEMENT & MODEL RELEASE</h3>
+                  <p className="text-charcoal text-xs mb-3">
+                    This Agreement is made between Second Skin Boudoir ("Photographer," "Studio," "we," or "us") and you ("Client," "you," or "your") for a private boudoir photography session and related products.
+                  </p>
+                  <p className="text-charcoal text-xs font-semibold mb-3 p-2 bg-charcoal/5 rounded border border-champagne/30">
+                    Privacy Default: Your images will not be shared online, in advertising, in print, or publicly unless you give written permission in the Image Privacy section of this questionnaire or in a later signed release.
+                  </p>
+                </div>
 
             <div className="border-t border-smoke/20 pt-3">
               <p className="font-semibold text-charcoal/70 mb-1">1. Session Fee and Reservation</p>
@@ -189,6 +278,8 @@ export default function SessionPrepStep2({
                 <strong>By checking the boxes below, you confirm that you have read and fully understand this complete 26-point agreement, and you consent to your photography session under all terms listed above.</strong>
               </p>
             </div>
+              </>
+            )}
           </div>
         </div>
       )}

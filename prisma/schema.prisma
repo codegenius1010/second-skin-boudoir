@@ -38,6 +38,7 @@ model PhotographySession {
   sessionType             String   // "private-client" | "collaboration" | "paid-model"
   sessionDate             DateTime?
   sessionLocation         String?
+  isPaidModel             Boolean  @default(false) // true = model is being paid; false = paying client
   ghlOpportunityId        String?
 
   agreementTemplateType   String?  // "standard-boudoir" | "bridal" | "collaboration" | etc
