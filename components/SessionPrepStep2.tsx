@@ -65,13 +65,13 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">1. Compensation and Payment Terms</p>
-                  <p className="text-xs text-charcoal">You agree to participate in this paid professional model session in exchange for compensation as follows{hourlyRate || hoursScheduled ? ':' : '. Payment terms, including amount, timing, and method, are subject to the written compensation agreement provided by Photographer.'}
+                  <p className="text-xs text-charcoal">You agree to participate in this paid professional model session in exchange for compensation as follows{hourlyRate || hoursScheduled ? ':' : '. Compensation amount, payment timing, and payment method are subject to mutual agreement and this contract.'}
                   {hourlyRate || hoursScheduled ? (
                     <>
                       {hourlyRate && <> - Hourly Rate: ${Number(hourlyRate).toFixed(2)}</>}
                       {hoursScheduled && <> - Duration: {hoursScheduled} hour{hoursScheduled !== 1 ? 's' : ''}</>}
                       {hourlyRate && hoursScheduled && <> - Total Estimated Compensation: ${(Number(hourlyRate) * hoursScheduled).toFixed(2)}</>}
-                      . Payment terms, including timing and method, are subject to the written compensation agreement provided by Photographer.
+                      . Payment shall be made within thirty (30) days of the session date via the agreed-upon payment method (cash, check, or electronic transfer). If payment is not received within thirty (30) days, compensation may be withheld until paid in full.
                     </>
                   ) : null}</p>
                 </div>
@@ -83,7 +83,7 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">3. Copyright and Image Ownership</p>
-                  <p className="text-xs text-charcoal">Photographer owns the copyright to all images created during the session. You grant Photographer the right to use, edit, reproduce, distribute, and display images from this session for portfolio, editorial, advertising, promotional, educational, and commercial purposes. Images may be used online, in print, in advertising, and in exhibitions without additional compensation or approval beyond what is specified in the written compensation agreement.</p>
+                  <p className="text-xs text-charcoal">Photographer owns the copyright to all images created during the session. You grant Photographer the right to use, edit, reproduce, distribute, and display images from this session for portfolio, editorial, advertising, promotional, educational, and commercial purposes. Images may be used online, in print, in advertising, and in exhibitions without additional compensation or approval beyond the compensation specified in Section 1 above.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
@@ -98,7 +98,7 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">6. Confidentiality and Non-Disclosure</p>
-                  <p className="text-xs text-charcoal">You agree to maintain confidentiality regarding session details, compensation, location, creative direction, and Photographer communications. You may not disclose compensation amounts, session details, or behind-the-scenes information without written permission.</p>
+                  <p className="text-xs text-charcoal">You agree to maintain confidentiality regarding session details, compensation amounts, location, creative direction, and Photographer communications. You may not disclose compensation, session details, or behind-the-scenes information without written permission.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
@@ -108,7 +108,7 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">8. Conduct and Safety</p>
-                  <p className="text-xs text-charcoal">This is a professional photography session. You agree to respectful communication and professional conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In that event, compensation may be forfeited according to the written compensation agreement.</p>
+                  <p className="text-xs text-charcoal">This is a professional photography session. You agree to respectful communication and professional conduct. Photographer may stop or cancel the session immediately if there is harassment, unsafe conduct, intoxication, illegal activity, threats, boundary violations, or behavior that compromises safety or professionalism. In such event, compensation may be forfeited in part or in whole at Photographer's discretion, depending on the severity and timing of the breach.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
@@ -118,7 +118,7 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">10. Rescheduling and Cancellation</p>
-                  <p className="text-xs text-charcoal">Session dates and times are subject to mutual agreement. Cancellations or reschedules must follow the terms outlined in the written compensation agreement. Failure to appear at the scheduled session may result in forfeiture of compensation unless otherwise agreed in writing.</p>
+                  <p className="text-xs text-charcoal">Session dates and times are subject to mutual agreement. Cancellations must be made at least seven (7) calendar days in advance to avoid forfeiture of compensation. Cancellations with less than seven (7) days notice will result in loss of fifty percent (50%) of compensation. Failure to appear at the scheduled session without notice may result in forfeiture of all compensation unless otherwise agreed in writing.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-3">
@@ -133,7 +133,7 @@ export default function SessionPrepStep2({
 
                 <div className="border-t border-smoke/20 pt-3">
                   <p className="font-semibold text-charcoal/70 mb-1">13. Entire Agreement</p>
-                  <p className="text-xs text-charcoal">This Agreement, together with the written compensation agreement, constitutes the entire agreement between the parties. Changes must be in writing and signed by both parties.</p>
+                  <p className="text-xs text-charcoal">This Agreement constitutes the entire agreement between the parties regarding this professional model session, compensation, image rights, and all related terms. Changes must be in writing and signed by both parties.</p>
                 </div>
 
                 <div className="border-t border-smoke/20 pt-4 bg-charcoal/2 p-3 rounded border-l-4 border-l-champagne">
