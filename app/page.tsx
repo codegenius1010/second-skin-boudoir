@@ -78,6 +78,7 @@ export default function Home() {
         '/images/boudoir/CM-030.jpg',
         '/images/boudoir/BH-40.jpg',
         '/images/boudoir/VK-38.jpg',
+        '/images/boudoir/DB-018.jpg',
       ]} />
     </Section>
 

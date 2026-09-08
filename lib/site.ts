@@ -128,6 +128,20 @@ export const galleryImages = [
   { image: '/images/boudoir/YM-25.jpg', alt: 'Artistic boudoir photography' },
   { image: '/images/boudoir/YM-26.jpg', alt: 'Beautiful boudoir portrait' },
   { image: '/images/boudoir/CM-030.jpg', alt: 'Elegant boudoir composition' },
+  { image: '/images/boudoir/DB-006.jpg', alt: 'Stunning boudoir portrait' },
+  { image: '/images/boudoir/DB-017.jpg', alt: 'Elegant boudoir composition' },
+  { image: '/images/boudoir/DB-018.jpg', alt: 'Beautiful boudoir photography' },
+  { image: '/images/boudoir/DB-026.jpg', alt: 'Artistic boudoir portrait' },
+  { image: '/images/boudoir/DB-027.jpg', alt: 'Confident boudoir photography' },
+  { image: '/images/boudoir/DB-051.jpg', alt: 'Luxurious boudoir composition' },
+  { image: '/images/boudoir/DB-070.jpg', alt: 'Empowered boudoir photography' },
+  { image: '/images/boudoir/DB-072.jpg', alt: 'Artistic boudoir portrait' },
+  { image: '/images/boudoir/DB-076.jpg', alt: 'Beautiful boudoir portrait' },
+  { image: '/images/boudoir/DB-088.jpg', alt: 'Elegant boudoir composition' },
+  { image: '/images/boudoir/DB-104.jpg', alt: 'Stunning boudoir photography' },
+  { image: '/images/boudoir/DB-108.jpg', alt: 'Artistic boudoir composition' },
+  { image: '/images/boudoir/DB-115.jpg', alt: 'Beautiful boudoir portrait' },
+  { image: '/images/boudoir/DB-122.jpg', alt: 'Confident boudoir photography' },
 ]
 
 export const faqs = [
