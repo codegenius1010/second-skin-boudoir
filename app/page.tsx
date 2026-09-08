@@ -64,22 +64,25 @@ export default function Home() {
         <p className="mx-auto mt-5 max-w-2xl text-ivory/68">These are real sessions with real women. Each one unique. Each one powerful.</p>
       </div>
       <PortfolioPreview images={[
-        '/images/boudoir/EG-53.jpg',
-        '/images/boudoir/EG-38.jpg',
-        '/images/boudoir/EG-47.jpg',
+        '/images/boudoir/LH-073.jpg',
         '/images/boudoir/KK-19.jpg',
-        '/images/boudoir/LM1.jpg',
-        '/images/boudoir/LM2.jpg',
-        '/images/boudoir/LW-089.jpg',
-        '/images/boudoir/LW-104.jpg',
         '/images/boudoir/LW-147.jpg',
-        '/images/boudoir/LW-156.jpg',
-        '/images/boudoir/LW-161.jpg',
+        '/images/boudoir/EG-65.jpg',
+        '/images/boudoir/LM-101.jpg',
+        '/images/boudoir/LW2-29.jpg',
+        '/images/boudoir/TC-5.jpg',
+        '/images/boudoir/EB-555.jpg',
+        '/images/boudoir/DG-15.jpg',
+        '/images/boudoir/SC-22.jpg',
+        '/images/boudoir/YM-09.jpg',
+        '/images/boudoir/CM-030.jpg',
+        '/images/boudoir/BH-40.jpg',
+        '/images/boudoir/VK-38.jpg',
       ]} />
     </Section>
 
     {/* Testimonial Section */}
-    <Section className="bg-smoke">
+    <Section id="testimonials" className="bg-smoke">
       <div className="mb-10 text-center">
         <Eyebrow>What clients are saying</Eyebrow>
         <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
@@ -120,6 +123,45 @@ Thank you so much! It was a great experience and your eye for lighting and posin
           author="Emily G."
           image="/images/boudoir/EG-38.jpg"
           imageAlt="Emily G. testimonial from her boudoir session"
+        />
+        <Testimonial
+          quote={`Overall the experience was very fun and relaxed I went in nervous but ended up feeling much more confident and calm with the guidance I was given
+
+Favorite Part: My favorite part was how great Matthew was about making sure I felt comfortable the entire time and being able to have my best friend tag along as moral support/cheerleader`}
+          author="Brittany H."
+          image="/images/boudoir/BH-40.jpg"
+          imageAlt="Brittany H. testimonial from her boudoir session"
+        />
+        <Testimonial
+          quote={`Matthew was easy to work with and made me feel comfortable as a first timer.
+
+Favorite Part: The playlist he created really set the mood and made me feel empowered.`}
+          author="Valerie K."
+          image="/images/boudoir/VK-38.jpg"
+          imageAlt="Valerie K. testimonial from her boudoir session"
+        />
+        <Testimonial
+          quote={`It was a fun experience!
+
+Favorite Part: From beginning to end the experience was amazing!`}
+          author="Dawn G."
+          image="/images/boudoir/DG-15.jpg"
+          imageAlt="Dawn G. testimonial from her boudoir session"
+        />        <Testimonial
+          quote={`The shoot went great!
+
+Favorite Part: Hard to choose a favorite part as the entire shoot was a pleasant experience.`}
+          author="Elena B."
+          image="/images/boudoir/EB-555.jpg"
+          imageAlt="Elena B. testimonial from her boudoir session"
+        />
+        <Testimonial
+          quote={`Matthew was super nice and thoughtful when taking my pictures. He created a list of music for me to listen to while shooting and asked me what I was comfortable with doing during the shoot as well
+
+Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! Matthew and Listening to my favorite artists definitely helped a lot with making me feel comfortable and confident while taking the pictures`}
+          author="Samantha C."
+          image="/images/boudoir/SC-22.jpg"
+          imageAlt="Samantha C. testimonial from her boudoir session"
         />
       </div>
     </Section>

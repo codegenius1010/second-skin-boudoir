@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero'
 import { Section, Eyebrow, Heading } from '@/components/Section'
 import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
+import { Testimonial } from '@/components/Testimonial'
 import { GalleryGrid } from '@/components/GalleryGrid'
 
 export const metadata: Metadata = {
@@ -181,6 +182,90 @@ export default function BoudoirPortfolio() {
               Screenshot what resonates. Share with us during your consultation. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> for styling ideas, then we'll create a session that brings your vision to life while keeping you comfortable.
             </p>
           </div>
+        </div>
+      </Section>
+
+      <Section className="bg-smoke">
+        <div className="mb-10 text-center">
+          <Eyebrow>What clients are saying</Eyebrow>
+          <Heading className="mx-auto max-w-3xl">Women leave feeling more beautiful than they arrived.</Heading>
+        </div>
+        <div className="space-y-8">
+          <Testimonial
+            quote={`I loved that I was shown the shots through the experience. It really helped me feel like I was part of the outcome and could help me tweak any poses to make sure I got the perfect shot!
+
+Favorite Part: I felt extremely comfortable the entire session. It honestly felt like I was shooting with a friend!
+
+Thank you again so much, it was such a great exerience`}
+            author="Lindsey M."
+            image="/images/boudoir/LM1.jpg"
+            imageAlt="Lindsey M. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`Matthew is very respectful, calm. he kept checking making sure that I was OK. He reinsured that I was doing a good job. I was beautiful. I liked how he would tell me where to put my hands or how to pose he talk to me through it. I was nervous at first but it made me feel better about myself I would say so worth it definitely going to do it again.
+
+Favorite Part: Getting to dress up and feel confident and beautiful`}
+            author="Laura W."
+            image="/images/boudoir/LW-260.jpg"
+            imageAlt="Laura W. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`It was a great experience and I felt great and amazing while doing it and even after leaving.
+
+Favorite Part: My favorite part of the shoot was more personal to me — doing something for me that I wanted for once. I felt beautiful and confident. It was also eye opening to realize I'm my toughest critic, but I too need to give myself grace.`}
+            author="Kaylin K."
+            image="/images/boudoir/KK-19.jpg"
+            imageAlt="Kaylin K. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`Everything was so relaxed and fun, and the images have turned out so elegant!
+
+Favorite Part: The posing guidance was so helpful 
+
+Thank you so much! It was a great experience and your eye for lighting and posing is such a gift. I've loved the images so far! Five stars☺️`}
+            author="Emily G."
+            image="/images/boudoir/EG-38.jpg"
+            imageAlt="Emily G. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`Overall the experience was very fun and relaxed I went in nervous but ended up feeling much more confident and calm with the guidance I was given
+
+Favorite Part: My favorite part was how great Matthew was about making sure I felt comfortable the entire time and being able to have my best friend tag along as moral support/cheerleader`}
+            author="Brittany H."
+            image="/images/boudoir/BH-40.jpg"
+            imageAlt="Brittany H. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`Matthew was easy to work with and made me feel comfortable as a first timer.
+
+Favorite Part: The playlist he created really set the mood and made me feel empowered.`}
+            author="Valerie K."
+            image="/images/boudoir/VK-38.jpg"
+            imageAlt="Valerie K. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`It was a fun experience!
+
+Favorite Part: From beginning to end the experience was amazing!`}
+            author="Dawn G."
+            image="/images/boudoir/DG-15.jpg"
+            imageAlt="Dawn G. testimonial from her boudoir session"
+          />          <Testimonial
+            quote={`The shoot went great!
+
+Favorite Part: Hard to choose a favorite part as the entire shoot was a pleasant experience.`}
+            author="Elena B."
+            image="/images/boudoir/EB-555.jpg"
+            imageAlt="Elena B. testimonial from her boudoir session"
+          />
+          <Testimonial
+            quote={`Matthew was super nice and thoughtful when taking my pictures. He created a list of music for me to listen to while shooting and asked me what I was comfortable with doing during the shoot as well
+
+Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! Matthew and Listening to my favorite artists definitely helped a lot with making me feel comfortable and confident while taking the pictures`}
+            author="Samantha C."
+            image="/images/boudoir/SC-22.jpg"
+            imageAlt="Samantha C. testimonial from her boudoir session"
+          />
         </div>
       </Section>
 
