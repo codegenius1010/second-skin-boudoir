@@ -6,6 +6,7 @@ import { Card, Timeline } from '@/components/Cards'
 import { Testimonial } from '@/components/Testimonial'
 import { PortfolioPreview } from '@/components/PortfolioPreview'
 import { FAQAccordion } from '@/components/FAQAccordion'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Luxury Boudoir Photography in Destin & 30A | Second Skin Boudoir',
@@ -53,6 +54,26 @@ export default function Home() {
     <Section className="bg-smoke"><div className="text-center"><Eyebrow>The promise</Eyebrow><Heading className="mx-auto max-w-3xl">This is more than a photoshoot.</Heading><p className="mx-auto mt-5 max-w-2xl text-ivory/68">It is a private, guided experience designed to help you feel safe, seen, and stunning. See examples in our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">gallery</a>.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3"><Card title="Fully Guided Posing">You do not need modeling experience. Every pose, hand placement, expression, and movement is guided.</Card><Card title="Privacy Comes First">Your images are never shared without written permission. Anonymous sharing options are available.</Card><Card title="Built Around Comfort">Soft, sensual, bold, covered, implied, playful, romantic — your session moves at your pace.</Card></div></Section>
 
     <Section><Eyebrow>The Second Skin Experience</Eyebrow><Heading>From first conversation to final reveal, everything is designed to make you feel cared for.</Heading><div className="mt-12"><Timeline items={steps} /></div><p className="mt-8 max-w-3xl text-ivory/68">During your consultation, we'll discuss <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">what to wear</a> and answer all your questions. We'll show you examples from our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">portfolio</a> and create a session tailored entirely to you.</p><div className="mt-10"><Button href="/experience">See the Full Experience</Button></div></Section>
+
+    {/* Studio Section */}
+    <Section className="bg-smoke">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
+            <Image src="/images/studio/SSB_Studio-02.jpg" alt="Second Skin Boudoir private studio interior" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
+          </div>
+          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
+            <Image src="/images/studio/SSB_Studio-07.jpg" alt="Second Skin Boudoir studio styling area" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
+          </div>
+        </div>
+        <div>
+          <Eyebrow>Our Studio</Eyebrow>
+          <Heading>A private, comfortable space designed just for your session.</Heading>
+          <p className="mt-5 text-ivory/68">Every session begins in our private Destin studio — a closed-door space with soft natural light, a dedicated styling area, and a warm, judgment-free atmosphere. Take a look inside before your session so you know exactly what to expect.</p>
+          <div className="mt-8"><Button href="/studio">Tour the Studio</Button></div>
+        </div>
+      </div>
+    </Section>
 
     <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
 

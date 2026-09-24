@@ -10,10 +10,24 @@ export const site = {
 export const nav = [
   { label: 'Experience', href: '/experience' },
   { label: 'Portfolio', href: '/boudoir-portfolio' },
+  { label: 'Studio', href: '/studio' },
   { label: 'Testimonials', href: '/#testimonials' },
   { label: 'Pricing', href: '/boudoir-pricing' },
   { label: 'FAQ', href: '/faq' },
   { label: 'About', href: '/about' },
+]
+
+export const studioImages = [
+  { image: '/images/studio/SSB_Studio-01.jpg', alt: 'Second Skin Boudoir private studio space in Destin, Florida' },
+  { image: '/images/studio/SSB_Studio-02.jpg', alt: 'Luxury boudoir studio interior with soft natural light' },
+  { image: '/images/studio/SSB_Studio-03.jpg', alt: 'Boudoir photography studio seating and styling area' },
+  { image: '/images/studio/SSB_Studio-04.jpg', alt: 'Private boudoir studio backdrop and lighting setup' },
+  { image: '/images/studio/SSB_Studio-05.jpg', alt: 'Cozy boudoir studio corner designed for comfort' },
+  { image: '/images/studio/SSB_Studio-06.jpg', alt: 'Second Skin Boudoir studio wardrobe and styling nook' },
+  { image: '/images/studio/SSB_Studio-07.jpg', alt: 'Elegant boudoir studio interior details' },
+  { image: '/images/studio/SSB_Studio-08.jpg', alt: 'Boudoir studio space with luxury decor' },
+  { image: '/images/studio/SSB_Studio-09.jpg', alt: 'Private photography studio designed for boudoir sessions' },
+  { image: '/images/studio/SSB_Studio-10.jpg', alt: 'Second Skin Boudoir studio welcoming entrance area' },
 ]
 
 export const galleryImages = [
