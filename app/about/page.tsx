@@ -6,7 +6,7 @@ import { Button } from '@/components/Button'
 
 export const metadata: Metadata = {
   title: 'About Second Skin Boudoir | Meet Your Photographer',
-  description: 'Meet Matthew, a privacy-first luxury boudoir photographer in Destin and 30A. Learn about the philosophy behind safe, guided, fully-directed sessions for women.',
+  description: 'Meet Matthew, a privacy-first luxury boudoir photographer based in Destin, Florida, traveling to 30A and the Gulf Coast. Learn about the philosophy behind safe, guided, fully-directed sessions for women.',
 }
 
 export default function Page() {

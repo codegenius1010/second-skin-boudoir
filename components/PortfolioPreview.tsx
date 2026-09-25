@@ -12,7 +12,7 @@ interface PortfolioPreviewProps {
 export function PortfolioPreview({ images }: PortfolioPreviewProps) {
   const [shuffled, setShuffled] = useState<string[]>([])
   const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [selectedImage, setSelectedImage] = useState<string>('')
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   useEffect(() => {
     // Shuffle images on client mount
@@ -20,8 +20,8 @@ export function PortfolioPreview({ images }: PortfolioPreviewProps) {
     setShuffled(shuffledImages)
   }, [images])
 
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image)
+  const handleImageClick = (index: number) => {
+    setSelectedIndex(index)
     setLightboxOpen(true)
   }
 
@@ -31,7 +31,7 @@ export function PortfolioPreview({ images }: PortfolioPreviewProps) {
         {shuffled.map((image, idx) => (
           <button
             key={`${image}-${idx}`}
-            onClick={() => handleImageClick(image)}
+            onClick={() => handleImageClick(idx)}
             className="group relative aspect-square overflow-hidden rounded-xl border border-ivory/10 cursor-pointer hover:border-ivory/30 transition-colors"
           >
             <Image
@@ -50,9 +50,10 @@ export function PortfolioPreview({ images }: PortfolioPreviewProps) {
       </div>
       <ImageLightbox
         isOpen={lightboxOpen}
-        image={selectedImage}
-        alt="Portfolio image"
+        images={shuffled.map((src) => ({ src, alt: 'Portfolio image' }))}
+        index={selectedIndex}
         onClose={() => setLightboxOpen(false)}
+        onNavigate={setSelectedIndex}
       />
     </div>
   )

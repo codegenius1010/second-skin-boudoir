@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { galleryImages } from '@/lib/site'
+import { ImageLightbox } from './ImageLightbox'
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array]
@@ -15,7 +16,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export function GalleryGrid({ limit }: { limit?: number }) {
   const [shuffledImages, setShuffledImages] = useState<typeof galleryImages>([])
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -27,10 +28,10 @@ export function GalleryGrid({ limit }: { limit?: number }) {
   return (
     <>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {shuffledImages.map((item) => (
+        {shuffledImages.map((item, i) => (
           <button
             key={item.image}
-            onClick={() => setSelectedImage(item.image)}
+            onClick={() => setSelectedIndex(i)}
             className="group relative h-80 overflow-hidden rounded-[1.75rem] border border-ivory/10 bg-smoke cursor-pointer"
           >
             <Image
@@ -44,30 +45,13 @@ export function GalleryGrid({ limit }: { limit?: number }) {
         ))}
       </div>
 
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-h-[90vh] max-w-[90vw]">
-            <Image
-              src={selectedImage}
-              alt="Full size gallery image"
-              width={1200}
-              height={1600}
-              className="h-auto w-auto max-h-[90vh] max-w-[90vw] object-contain"
-              priority
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-ivory hover:bg-black/80 transition"
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
+      <ImageLightbox
+        isOpen={selectedIndex !== null}
+        images={shuffledImages.map((item) => ({ src: item.image, alt: item.alt }))}
+        index={selectedIndex ?? 0}
+        onClose={() => setSelectedIndex(null)}
+        onNavigate={setSelectedIndex}
+      />
     </>
   )
 }

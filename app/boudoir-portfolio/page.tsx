@@ -25,6 +25,17 @@ export default function BoudoirPortfolio() {
       />
 
       <Section>
+        <Eyebrow>Our Gallery</Eyebrow>
+        <Heading>Portfolio Images from Recent Sessions</Heading>
+        <p className="mt-5 max-w-2xl text-ivory/68">
+          Every image displayed here has been shared by our clients. Discover the range of styles, moods, and artistic directions we create. From soft and romantic to bold and empowering — this is what we do.
+        </p>
+        <div className="mt-12">
+          <GalleryGrid />
+        </div>
+      </Section>
+
+      <Section>
         <Eyebrow>Our Privacy Promise</Eyebrow>
         <Heading>Your Images, Your Choice, Your Control</Heading>
         <p className="mt-5 max-w-3xl text-ivory/68">
@@ -108,17 +119,6 @@ export default function BoudoirPortfolio() {
         </div>
       </Section>
 
-      <Section>
-        <Eyebrow>Our Gallery</Eyebrow>
-        <Heading>Portfolio Images from Recent Sessions</Heading>
-        <p className="mt-5 max-w-2xl text-ivory/68">
-          Every image displayed here has been shared by our clients. Discover the range of styles, moods, and artistic directions we create. From soft and romantic to bold and empowering — this is what we do.
-        </p>
-        <div className="mt-12">
-          <GalleryGrid />
-        </div>
-      </Section>
-
       <Section className="bg-smoke">
         <Eyebrow>What You'll Experience</Eyebrow>
         <Heading>Professional Direction Leads to Beautiful Results</Heading>
@@ -163,7 +163,7 @@ export default function BoudoirPortfolio() {
         </div>
       </Section>
 
-      <Section className="bg-smoke">
+      <Section>
         <Eyebrow>Why These Images Matter</Eyebrow>
         <Heading>More Than Pretty Pictures</Heading>
         <p className="mt-5 max-w-2xl text-ivory/68">

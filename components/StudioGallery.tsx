@@ -6,19 +6,15 @@ import { ImageLightbox } from './ImageLightbox'
 import { studioImages } from '@/lib/site'
 
 export function StudioGallery() {
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [selected, setSelected] = useState<{ image: string; alt: string } | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {studioImages.map((item) => (
+        {studioImages.map((item, i) => (
           <button
             key={item.image}
-            onClick={() => {
-              setSelected(item)
-              setLightboxOpen(true)
-            }}
+            onClick={() => setSelectedIndex(i)}
             className="group relative h-80 overflow-hidden rounded-[1.75rem] border border-ivory/10 bg-smoke cursor-pointer"
           >
             <Image
@@ -32,10 +28,11 @@ export function StudioGallery() {
         ))}
       </div>
       <ImageLightbox
-        isOpen={lightboxOpen}
-        image={selected?.image || ''}
-        alt={selected?.alt || 'Studio image'}
-        onClose={() => setLightboxOpen(false)}
+        isOpen={selectedIndex !== null}
+        images={studioImages.map((item) => ({ src: item.image, alt: item.alt }))}
+        index={selectedIndex ?? 0}
+        onClose={() => setSelectedIndex(null)}
+        onNavigate={setSelectedIndex}
       />
     </div>
   )

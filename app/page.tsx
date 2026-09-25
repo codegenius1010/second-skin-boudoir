@@ -9,11 +9,11 @@ import { FAQAccordion } from '@/components/FAQAccordion'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Luxury Boudoir Photography in Destin & 30A | Second Skin Boudoir',
-  description: 'Luxury boudoir photography in Destin, 30A, Santa Rosa Beach, and the Florida Gulf Coast. Private, guided sessions designed to help you feel beautiful, powerful, and completely yourself.',
+  title: 'Luxury Boudoir Photography in Destin, FL | Second Skin Boudoir',
+  description: 'Destin-based luxury boudoir photography, traveling to 30A, Santa Rosa Beach, and the Florida Gulf Coast. Private, guided sessions designed to help you feel beautiful, powerful, and completely yourself.',
   openGraph: {
-    title: 'Luxury Boudoir Photography in Destin & 30A',
-    description: 'Private, guided boudoir photography for women in Destin and along the Florida Gulf Coast.',
+    title: 'Luxury Boudoir Photography in Destin, FL',
+    description: 'Private, guided boudoir photography based in Destin, traveling throughout the Florida Gulf Coast.',
   },
 }
 
@@ -43,39 +43,12 @@ export default function Home() {
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Hero
-        title="Luxury Boudoir Photography in Destin & 30A"
-        subtitle="Private, guided, fully-directed boudoir sessions for women across the Florida Gulf Coast who are ready to feel beautiful, powerful, and completely themselves."
+        title="Luxury Boudoir Photography in Destin, Florida"
+        subtitle="Private, guided, fully-directed boudoir sessions based in Destin, with travel throughout the Florida Gulf Coast for women ready to feel beautiful, powerful, and completely themselves."
         secondary={{ label: 'Explore the Experience', href: '/experience' }}
         image="/images/second-skin-boudoir-luxury-brand-hero.jpg"
+        trust={{ label: 'Rated 5 stars by real clients', href: '#testimonials' }}
       />
-
-    <Section className="bg-smoke"><div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end"><div><Eyebrow>You are not the only one</Eyebrow><Heading>Most women arrive nervous. Almost all of them leave wondering why they waited so long.</Heading></div><div className="prose-luxury text-lg"><p>Maybe you have been waiting until you lose the weight. Maybe you feel disconnected from your body. Maybe you are newly single, newly married, becoming a mom, done raising kids, healing from something, celebrating something, or simply ready to remember who you are.</p><p>Boudoir is not about pretending to be someone else. It is about seeing the version of you that has been there the whole time. Learn more about the <a href="/experience" className="text-champagne hover:text-ivory transition-colors">fully guided boudoir experience</a> and how we make you feel safe from start to finish.</p><Button href="/contact" variant="secondary">I'm Nervous, But Interested</Button></div></div></Section>
-
-    <Section className="bg-smoke"><div className="text-center"><Eyebrow>The promise</Eyebrow><Heading className="mx-auto max-w-3xl">This is more than a photoshoot.</Heading><p className="mx-auto mt-5 max-w-2xl text-ivory/68">It is a private, guided experience designed to help you feel safe, seen, and stunning. See examples in our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">gallery</a>.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3"><Card title="Fully Guided Posing">You do not need modeling experience. Every pose, hand placement, expression, and movement is guided.</Card><Card title="Privacy Comes First">Your images are never shared without written permission. Anonymous sharing options are available.</Card><Card title="Built Around Comfort">Soft, sensual, bold, covered, implied, playful, romantic — your session moves at your pace.</Card></div></Section>
-
-    <Section><Eyebrow>The Second Skin Experience</Eyebrow><Heading>From first conversation to final reveal, everything is designed to make you feel cared for.</Heading><div className="mt-12"><Timeline items={steps} /></div><p className="mt-8 max-w-3xl text-ivory/68">During your consultation, we'll discuss <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">what to wear</a> and answer all your questions. We'll show you examples from our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">portfolio</a> and create a session tailored entirely to you.</p><div className="mt-10"><Button href="/experience">See the Full Experience</Button></div></Section>
-
-    {/* Studio Section */}
-    <Section className="bg-smoke">
-      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
-            <Image src="/images/studio/SSB_Studio-02.jpg" alt="Second Skin Boudoir private studio interior" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
-          </div>
-          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
-            <Image src="/images/studio/SSB_Studio-07.jpg" alt="Second Skin Boudoir studio styling area" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
-          </div>
-        </div>
-        <div>
-          <Eyebrow>Our Studio</Eyebrow>
-          <Heading>A private, comfortable space designed just for your session.</Heading>
-          <p className="mt-5 text-ivory/68">Every session begins in our private Destin studio — a closed-door space with soft natural light, a dedicated styling area, and a warm, judgment-free atmosphere. Take a look inside before your session so you know exactly what to expect.</p>
-          <div className="mt-8"><Button href="/studio">Tour the Studio</Button></div>
-        </div>
-      </div>
-    </Section>
-
-    <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
 
     {/* Portfolio Preview Section */}
     <Section>
@@ -188,24 +161,52 @@ Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! 
       </div>
     </Section>
 
+    <Section><div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end"><div><Eyebrow>You are not the only one</Eyebrow><Heading>Most women arrive nervous. Almost all of them leave wondering why they waited so long.</Heading></div><div className="prose-luxury text-lg"><p>Maybe you have been waiting until you lose the weight. Maybe you feel disconnected from your body. Maybe you are newly single, newly married, becoming a mom, done raising kids, healing from something, celebrating something, or simply ready to remember who you are.</p><p>Boudoir is not about pretending to be someone else. It is about seeing the version of you that has been there the whole time. Learn more about the <a href="/experience" className="text-champagne hover:text-ivory transition-colors">fully guided boudoir experience</a> and how we make you feel safe from start to finish.</p><Button href="/contact" variant="secondary">I'm Nervous, But Interested</Button></div></div></Section>
+
+    <Section className="bg-smoke"><div className="text-center"><Eyebrow>The promise</Eyebrow><Heading className="mx-auto max-w-3xl">This is more than a photoshoot.</Heading><p className="mx-auto mt-5 max-w-2xl text-ivory/68">It is a private, guided experience designed to help you feel safe, seen, and stunning. See examples in our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">gallery</a>.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3"><Card title="Fully Guided Posing">You do not need modeling experience. Every pose, hand placement, expression, and movement is guided.</Card><Card title="Privacy Comes First">Your images are never shared without written permission. Anonymous sharing options are available.</Card><Card title="Built Around Comfort">Soft, sensual, bold, covered, implied, playful, romantic — your session moves at your pace.</Card></div></Section>
+
+    <Section><Eyebrow>The Second Skin Experience</Eyebrow><Heading>From first conversation to final reveal, everything is designed to make you feel cared for.</Heading><div className="mt-12"><Timeline items={steps} /></div><p className="mt-8 max-w-3xl text-ivory/68">During your consultation, we'll discuss <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">what to wear</a> and answer all your questions. We'll show you examples from our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">portfolio</a> and create a session tailored entirely to you.</p><div className="mt-10"><Button href="/experience">See the Full Experience</Button></div></Section>
+
+    {/* Studio Section */}
+    <Section className="bg-smoke">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
+            <Image src="/images/studio/SSB_Studio-02.jpg" alt="Second Skin Boudoir private studio interior" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
+          </div>
+          <div className="relative h-48 overflow-hidden rounded-2xl border border-ivory/10 sm:h-64">
+            <Image src="/images/studio/SSB_Studio-07.jpg" alt="Second Skin Boudoir studio styling area" fill className="object-cover" sizes="(min-width: 1024px) 25vw, 50vw" />
+          </div>
+        </div>
+        <div>
+          <Eyebrow>Our Studio</Eyebrow>
+          <Heading>A private, comfortable space designed just for your session.</Heading>
+          <p className="mt-5 text-ivory/68">Every session begins in our private Destin studio — a closed-door space with soft natural light, a dedicated styling area, and a warm, judgment-free atmosphere. Take a look inside before your session so you know exactly what to expect.</p>
+          <div className="mt-8"><Button href="/studio">Tour the Studio</Button></div>
+        </div>
+      </div>
+    </Section>
+
+    <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
+
     <Section className="bg-smoke"><Eyebrow>Investment</Eyebrow><Heading>A luxury boudoir experience with flexible options and no pressure to buy what you do not love.</Heading><p className="mt-5 max-w-3xl text-ivory/68">Second Skin Boudoir uses a Session Fee + Products model. Your session fee covers the experience. Your artwork, albums, and digital collections are chosen separately after you see your images.</p><div className="mt-10 grid gap-5 md:grid-cols-2"><Card title="Essential Session — $300">Consultation, wardrobe guidance, private boudoir session, fully guided posing, and private image reveal.</Card><Card title="Signature Session — $549">Everything in Essential plus professional hair and makeup for a more polished, relaxed experience.</Card></div><p className="mt-7 text-ivory/68">Products and image collections begin at <span className="text-champagne">$995</span>. Payment plans are available.</p><div className="mt-8"><Button href="/boudoir-pricing">View Pricing & Collections</Button></div></Section>
 
     {/* Local Boudoir Photographer Section */}
     <Section>
       <div className="text-center">
         <Eyebrow>Serving the Florida Gulf Coast</Eyebrow>
-        <Heading className="mx-auto max-w-3xl">Luxury Boudoir Photography Across Destin & 30A</Heading>
-        <p className="mx-auto mt-5 max-w-2xl text-ivory/68">Whether you are in Destin, 30A, Santa Rosa Beach, Miramar Beach, Fort Walton Beach, Panama City Beach, or anywhere along the Gulf Coast, we bring the Second Skin experience to you.</p>
+        <Heading className="mx-auto max-w-3xl">Based in Destin, Traveling the Florida Gulf Coast</Heading>
+        <p className="mx-auto mt-5 max-w-2xl text-ivory/68">Our home studio is in Destin, and we travel to 30A, Santa Rosa Beach, Miramar Beach, Fort Walton Beach, Panama City Beach, or anywhere else along the Gulf Coast to bring the Second Skin experience to you.</p>
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-6">
           <h3 className="text-lg font-semibold text-ivory mb-2">Destin Boudoir Photographer</h3>
-          <p className="text-ivory/70 mb-4">Private luxury boudoir sessions in Destin with vacation and local options.</p>
+          <p className="text-ivory/70 mb-4">Private luxury boudoir sessions at our home studio in Destin, with vacation and local options.</p>
           <Button href="/destin-boudoir-photographer" variant="secondary">Learn More</Button>
         </div>
         <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-6">
           <h3 className="text-lg font-semibold text-ivory mb-2">30A Boudoir Photographer</h3>
-          <p className="text-ivory/70 mb-4">Luxury sessions near 30A, Santa Rosa Beach, Rosemary Beach, and Seaside.</p>
+          <p className="text-ivory/70 mb-4">Traveling sessions in 30A, Santa Rosa Beach, Rosemary Beach, and Seaside — from our Destin studio.</p>
           <Button href="/30a-boudoir-photographer" variant="secondary">Learn More</Button>
         </div>
         <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-6">
@@ -215,7 +216,7 @@ Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! 
         </div>
         <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-6">
           <h3 className="text-lg font-semibold text-ivory mb-2">Santa Rosa Beach & 30A</h3>
-          <p className="text-ivory/70 mb-4">Private boudoir photography in South Walton communities and coastal areas.</p>
+          <p className="text-ivory/70 mb-4">Traveling boudoir photography in South Walton communities and coastal areas.</p>
           <Button href="/santa-rosa-beach-boudoir-photographer" variant="secondary">Learn More</Button>
         </div>
         <div className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-6">

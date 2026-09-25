@@ -1,34 +1,51 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+interface LightboxImage {
+  src: string
+  alt: string
+}
 
 interface ImageLightboxProps {
   isOpen: boolean
-  image: string
-  alt: string
+  images: LightboxImage[]
+  index: number
   onClose: () => void
+  onNavigate: (index: number) => void
 }
 
-export function ImageLightbox({ isOpen, image, alt, onClose }: ImageLightboxProps) {
+export function ImageLightbox({ isOpen, images, index, onClose, onNavigate }: ImageLightboxProps) {
+  const goPrev = useCallback(() => {
+    onNavigate((index - 1 + images.length) % images.length)
+  }, [index, images.length, onNavigate])
+
+  const goNext = useCallback(() => {
+    onNavigate((index + 1) % images.length)
+  }, [index, images.length, onNavigate])
+
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') goPrev()
+      if (e.key === 'ArrowRight') goNext()
     }
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
+      document.addEventListener('keydown', handleKeydown)
       document.body.style.overflow = 'hidden'
       return () => {
-        document.removeEventListener('keydown', handleEscape)
+        document.removeEventListener('keydown', handleKeydown)
         document.body.style.overflow = 'unset'
       }
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose, goPrev, goNext])
 
-  if (!isOpen) return null
+  if (!isOpen || images.length === 0) return null
+
+  const current = images[index]
 
   return (
     <div
@@ -40,11 +57,13 @@ export function ImageLightbox({ isOpen, image, alt, onClose }: ImageLightboxProp
         onClick={(e) => e.stopPropagation()}
       >
         <Image
-          src={image}
-          alt={alt}
+          key={current.src}
+          src={current.src}
+          alt={current.alt}
           fill
           className="object-contain rounded-lg"
           sizes="85vw"
+          priority
         />
         <button
           onClick={onClose}
@@ -53,6 +72,27 @@ export function ImageLightbox({ isOpen, image, alt, onClose }: ImageLightboxProp
         >
           <span className="text-2xl leading-none">×</span>
         </button>
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={(e) => { e.stopPropagation(); goPrev() }}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors sm:left-4"
+              aria-label="Previous image"
+            >
+              <ChevronLeft />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); goNext() }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors sm:right-4"
+              aria-label="Next image"
+            >
+              <ChevronRight />
+            </button>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs text-white/85">
+              {index + 1} / {images.length}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

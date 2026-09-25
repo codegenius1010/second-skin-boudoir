@@ -7,9 +7,9 @@ import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'Second Skin Boudoir | Luxury Boudoir Photography in Destin & 30A', template: '%s | Second Skin Boudoir' },
-  description: 'Luxury boudoir photography in Destin, 30A, Santa Rosa Beach, Miramar Beach, Fort Walton Beach, Panama City Beach, and the Florida Gulf Coast.',
-  openGraph: { title: 'Second Skin Boudoir', description: 'Private, guided, luxury boudoir photography across Destin and 30A.', url: site.url, siteName: 'Second Skin Boudoir', type: 'website' },
+  title: { default: 'Second Skin Boudoir | Luxury Boudoir Photography in Destin, FL', template: '%s | Second Skin Boudoir' },
+  description: 'Destin-based luxury boudoir photography, traveling to 30A, Santa Rosa Beach, Miramar Beach, Fort Walton Beach, Panama City Beach, and the Florida Gulf Coast.',
+  openGraph: { title: 'Second Skin Boudoir', description: 'Private, guided luxury boudoir photography based in Destin, traveling throughout the Florida Gulf Coast.', url: site.url, siteName: 'Second Skin Boudoir', type: 'website' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: site.name,
     url: site.url,
     logo: `${site.url}/images/logo.png`,
-    description: 'Luxury boudoir photography in Destin, 30A, Santa Rosa Beach, and the Florida Gulf Coast. Private, guided, fully-photographed sessions.',
+    description: 'Destin-based luxury boudoir photography, traveling to 30A, Santa Rosa Beach, and the Florida Gulf Coast. Private, guided, fully-photographed sessions.',
     telephone: site.phone,
     email: site.email,
     areaServed: site.areas.map(area => ({ '@type': 'City', name: area, addressRegion: 'FL', addressCountry: 'US' })),

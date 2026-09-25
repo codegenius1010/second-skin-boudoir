@@ -5,11 +5,11 @@ import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
 
 export const metadata: Metadata = {
-  title: 'Santa Rosa Beach Boudoir Photographer | Luxury Boudoir Photography',
-  description: 'Private luxury boudoir photography in Santa Rosa Beach, 30A, Grayton Beach, Blue Mountain Beach, and WaterColor. Fully guided sessions with privacy-first approach.',
+  title: 'Santa Rosa Beach Boudoir Photographer | Destin-Based, Traveling to You',
+  description: 'Destin-based luxury boudoir photographer traveling to Santa Rosa Beach, 30A, Grayton Beach, Blue Mountain Beach, and WaterColor. Fully guided sessions with privacy-first approach.',
   openGraph: {
     title: 'Santa Rosa Beach Boudoir Photographer',
-    description: 'Luxury, private boudoir photography sessions in Santa Rosa Beach and surrounding 30A areas.',
+    description: 'Destin-based luxury boudoir photography, traveling to Santa Rosa Beach and surrounding 30A areas.',
   },
 }
 
@@ -19,7 +19,7 @@ export default function SantaRosaBeachBoudoir() {
       <Hero
         eyebrow="Santa Rosa Beach Boudoir Photographer"
         title="Luxury Boudoir Photography in Santa Rosa Beach & 30A"
-        subtitle="Private, guided boudoir sessions for women in Santa Rosa Beach, Grayton Beach, Blue Mountain Beach, WaterColor, Seaside, and the beautiful 30A area."
+        subtitle="Based at our private studio in Destin, we travel to Santa Rosa Beach, Grayton Beach, Blue Mountain Beach, WaterColor, Seaside, and the beautiful 30A area for your session."
       />
 
       <Section>
@@ -40,7 +40,7 @@ export default function SantaRosaBeachBoudoir() {
         <Eyebrow>Santa Rosa Beach & 30A Boudoir</Eyebrow>
         <Heading>Fully Guided Sessions for Women in South Walton</Heading>
         <p className="mt-5 max-w-3xl text-ivory/68">
-          Second Skin Boudoir serves women throughout the 30A area including Santa Rosa Beach, Grayton Beach, Blue Mountain Beach, Miramar Beach, Alys Beach, Rosemary Beach, Seaside, WaterColor, Inlet Beach, and surrounding Gulf Coast communities. Whether you are a local or visiting, we create a private, fully guided boudoir experience tailored to you.
+          Second Skin Boudoir is based in Destin and travels throughout the 30A area including Santa Rosa Beach, Grayton Beach, Blue Mountain Beach, Miramar Beach, Alys Beach, Rosemary Beach, Seaside, WaterColor, Inlet Beach, and surrounding Gulf Coast communities. Whether you are a local or visiting, we create a private, fully guided boudoir experience tailored to you.
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <Card title="What You Get">

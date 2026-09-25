@@ -5,11 +5,11 @@ import { Card } from '@/components/Cards'
 import { Button } from '@/components/Button'
 
 export const metadata: Metadata = {
-  title: '30A Boudoir Photographer | Santa Rosa Beach Boudoir Photography',
-  description: 'Luxury boudoir photography in 30A: Santa Rosa Beach, Rosemary Beach, Alys Beach, WaterColor, Seaside, and Grayton Beach. Private, fully guided sessions.',
+  title: '30A Boudoir Photographer | Destin-Based, Traveling to Santa Rosa Beach',
+  description: 'Destin-based luxury boudoir photographer traveling to 30A: Santa Rosa Beach, Rosemary Beach, Alys Beach, WaterColor, Seaside, and Grayton Beach. Private, fully guided sessions.',
   openGraph: {
     title: '30A Boudoir Photographer',
-    description: 'Luxury boudoir photography for women in 30A and surrounding South Walton communities.',
+    description: 'Destin-based luxury boudoir photography, traveling to 30A and surrounding South Walton communities.',
   },
 }
 
@@ -19,14 +19,14 @@ export default function ThirtyABoudoirPhotographer() {
       <Hero
         eyebrow="30A Boudoir Photographer"
         title="Luxury Boudoir Photography in 30A"
-        subtitle="Elegant, private boudoir sessions for women in Santa Rosa Beach, Rosemary Beach, Alys Beach, WaterColor, Seaside, Grayton Beach, Blue Mountain Beach, and surrounding communities."
+        subtitle="Based at our private studio in Destin, we travel to Santa Rosa Beach, Rosemary Beach, Alys Beach, WaterColor, Seaside, Grayton Beach, and surrounding communities for your session."
       />
 
       <Section>
         <Eyebrow>The 30A Boudoir Experience</Eyebrow>
         <Heading>Luxury Photography for Life's Beautiful Moments</Heading>
         <p className="mt-5 max-w-3xl text-ivory/68">
-          30A is known for its laid-back elegance, stunning natural beauty, and vibrant community. Second Skin Boudoir brings that same relaxed luxury to your boudoir experience — no pretense, no pressure, just thoughtful, artistic photography that celebrates you.
+          30A is known for its laid-back elegance, stunning natural beauty, and vibrant community. Second Skin Boudoir is based in Destin and travels to 30A to bring that same relaxed luxury to your boudoir experience — no pretense, no pressure, just thoughtful, artistic photography that celebrates you.
         </p>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           <Card title="Elevated & Elegant">
