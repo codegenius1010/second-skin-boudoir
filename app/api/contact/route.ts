@@ -16,6 +16,11 @@ export async function POST(request: NextRequest) {
       timeframe,
       formType,
       source,
+      promoId,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmContent,
     } = data
 
     const webhookUrl = process.env.GHL_WEBHOOK_URL
@@ -45,6 +50,11 @@ export async function POST(request: NextRequest) {
         timeframe,
         formType,
         source,
+        promoId,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmContent,
       }),
     })
 

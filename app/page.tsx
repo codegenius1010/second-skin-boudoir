@@ -6,6 +6,7 @@ import { Card, Timeline } from '@/components/Cards'
 import { Testimonial } from '@/components/Testimonial'
 import { PortfolioPreview } from '@/components/PortfolioPreview'
 import { FAQAccordion } from '@/components/FAQAccordion'
+import { BlackFridayBanner } from '@/components/BlackFridayBanner'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
@@ -40,7 +41,9 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <>
+      <BlackFridayBanner />
+      <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Hero
         title="Luxury Boudoir Photography in Destin, Florida"
@@ -161,6 +164,16 @@ Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! 
       </div>
     </Section>
 
+    {/* Black Friday Offer Section — After Testimonials */}
+    <Section className="bg-gradient-to-r from-rose/10 via-champagne/5 to-rose/10">
+      <div className="rounded-2xl border border-champagne/30 bg-gradient-to-br from-champagne/15 to-rose/10 p-8 md:p-12 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.32em] text-champagne mb-3">Limited-Time Offer</p>
+        <h3 className="text-2xl md:text-3xl font-serif text-ivory mb-3">50% Off All Boudoir Packages</h3>
+        <p className="mx-auto max-w-2xl text-ivory/75 mb-7">Celebrate the season with an exclusive early Black Friday offer. Invest in yourself now and make your boudoir session unforgettable.</p>
+        <Button href="/black-friday" className="inline-block">Claim Your 50% Offer</Button>
+      </div>
+    </Section>
+
     <Section><div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-end"><div><Eyebrow>You are not the only one</Eyebrow><Heading>Most women arrive nervous. Almost all of them leave wondering why they waited so long.</Heading></div><div className="prose-luxury text-lg"><p>Maybe you have been waiting until you lose the weight. Maybe you feel disconnected from your body. Maybe you are newly single, newly married, becoming a mom, done raising kids, healing from something, celebrating something, or simply ready to remember who you are.</p><p>Boudoir is not about pretending to be someone else. It is about seeing the version of you that has been there the whole time. Learn more about the <a href="/experience" className="text-champagne hover:text-ivory transition-colors">fully guided boudoir experience</a> and how we make you feel safe from start to finish.</p><Button href="/contact" variant="secondary">I'm Nervous, But Interested</Button></div></div></Section>
 
     <Section className="bg-smoke"><div className="text-center"><Eyebrow>The promise</Eyebrow><Heading className="mx-auto max-w-3xl">This is more than a photoshoot.</Heading><p className="mx-auto mt-5 max-w-2xl text-ivory/68">It is a private, guided experience designed to help you feel safe, seen, and stunning. See examples in our <a href="/boudoir-portfolio" className="text-champagne hover:text-ivory transition-colors">gallery</a>.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3"><Card title="Fully Guided Posing">You do not need modeling experience. Every pose, hand placement, expression, and movement is guided.</Card><Card title="Privacy Comes First">Your images are never shared without written permission. Anonymous sharing options are available.</Card><Card title="Built Around Comfort">Soft, sensual, bold, covered, implied, playful, romantic — your session moves at your pace.</Card></div></Section>
@@ -189,7 +202,7 @@ Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! 
 
     <Section><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><div className="rounded-[2rem] border border-ivory/10 bg-gradient-to-br from-rose/25 to-champagne/10 p-10"><Heading>Boudoir is for the woman who is ready to stop waiting.</Heading><p className="mt-5 text-ivory/68">You do not need to become someone else for this. You only need to let yourself be seen. Check out our <a href="/what-to-wear-boudoir-session" className="text-champagne hover:text-ivory transition-colors">wardrobe guide</a> to see outfit ideas and styling tips.</p></div><ul className="grid gap-4 text-ivory/75">{['You want to feel desirable again','You are celebrating a birthday, wedding, anniversary, divorce, or personal milestone','You want a powerful gift for your partner','You want a private experience just for yourself','You are nervous but curious','You are tired of being overly critical of your body','You want to see yourself through a more loving lens'].map(x=><li key={x} className="rounded-2xl border border-ivory/10 bg-ivory/[.03] p-4">{x}</li>)}</ul></div></Section>
 
-    <Section className="bg-smoke"><Eyebrow>Investment</Eyebrow><Heading>A luxury boudoir experience with flexible options and no pressure to buy what you do not love.</Heading><p className="mt-5 max-w-3xl text-ivory/68">Second Skin Boudoir uses a Session Fee + Products model. Your session fee covers the experience. Your artwork, albums, and digital collections are chosen separately after you see your images.</p><div className="mt-10 grid gap-5 md:grid-cols-2"><Card title="Essential Session — $300">Consultation, wardrobe guidance, private boudoir session, fully guided posing, and private image reveal.</Card><Card title="Signature Session — $549">Everything in Essential plus professional hair and makeup for a more polished, relaxed experience.</Card></div><p className="mt-7 text-ivory/68">Products and image collections begin at <span className="text-champagne">$995</span>. Payment plans are available.</p><div className="mt-8"><Button href="/boudoir-pricing">View Pricing & Collections</Button></div></Section>
+    <Section className="bg-smoke"><Eyebrow>Investment</Eyebrow><Heading>A luxury boudoir experience with flexible options and no pressure to buy what you do not love.</Heading><p className="mt-5 max-w-3xl text-ivory/68">Second Skin Boudoir uses a Session Fee + Products model. Your session fee covers the experience. Your artwork, albums, and digital collections are chosen separately after you see your images.</p><div className="mt-8 p-6 rounded-2xl bg-champagne/10 border border-champagne/30"><p className="text-champagne font-semibold mb-2">🎉 Early Black Friday Special</p><p className="text-ivory/80 text-sm">Receive 50% off all session packages through early November. This is a limited-time offer only.</p></div><div className="mt-10 grid gap-5 md:grid-cols-2"><Card title="Essential Session — $300"><span className="line-through text-ivory/50">$300</span><span className="block text-champagne font-bold text-lg">$150</span>Consultation, wardrobe guidance, private boudoir session, fully guided posing, and private image reveal.</Card><Card title="Signature Session — $549"><span className="line-through text-ivory/50">$549</span><span className="block text-champagne font-bold text-lg">$274.50</span>Everything in Essential plus professional hair and makeup for a more polished, relaxed experience.</Card></div><p className="mt-7 text-ivory/68">Products and image collections begin at <span className="text-champagne">$995</span>. Payment plans are available.</p><div className="mt-8"><Button href="/black-friday">Learn More About This Offer</Button></div></Section>
 
     {/* Local Boudoir Photographer Section */}
     <Section>
@@ -234,7 +247,8 @@ Favorite Part: How thoughtful Matthew was with respecting all of my boundaries! 
 
     <Section><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><Eyebrow>Questions are normal</Eyebrow><Heading>Still feeling nervous? Good. That means this matters.</Heading><p className="mt-5 text-ivory/65">The experience is built for first-time clients, privacy, and comfort.</p></div><FAQAccordion items={[['I\'m not photogenic.', 'That is not your job. Lighting, posing, angles, expression, and direction are our job.'], ['I need to lose weight first.', 'You are allowed to feel beautiful before the next version of your body arrives.'], ['I do not know what to wear.', 'We help you choose pieces that flatter your body and match your comfort level.'], ['I do not want my photos online.', 'They will never be shared without written permission.']]}/><div className="mt-8"><Button href="/faq">See All Questions</Button></div></div></Section>
 
-    <Section className="bg-smoke"><div className="text-center"><Eyebrow>Begin privately</Eyebrow><Heading className="mx-auto max-w-3xl">You are allowed to see yourself this way.</Heading><p className="mx-auto mt-5 max-w-xl text-ivory/70">Not someday. Not after the weight loss. Not after life slows down. Now.</p><div className="mt-8"><Button href="/contact">Book Your Private Consultation</Button></div></div></Section>
-    </main>
+    <Section className="bg-smoke"><div className="text-center"><Eyebrow>Begin privately</Eyebrow><Heading className="mx-auto max-w-3xl">You are allowed to see yourself this way.</Heading><p className="mx-auto mt-5 max-w-xl text-ivory/70">Not someday. Not after the weight loss. Not after life slows down. Now.</p><div className="mt-6 p-5 rounded-xl bg-champagne/10 border border-champagne/20 inline-block"><p className="text-sm text-champagne font-semibold">Special Offer: 50% Off Through Early November</p></div><div className="mt-8"><Button href="/black-friday">Claim Your Offer</Button></div></div></Section>
+      </main>
+    </>
   )
 }
