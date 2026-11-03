@@ -6,9 +6,9 @@ export function BFHero() {
   const active = isPromoActive()
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-bfBlack">
-      <div className="mx-auto grid max-w-7xl lg:min-h-[90vh] lg:grid-cols-2">
-        <div className="relative order-1 h-[48vh] min-h-[320px] lg:h-auto lg:min-h-[90vh]">
+    <section id="hero" className="relative overflow-hidden bg-bfBlack pt-24 lg:pt-28">
+      <div className="mx-auto grid max-w-7xl lg:min-h-[85vh] lg:grid-cols-2">
+        <div className="relative order-1 h-[48vh] min-h-[320px] lg:h-auto lg:min-h-[85vh]">
           <Image
             src="/images/boudoir/LW-206.jpg"
             alt="Elegant Second Skin Boudoir portrait session"
@@ -20,7 +20,7 @@ export function BFHero() {
           <div className="absolute inset-0 bg-gradient-to-t from-bfBlack via-bfBlack/15 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-bfBlack/50" />
         </div>
 
-        <div className="relative z-10 order-2 flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 lg:py-0">
+        <div className="relative z-10 order-2 flex flex-col justify-center px-6 py-14 sm:px-10 lg:px-16 lg:py-16">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-bfGold">{blackFridayPromo.eyebrow}</p>
 
           <h1 className="mt-5 font-bf-serif text-4xl leading-[1.05] text-bfIvory sm:text-5xl lg:text-6xl">
