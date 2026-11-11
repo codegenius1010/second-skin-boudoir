@@ -37,10 +37,14 @@ export function BFLeadForm() {
       source: searchParams.get('utm_source') || 'black-friday-landing',
       promoId: blackFridayPromo.promoId,
       firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       phone: data.get('phone'),
-      consultationPreference: data.get('preferredContact'),
-      nervousAbout: data.get('message'),
+      city: data.get('city'),
+      sessionType: data.get('sessionType'),
+      nervousAbout: data.get('nervousAbout'),
+      consultationPreference: data.get('consultationPreference'),
+      timeframe: data.get('timeframe'),
       utmSource: searchParams.get('utm_source'),
       utmMedium: searchParams.get('utm_medium'),
       utmCampaign: searchParams.get('utm_campaign'),
@@ -91,7 +95,7 @@ export function BFLeadForm() {
   }
 
   return (
-    <form onSubmit={submit} className="grid gap-4 rounded-[2rem] border border-bfGold/20 bg-bfCharcoal p-6 shadow-glow md:p-8" noValidate>
+    <form onSubmit={submit} className="grid gap-4 rounded-[2rem] border border-bfGold/20 bg-bfCharcoal p-6 shadow-glow md:p-8">
       {/* Honeypot field — hidden from sighted users and screen readers, bots tend to fill every field */}
       <input
         type="text"
@@ -108,31 +112,76 @@ export function BFLeadForm() {
           <input id="firstName" name="firstName" required placeholder="First name *" className={input} />
         </div>
         <div>
-          <label htmlFor="email" className="sr-only">Email address</label>
-          <input id="email" name="email" type="email" required placeholder="Email address *" className={input} />
+          <label htmlFor="lastName" className="sr-only">Last name</label>
+          <input id="lastName" name="lastName" required placeholder="Last name *" className={input} />
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label htmlFor="phone" className="sr-only">Phone number</label>
-          <input id="phone" name="phone" placeholder="Phone number (optional)" className={input} />
+          <label htmlFor="email" className="sr-only">Email address</label>
+          <input id="email" name="email" type="email" required placeholder="Email *" className={input} />
         </div>
         <div>
-          <label htmlFor="preferredContact" className="sr-only">Preferred contact method</label>
-          <select id="preferredContact" name="preferredContact" defaultValue="" className={input}>
-            <option value="">Preferred contact method (optional)</option>
-            <option>Email</option>
-            <option>Phone</option>
-            <option>Text</option>
+          <label htmlFor="phone" className="sr-only">Phone or text number</label>
+          <input id="phone" name="phone" required placeholder="Phone or text number *" className={input} />
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div>
+          <label htmlFor="city" className="sr-only">City or area</label>
+          <input id="city" name="city" required placeholder="City or area *" className={input} />
+        </div>
+        <div>
+          <label htmlFor="sessionType" className="sr-only">What&apos;s the occasion?</label>
+          <select id="sessionType" name="sessionType" required defaultValue="" className={input}>
+            <option value="" disabled>What&apos;s the occasion? *</option>
+            <option>Self-love &amp; confidence</option>
+            <option>Bridal or wedding gift</option>
+            <option>Anniversary gift</option>
+            <option>Birthday celebration</option>
+            <option>New chapter (divorce, healing)</option>
+            <option>Just because I deserve it</option>
+            <option>Not sure yet</option>
           </select>
         </div>
       </div>
 
       <div>
-        <label htmlFor="message" className="sr-only">Message or questions</label>
-        <textarea id="message" name="message" placeholder="Message / questions (optional)" rows={4} className={input} />
+        <label htmlFor="nervousAbout" className="sr-only">Anything you&apos;re nervous about?</label>
+        <textarea id="nervousAbout" name="nervousAbout" required placeholder="Anything you're nervous about? (We'll put your mind at ease)" rows={4} className={input} />
       </div>
+
+      <div>
+        <label htmlFor="consultationPreference" className="sr-only">How would you prefer to talk?</label>
+        <select id="consultationPreference" name="consultationPreference" required defaultValue="" className={input}>
+          <option value="" disabled>How would you prefer to talk? *</option>
+          <option>Phone call</option>
+          <option>Zoom video call (recommended - more personal)</option>
+          <option>Text first, then call</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="timeframe" className="sr-only">When are you hoping to do this?</label>
+        <input id="timeframe" name="timeframe" required placeholder="When are you hoping to do this? (e.g., next month, before wedding)" className={input} />
+      </div>
+
+      <label className="flex items-start gap-3 text-sm leading-relaxed text-bfIvory/65">
+        <input required type="checkbox" className="mt-0.5 flex-shrink-0" />
+        <span className="text-bfIvory/65">
+          I understand my inquiry is private and my images will never be shared without written permission. By submitting this form, I consent to be contacted via phone, SMS, and email regarding my inquiry. I have read and agree to the{' '}
+          <Link href={blackFridayPromo.privacyPolicyUrl} className="inline text-bfGold hover:text-bfIvory">
+            Privacy Policy
+          </Link>{' '}
+          and{' '}
+          <Link href="/terms-of-service" className="inline text-bfGold hover:text-bfIvory">
+            Terms of Service
+          </Link>
+          .
+        </span>
+      </label>
 
       <button
         disabled={status === 'loading' || !active}
@@ -142,11 +191,7 @@ export function BFLeadForm() {
       </button>
 
       <p className="text-xs leading-relaxed text-bfIvory/55">
-        No obligation. We&apos;ll be in touch with more details about the experience and current offer. By submitting, you agree to our{' '}
-        <Link href={blackFridayPromo.privacyPolicyUrl} className="text-bfGold underline hover:text-bfIvory">
-          Privacy Policy
-        </Link>
-        .
+        No obligation. We&apos;ll be in touch with more details about the experience and current offer.
       </p>
 
       {status === 'error' && (
